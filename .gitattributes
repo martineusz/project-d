@@ -1,0 +1,15 @@
+﻿# Text files with LF line endings
+*.asset text eol=lf
+*.meta text eol=lf
+*.unity text eol=lf
+*.inputactions text eol=lf
+*.scenetemplate text eol=lf
+*.gitignore text eol=lf
+
+# Scripts
+*.cs text eol=lf
+
+# Other text config files
+*.json text eol=lf
+*.xml text eol=lf
+*.txt text eol=lf
