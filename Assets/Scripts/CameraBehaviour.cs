@@ -11,15 +11,17 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
+        
         if (!target) return;
 
         Vector3 desiredPosition = target.position + offset;
 
-        // Clamp the camera position
         float clampedX = Mathf.Clamp(desiredPosition.x, minBounds.x, maxBounds.x);
         float clampedY = Mathf.Clamp(desiredPosition.y, minBounds.y, maxBounds.y);
 
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, new Vector3(clampedX, clampedY, desiredPosition.z), smoothSpeed);
+        float fixedZ = transform.position.z; 
+
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, new Vector3(clampedX, clampedY, fixedZ), smoothSpeed);
         transform.position = smoothedPosition;
     }
 }
