@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,11 @@ public class UnitMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        Debug.Log("Player velocity magnitude: " + _rb.linearVelocity.magnitude);
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         _movement = context.ReadValue<Vector2>();
@@ -19,6 +25,7 @@ public class UnitMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _movement * (speed * Time.fixedDeltaTime));
+        _rb.linearVelocity = _movement * speed;
     }
+
 }

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 308107230994336508}
   - component: {fileID: 8555765317292512330}
   - component: {fileID: 8523863603407543958}
-  - component: {fileID: 2679353807120829308}
+  - component: {fileID: 1155157049974063260}
   - component: {fileID: -7130550587155595638}
   m_Layer: 0
-  m_Name: Boid
+  m_Name: Ally Boid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3726415, g: 0.98875207, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -117,7 +117,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2679353807120829308
+--- !u!114 &1155157049974063260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,16 +126,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 6411102760633059870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b140d698ffe69f47a89b63dc426ffe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 331b390041e142558a5b42ce2ceb9fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  neighborRadius: 3
-  separationRadius: 1
-  separationWeight: 1.5
-  alignmentWeight: 1
-  cohesionWeight: 1
+  responsiveness: 5
+  speed: 4.5
+  neighborRadius: 4
+  separationRadius: 2
+  separationWeight: 0.8
+  alignmentWeight: 0.2
+  cohesionWeight: 0.4
   manager: {fileID: 0}
+  followPlayerWeight: 1.5
+  playerSeparationWeight: 3
+  playerAlignmentWeight: 4
+  playerSeparationRadius: 3.5
+  slowDownRadius: 12
+  stopRadius: 3.5
+  minimumSlowDown: 0.1
 --- !u!58 &-7130550587155595638
 CircleCollider2D:
   m_ObjectHideFlags: 0
