@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class BoidManager : MonoBehaviour
-{
+{   
+    public Transform player;
     public GameObject boidPrefab;
     public int boidCount = 50;
     public float spawnRadius = 10f;

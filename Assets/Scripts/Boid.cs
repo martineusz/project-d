@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Boid : MonoBehaviour
 {
+    public float responsiveness = 5f;
+    
     public float speed = 2f;
     public float neighborRadius = 3f;
     public float separationRadius = 1f;
@@ -13,14 +15,14 @@ public class Boid : MonoBehaviour
 
     [HideInInspector] public BoidManager manager;
 
-    private Vector2 velocity;
+    protected Vector2 velocity;
 
-    void Start()
+    protected virtual void Start()
     {
         velocity = Random.insideUnitCircle.normalized * speed;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         List<Boid> neighbors = GetNeighbors();
 
@@ -29,14 +31,15 @@ public class Boid : MonoBehaviour
         Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
 
         Vector2 acceleration = separation + alignment + cohesion;
-        velocity += acceleration * Time.deltaTime;
 
+        velocity += acceleration * (Time.deltaTime * responsiveness);
         velocity = velocity.normalized * speed;
+
         transform.position += (Vector3)(velocity * Time.deltaTime);
-        transform.up = velocity; // Rotate the sprite to face the direction
+        transform.up = velocity;
     }
 
-    List<Boid> GetNeighbors()
+    protected List<Boid> GetNeighbors()
     {
         List<Boid> neighbors = new List<Boid>();
         foreach (Boid other in manager.allBoids)
@@ -46,10 +49,11 @@ public class Boid : MonoBehaviour
             if (dist < neighborRadius)
                 neighbors.Add(other);
         }
+
         return neighbors;
     }
 
-    Vector2 ComputeSeparation(List<Boid> neighbors)
+    protected Vector2 ComputeSeparation(List<Boid> neighbors)
     {
         Vector2 force = Vector2.zero;
         foreach (Boid other in neighbors)
@@ -58,10 +62,11 @@ public class Boid : MonoBehaviour
             if (dist < separationRadius)
                 force += (Vector2)(transform.position - other.transform.position) / dist;
         }
+
         return force.normalized;
     }
 
-    Vector2 ComputeAlignment(List<Boid> neighbors)
+    protected Vector2 ComputeAlignment(List<Boid> neighbors)
     {
         if (neighbors.Count == 0) return Vector2.zero;
         Vector2 avgVelocity = Vector2.zero;
@@ -71,7 +76,7 @@ public class Boid : MonoBehaviour
         return (avgVelocity - velocity).normalized;
     }
 
-    Vector2 ComputeCohesion(List<Boid> neighbors)
+    protected Vector2 ComputeCohesion(List<Boid> neighbors)
     {
         if (neighbors.Count == 0) return Vector2.zero;
         Vector2 center = Vector2.zero;
