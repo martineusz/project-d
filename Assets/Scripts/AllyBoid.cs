@@ -6,6 +6,8 @@ public class AllyBoid : Boid
     private Transform _player;
     private Rigidbody2D _playerRb;
     
+    public bool selected;
+    
     public float playerFollowWeight = 2f;
     public float playerSeparationWeight = 1.5f;
     public float playerAlignmentWeight = 1f;
@@ -16,7 +18,11 @@ public class AllyBoid : Boid
     public float slowDownRadius = 1.5f;
     public float minimumSlowDown = 0.1f;
     private const float MaxSlowDown = 0.5f;
-
+    
+    protected void Awake()
+    {
+        Type = BoidType.Ally;
+    }
     protected override void Start()
     {
         base.Start();
@@ -38,25 +44,29 @@ public class AllyBoid : Boid
 
     protected override void Update()
     {
-        List<Boid> neighbors = GetNeighbors();
+        if (selected)
+        {
+            List<Boid> neighbors = GetNeighbors();
 
-        Vector2 separation = ComputeSeparation(neighbors) * separationWeight;
-        Vector2 alignment = ComputeAlignment(neighbors) * alignmentWeight;
-        Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
+            Vector2 separation = ComputeSeparation(neighbors) * separationWeight;
+            Vector2 alignment = ComputeAlignment(neighbors) * alignmentWeight;
+            Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
 
-        Vector2 followPlayer = ComputeFollowPlayer() * playerFollowWeight;
-        Vector2 playerSeparation = ComputePlayerSeparation() * playerSeparationWeight;
-        Vector2 playerAlignment = ComputePlayerAlignment() * playerAlignmentWeight;
+            Vector2 followPlayer = ComputeFollowPlayer() * playerFollowWeight;
+            Vector2 playerSeparation = ComputePlayerSeparation() * playerSeparationWeight;
+            Vector2 playerAlignment = ComputePlayerAlignment() * playerAlignmentWeight;
 
-        Vector2 acceleration = separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment;
+            Vector2 acceleration =
+                separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment;
 
-        float slowDownFactor = ComputeSlowDownFactor();
-        
-        velocity += acceleration * (Time.deltaTime * responsiveness);
-        velocity = velocity.normalized * (speed * slowDownFactor);
-        
-        transform.position += (Vector3)(velocity * Time.deltaTime);
-        transform.up = velocity;
+            float slowDownFactor = ComputeSlowDownFactor();
+
+            velocity += acceleration * (Time.deltaTime * responsiveness);
+            velocity = velocity.normalized * (speed * slowDownFactor);
+
+            transform.position += (Vector3)(velocity * Time.deltaTime);
+            transform.up = velocity;
+        }
     }
 
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Boid : MonoBehaviour
 {
+    protected BoidType Type;
+    
     public float responsiveness = 5f;
     
     public float speed = 2f;
@@ -16,7 +18,6 @@ public class Boid : MonoBehaviour
     [HideInInspector] public BoidManager manager;
 
     protected Vector2 velocity;
-
     protected virtual void Start()
     {
         velocity = Random.insideUnitCircle.normalized * speed;
@@ -42,7 +43,7 @@ public class Boid : MonoBehaviour
     protected List<Boid> GetNeighbors()
     {
         List<Boid> neighbors = new List<Boid>();
-        foreach (Boid other in manager.allBoids)
+        foreach (Boid other in manager.allAllyBoids)
         {
             if (other == this) continue;
             float dist = Vector2.Distance(transform.position, other.transform.position);
@@ -85,4 +86,16 @@ public class Boid : MonoBehaviour
         center /= neighbors.Count;
         return (center - (Vector2)transform.position).normalized;
     }
+
+    public BoidType GetBoidType()
+    {
+        return Type;
+    }
+}
+
+public enum BoidType
+{
+    Ally,
+    Enemy,
+    Neutral
 }
