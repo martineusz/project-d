@@ -6,7 +6,10 @@ public class AllyBoid : Boid
     private Transform _player;
     private Rigidbody2D _playerRb;
     
-    public bool selected;
+    public Color colorUnselected = Color.white;
+    public Color colorSelected = Color.blue;
+    
+    private bool _selected;
     
     public float playerFollowWeight = 2f;
     public float playerSeparationWeight = 1.5f;
@@ -44,7 +47,7 @@ public class AllyBoid : Boid
 
     protected override void Update()
     {
-        if (selected)
+        if (_selected)
         {
             List<Boid> neighbors = GetNeighbors();
 
@@ -66,6 +69,16 @@ public class AllyBoid : Boid
 
             transform.position += (Vector3)(velocity * Time.deltaTime);
             transform.up = velocity;
+        }
+    }
+    
+    public bool Selected
+    {
+        get => _selected;
+        set
+        {
+            _selected = value;
+            SpriteRenderer.color = _selected ? colorSelected : colorUnselected;
         }
     }
 

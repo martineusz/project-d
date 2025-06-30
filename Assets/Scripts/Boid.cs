@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Boid : MonoBehaviour
+public abstract class Boid : MonoBehaviour
 {
     protected BoidType Type;
     
@@ -16,10 +16,12 @@ public class Boid : MonoBehaviour
     public float cohesionWeight = 1f;
 
     [HideInInspector] public BoidManager manager;
+    protected SpriteRenderer SpriteRenderer;
 
     protected Vector2 velocity;
     protected virtual void Start()
     {
+        SpriteRenderer = GetComponent<SpriteRenderer>();
         velocity = Random.insideUnitCircle.normalized * speed;
     }
 
