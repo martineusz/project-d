@@ -137,12 +137,12 @@ MonoBehaviour:
   alignmentWeight: 0.2
   cohesionWeight: 0.4
   manager: {fileID: 0}
-  followPlayerWeight: 1.5
+  playerFollowWeight: 2
   playerSeparationWeight: 3
-  playerAlignmentWeight: 4
+  playerAlignmentWeight: 3
+  stopRadius: 2
   playerSeparationRadius: 3.5
   slowDownRadius: 12
-  stopRadius: 3.5
   minimumSlowDown: 0.1
 --- !u!58 &-7130550587155595638
 CircleCollider2D:
