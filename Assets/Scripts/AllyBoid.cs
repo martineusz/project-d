@@ -5,16 +5,17 @@ public class AllyBoid : Boid
 {
     private Transform _player;
     private Rigidbody2D _playerRb;
-    private const float MaxSlowDown = 0.5f;
-
-    public float followPlayerWeight = 2f;
+    
+    public float playerFollowWeight = 2f;
     public float playerSeparationWeight = 1.5f;
     public float playerAlignmentWeight = 1f;
+    
+    public float stopRadius = 2.0f;
     public float playerSeparationRadius = 1.5f;
     
     public float slowDownRadius = 1.5f;
-    public float stopRadius = 2.0f;
     public float minimumSlowDown = 0.1f;
+    private const float MaxSlowDown = 0.5f;
 
     protected override void Start()
     {
@@ -43,7 +44,7 @@ public class AllyBoid : Boid
         Vector2 alignment = ComputeAlignment(neighbors) * alignmentWeight;
         Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
 
-        Vector2 followPlayer = ComputeFollowPlayer() * followPlayerWeight;
+        Vector2 followPlayer = ComputeFollowPlayer() * playerFollowWeight;
         Vector2 playerSeparation = ComputePlayerSeparation() * playerSeparationWeight;
         Vector2 playerAlignment = ComputePlayerAlignment() * playerAlignmentWeight;
 
