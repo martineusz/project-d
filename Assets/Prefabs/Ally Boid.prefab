@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.3726415, g: 0.98875207, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -137,8 +137,10 @@ MonoBehaviour:
   alignmentWeight: 0.2
   cohesionWeight: 0.4
   manager: {fileID: 0}
-  playerFollowWeight: 2
-  playerSeparationWeight: 3
+  colorUnselected: {r: 1, g: 1, b: 1, a: 1}
+  colorSelected: {r: 0.37254903, g: 0.9882353, b: 1, a: 1}
+  playerFollowWeight: 3.5
+  playerSeparationWeight: 4
   playerAlignmentWeight: 3
   stopRadius: 2
   playerSeparationRadius: 3.5

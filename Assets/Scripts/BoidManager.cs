@@ -26,31 +26,38 @@ public class BoidManager : MonoBehaviour
             allAllyBoids.Add(boid);
         }
     }
+    
+    public void DeselectFirstSelectedAllyBoid()
+    {
+        foreach (AllyBoid boid in allAllyBoids)
+        {
+            if (boid.Selected)
+            {
+                boid.Selected = false;
+                return;
+            }
+        }
+    }
         
     
     public void SelectNearestUnselectedAllyBoid()
     {
-        AllyBoid nearest = FindNearestSelectedAllyBoid();
+        AllyBoid nearest = FindNearestUnselectedAllyBoid();
 
-        if (nearest != null)
+        if (nearest)
         {
-            nearest.selected = true;
-            Debug.Log("Selected nearest boid: " + nearest.name);
-        }
-        else
-        {
-            Debug.Log("No unselected boids found.");
+            nearest.Selected = true;
         }
     }
 
-    private AllyBoid FindNearestSelectedAllyBoid()
+    private AllyBoid FindNearestUnselectedAllyBoid()
     {
         AllyBoid nearest = null;
         float minDistance = Mathf.Infinity;
 
         foreach (AllyBoid boid in allAllyBoids)
         {
-            if (!boid.selected)
+            if (!boid.Selected)
             {
                 float dist = Vector3.Distance(player.position, boid.transform.position);
                 if (dist < minDistance)
