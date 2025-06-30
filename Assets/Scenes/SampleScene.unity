@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 842971758}
   - component: {fileID: 842971760}
   m_Layer: 0
-  m_Name: PlayerUnit
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,6 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  boidManager: {fileID: 1022952422}
 --- !u!61 &842971758
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -686,7 +687,7 @@ MonoBehaviour:
   boidPrefab: {fileID: 6411102760633059870, guid: 60730e8e4c52ba84e80aa339396fd955, type: 3}
   boidCount: 50
   spawnRadius: 10
-  allBoids: []
+  allAllyBoids: []
 --- !u!4 &1022952423
 Transform:
   m_ObjectHideFlags: 0

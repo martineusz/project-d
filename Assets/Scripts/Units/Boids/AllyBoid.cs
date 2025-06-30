@@ -64,11 +64,11 @@ public class AllyBoid : Boid
 
             float slowDownFactor = ComputeSlowDownFactor();
 
-            velocity += acceleration * (Time.deltaTime * responsiveness);
-            velocity = velocity.normalized * (speed * slowDownFactor);
+            Velocity += acceleration * (Time.deltaTime * responsiveness);
+            Velocity = Velocity.normalized * (speed * slowDownFactor);
 
-            transform.position += (Vector3)(velocity * Time.deltaTime);
-            transform.up = velocity;
+            transform.position += (Vector3)(Velocity * Time.deltaTime);
+            transform.up = Velocity;
         }
     }
     

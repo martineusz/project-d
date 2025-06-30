@@ -18,11 +18,11 @@ public abstract class Boid : MonoBehaviour
     [HideInInspector] public BoidManager manager;
     protected SpriteRenderer SpriteRenderer;
 
-    protected Vector2 velocity;
+    protected Vector2 Velocity;
     protected virtual void Start()
     {
         SpriteRenderer = GetComponent<SpriteRenderer>();
-        velocity = Random.insideUnitCircle.normalized * speed;
+        Velocity = Random.insideUnitCircle.normalized * speed;
     }
 
     protected virtual void Update()
@@ -35,11 +35,11 @@ public abstract class Boid : MonoBehaviour
 
         Vector2 acceleration = separation + alignment + cohesion;
 
-        velocity += acceleration * (Time.deltaTime * responsiveness);
-        velocity = velocity.normalized * speed;
+        Velocity += acceleration * (Time.deltaTime * responsiveness);
+        Velocity = Velocity.normalized * speed;
 
-        transform.position += (Vector3)(velocity * Time.deltaTime);
-        transform.up = velocity;
+        transform.position += (Vector3)(Velocity * Time.deltaTime);
+        transform.up = Velocity;
     }
 
     protected List<Boid> GetNeighbors()
@@ -74,9 +74,9 @@ public abstract class Boid : MonoBehaviour
         if (neighbors.Count == 0) return Vector2.zero;
         Vector2 avgVelocity = Vector2.zero;
         foreach (Boid other in neighbors)
-            avgVelocity += other.velocity;
+            avgVelocity += other.Velocity;
         avgVelocity /= neighbors.Count;
-        return (avgVelocity - velocity).normalized;
+        return (avgVelocity - Velocity).normalized;
     }
 
     protected Vector2 ComputeCohesion(List<Boid> neighbors)
