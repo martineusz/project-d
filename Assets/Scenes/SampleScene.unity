@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 842971760}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,7 +517,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842971754}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -684,10 +684,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 842971756}
-  boidPrefab: {fileID: 6411102760633059870, guid: 60730e8e4c52ba84e80aa339396fd955, type: 3}
-  boidCount: 50
+  allyBoidPrefab: {fileID: 6411102760633059870, guid: 60730e8e4c52ba84e80aa339396fd955, type: 3}
+  enemyBoidPrefab: {fileID: 6411102760633059870, guid: e468c2223d3744a4e896a291c11d22f9, type: 3}
+  allyBoidCount: 30
+  enemyBoidCount: 10
   spawnRadius: 10
   allAllyBoids: []
+  allEnemyBoids: []
 --- !u!4 &1022952423
 Transform:
   m_ObjectHideFlags: 0
@@ -714,7 +717,7 @@ GameObject:
   - component: {fileID: 1121504054}
   - component: {fileID: 1121504053}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -765,7 +768,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.509434, g: 0.48300108, b: 0.48300108, a: 1}
+  m_Color: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -803,7 +806,7 @@ GameObject:
   - component: {fileID: 1335384231}
   - component: {fileID: 1335384230}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Circle obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

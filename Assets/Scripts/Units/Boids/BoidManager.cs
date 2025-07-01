@@ -1,74 +1,92 @@
-using UnityEngine;
 using System.Collections.Generic;
-using Units.Boids;
+using UnityEngine;
 
-public class BoidManager : MonoBehaviour
-{   
-    public Transform player;
-    public GameObject boidPrefab;
-    public int boidCount = 50;
-    public float spawnRadius = 10f;
+namespace Units.Boids
+{
+    public class BoidManager : MonoBehaviour
+    {   
+        public Transform player;
+        public GameObject allyBoidPrefab;
+        public GameObject enemyBoidPrefab;
+        public int allyBoidCount = 30;
+        public int enemyBoidCount = 10;
+        public float spawnRadius = 10f;
 
-    [HideInInspector] public List<AllyBoid> allAllyBoids = new List<AllyBoid>();
+        [HideInInspector] public List<AllyBoid> allAllyBoids = new List<AllyBoid>();
+        [HideInInspector] public List<EnemyBoid> allEnemyBoids = new List<EnemyBoid>();
 
-    private void Start()
-    {
-        SpawnAllyBoids();
-    }
-
-    private void SpawnAllyBoids()
-    {
-        for (int i = 0; i < boidCount; i++)
+        private void Start()
         {
-            Vector2 spawnPos = Random.insideUnitCircle * spawnRadius;
-            GameObject boidGo = Instantiate(boidPrefab, spawnPos, Quaternion.identity);
-            AllyBoid boid = boidGo.GetComponent<AllyBoid>();
-            boid.manager = this;
-            allAllyBoids.Add(boid);
+            SpawnAllyBoids();
+            SpawnEnemyBoids();
         }
-    }
-    
-    public void DeselectFirstSelectedAllyBoid()
-    {
-        foreach (AllyBoid boid in allAllyBoids)
+        
+        private void SpawnEnemyBoids()
         {
-            if (boid.Selected)
+            for (int i = 0; i < enemyBoidCount; i++)
             {
-                boid.Selected = false;
-                return;
+                Vector2 spawnPos = Random.insideUnitCircle * spawnRadius;
+                GameObject boidGo = Instantiate(enemyBoidPrefab, spawnPos, Quaternion.identity);
+                EnemyBoid boid = boidGo.GetComponent<EnemyBoid>();
+                boid.manager = this;
+                allEnemyBoids.Add(boid);
             }
         }
-    }
         
-    
-    public void SelectNearestUnselectedAllyBoid()
-    {
-        AllyBoid nearest = FindNearestUnselectedAllyBoid();
-
-        if (nearest)
+        private void SpawnAllyBoids()
         {
-            nearest.Selected = true;
-        }
-    }
-
-    private AllyBoid FindNearestUnselectedAllyBoid()
-    {
-        AllyBoid nearest = null;
-        float minDistance = Mathf.Infinity;
-
-        foreach (AllyBoid boid in allAllyBoids)
-        {
-            if (!boid.Selected)
+            for (int i = 0; i < allyBoidCount; i++)
             {
-                float dist = Vector3.Distance(player.position, boid.transform.position);
-                if (dist < minDistance)
+                Vector2 spawnPos = Random.insideUnitCircle * spawnRadius;
+                GameObject boidGo = Instantiate(allyBoidPrefab, spawnPos, Quaternion.identity);
+                AllyBoid boid = boidGo.GetComponent<AllyBoid>();
+                boid.manager = this;
+                allAllyBoids.Add(boid);
+            }
+        }
+    
+        public void DeselectFirstSelectedAllyBoid()
+        {
+            foreach (AllyBoid boid in allAllyBoids)
+            {
+                if (boid.GetBoidState() == BoidState.Following)
                 {
-                    minDistance = dist;
-                    nearest = boid;
+                    boid.SetBoidState(BoidState.Idle);
+                    return;
                 }
             }
         }
+        
+    
+        public void SelectNearestUnselectedAllyBoid()
+        {
+            AllyBoid nearest = FindNearestUnselectedAllyBoid();
 
-        return nearest;
+            if (nearest)
+            {
+                nearest.SetBoidState(BoidState.Following);
+            }
+        }
+
+        private AllyBoid FindNearestUnselectedAllyBoid()
+        {
+            AllyBoid nearest = null;
+            float minDistance = Mathf.Infinity;
+
+            foreach (AllyBoid boid in allAllyBoids)
+            {
+                if (boid.GetBoidState() == BoidState.Idle)
+                {
+                    float dist = Vector3.Distance(player.position, boid.transform.position);
+                    if (dist < minDistance)
+                    {
+                        minDistance = dist;
+                        nearest = boid;
+                    }
+                }
+            }
+
+            return nearest;
+        }
     }
 }

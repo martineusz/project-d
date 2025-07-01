@@ -12,7 +12,7 @@ namespace Units.Boids
             Type = BoidType.Enemy;
         }
 
-        protected override void Update()
+        protected void Update()
         {
             List<Boid> neighbors = GetNeighbors();
 
@@ -29,6 +29,20 @@ namespace Units.Boids
 
             transform.position += (Vector3)(Velocity * Time.deltaTime);
             transform.up = Velocity;
+        }
+        
+        protected List<Boid> GetNeighbors()
+        {
+            List<Boid> neighbors = new List<Boid>();
+            foreach (Boid other in manager.allEnemyBoids)
+            {
+                if (other == this) continue;
+                float dist = Vector2.Distance(transform.position, other.transform.position);
+                if (dist < neighborRadius)
+                    neighbors.Add(other);
+            }
+
+            return neighbors;
         }
     }
 }

@@ -19,8 +19,6 @@ namespace Units.Boids
         public float separationWeight = 1.5f;
         public float alignmentWeight = 1f;
         public float cohesionWeight = 1f;
-        
-        public float playerSeparationRadius = 1.5f;
 
         [HideInInspector] public BoidManager manager;
         protected SpriteRenderer SpriteRenderer;
@@ -49,37 +47,6 @@ namespace Units.Boids
             {
                 Debug.LogError("AllyBoid requires a player");
             }
-        }
-
-        protected virtual void Update()
-        {
-            List<Boid> neighbors = GetNeighbors();
-
-            Vector2 separation = ComputeSeparation(neighbors) * separationWeight;
-            Vector2 alignment = ComputeAlignment(neighbors) * alignmentWeight;
-            Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
-
-            Vector2 acceleration = separation + alignment + cohesion;
-
-            Velocity += acceleration * (Time.deltaTime * responsiveness);
-            Velocity = Velocity.normalized * speed;
-
-            transform.position += (Vector3)(Velocity * Time.deltaTime);
-            transform.up = Velocity;
-        }
-
-        protected List<Boid> GetNeighbors()
-        {
-            List<Boid> neighbors = new List<Boid>();
-            foreach (Boid other in manager.allAllyBoids)
-            {
-                if (other == this) continue;
-                float dist = Vector2.Distance(transform.position, other.transform.position);
-                if (dist < neighborRadius)
-                    neighbors.Add(other);
-            }
-
-            return neighbors;
         }
 
         protected Vector2 ComputeSeparation(List<Boid> neighbors)
@@ -124,29 +91,6 @@ namespace Units.Boids
         {
             if (!Player) return Vector2.zero;
             return ((Vector2)Player.position - (Vector2)transform.position).normalized;
-        }
-
-        protected Vector2 ComputePlayerSeparation()
-        {
-            if (!Player) return Vector2.zero;
-
-            float dist = Vector2.Distance(transform.position, Player.position);
-            if (dist < playerSeparationRadius)
-            {
-                return ((Vector2)transform.position - (Vector2)Player.position) / dist;
-            }
-
-            return Vector2.zero;
-        }
-
-        protected Vector2 ComputePlayerAlignment()
-        {
-            if (!PlayerRb) return Vector2.zero;
-
-            Vector2 playerVelocity = PlayerRb.linearVelocity;
-            if (playerVelocity == Vector2.zero) return Vector2.zero;
-
-            return playerVelocity.normalized;
         }
     }
     

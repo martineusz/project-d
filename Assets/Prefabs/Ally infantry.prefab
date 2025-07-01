@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8523863603407543958}
   - component: {fileID: 1155157049974063260}
   - component: {fileID: -7130550587155595638}
+  - component: {fileID: -6849181045095259022}
   m_Layer: 0
   m_Name: Ally infantry
-  m_TagString: Untagged
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,13 +138,14 @@ MonoBehaviour:
   alignmentWeight: 0.2
   cohesionWeight: 0.4
   manager: {fileID: 0}
-  colorUnselected: {r: 1, g: 1, b: 1, a: 1}
-  colorSelected: {r: 0.37254903, g: 0.9882353, b: 1, a: 1}
+  colorIdle: {r: 1, g: 1, b: 1, a: 1}
+  colorFollowing: {r: 0.5990566, g: 0.9105333, b: 1, a: 1}
+  colorAggresive: {r: 0.6745283, g: 0.7173824, b: 1, a: 1}
   playerFollowWeight: 3.5
   playerSeparationWeight: 4
+  playerSeparationRadius: 3.5
   playerAlignmentWeight: 3
   stopRadius: 2
-  playerSeparationRadius: 3.5
   slowDownRadius: 12
   minimumSlowDown: 0.1
 --- !u!58 &-7130550587155595638
@@ -181,4 +183,40 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.06}
-  m_Radius: 0.56
+  m_Radius: 0.35
+--- !u!58 &-6849181045095259022
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411102760633059870}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.21133332}
+  m_Radius: 2.5
