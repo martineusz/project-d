@@ -13,11 +13,12 @@ namespace Units.Boids
         public Color colorChasing = Color.red;
         public Color colorDistracted = Color.red;
 
-        private GameObject _aggroAlly;
-        
+
         public float slowDownRadius = 1.5f;
         public float minimumSlowDown = 0.1f;
         private const float MaxSlowDown = 0.5f;
+
+        private bool _playerInRange = false;
 
         protected void Awake()
         {
@@ -29,7 +30,7 @@ namespace Units.Boids
             //TODO: Implement full player focus when in range
             Vector2 acceleration = ComputeAcceleration();
             float slowDownFactor = ComputeSlowDownFactor();
-            
+
             Velocity += acceleration * (Time.deltaTime * responsiveness);
             Velocity = Velocity.normalized * (speed * slowDownFactor);
 
@@ -57,12 +58,12 @@ namespace Units.Boids
             Vector2 acceleration = separation + alignment + cohesion + followPlayer + followAlly;
             return acceleration;
         }
-        
+
         private float ComputeSlowDownFactor()
         {
             if (_enemyBoidState == EnemyBoidState.Chasing) return 1f;
-            float distance = Vector2.Distance(transform.position, _aggroAlly.transform.position);
-            
+            float distance = Vector2.Distance(transform.position, AggroTarget.transform.position);
+
             // if (distance < stopRadius)
             // {
             //     return 0f;
@@ -113,27 +114,35 @@ namespace Units.Boids
 
         private Vector2 ComputeFollowAlly()
         {
-            if (!_aggroAlly) return Vector2.zero;
-            return ((Vector2)_aggroAlly.transform.position - (Vector2)transform.position).normalized;
+            if (!AggroTarget) return Vector2.zero;
+            return ((Vector2)AggroTarget.transform.position - (Vector2)transform.position).normalized;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Ally") && _aggroAlly == null)
+            if (_playerInRange) return;
+            if (other.CompareTag("Player"))
             {
-                _aggroAlly = other.gameObject;
+                _playerInRange = true;
+                SetBoidState(EnemyBoidState.Chasing);
+                AggroTarget = null;
+                return;
+            }
+
+            if (other.CompareTag("Ally") && AggroTarget == null)
+            {
+                AggroTarget = other.gameObject;
                 SetBoidState(EnemyBoidState.Distracted);
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Ally") && other.gameObject == _aggroAlly)
-            {
-                _aggroAlly = null;
-
-                SetBoidState(EnemyBoidState.Chasing);
-            }
+            if (other.CompareTag("Player")) _playerInRange = false;
+            if (!other.CompareTag("Ally") || other.gameObject != AggroTarget) return;
+            
+            SetBoidState(EnemyBoidState.Chasing);
+            AggroTarget = null;
         }
     }
 

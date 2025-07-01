@@ -6,6 +6,8 @@ namespace Units.Boids
     public abstract class AbstractBoid : MonoBehaviour
     {
         protected BoidType Type;
+        
+        protected GameObject AggroTarget;
 
         protected Transform Player;
         protected Rigidbody2D PlayerRb;
@@ -99,6 +101,11 @@ namespace Units.Boids
         {
             if (!Player) return Vector2.zero;
             return ((Vector2)Player.position - (Vector2)transform.position).normalized;
+        }
+        
+        public GameObject GetAggroTarget()
+        {
+            return AggroTarget;
         }
     }
     

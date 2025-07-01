@@ -24,8 +24,6 @@ namespace Units.Boids
         public float minimumSlowDown = 0.1f;
         private const float MaxSlowDown = 0.5f;
 
-        private GameObject _aggroEnemy;
-
         private bool _wasFollowing = false;
 
         protected void Awake()
@@ -82,23 +80,23 @@ namespace Units.Boids
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy") && _aggroEnemy == null)
+            if (other.CompareTag("Enemy") && AggroTarget == null)
             {
                 if (_allyBoidState == AllyBoidState.Following)
                 {
                     _wasFollowing = true;
                 }
 
-                _aggroEnemy = other.gameObject;
+                AggroTarget = other.gameObject;
                 SetBoidState(AllyBoidState.Aggressive);
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy") && other.gameObject == _aggroEnemy)
+            if (other.CompareTag("Enemy") && other.gameObject == AggroTarget)
             {
-                _aggroEnemy = null;
+                AggroTarget = null;
 
                 if (_wasFollowing)
                 {
@@ -145,7 +143,7 @@ namespace Units.Boids
 
             if (_allyBoidState == AllyBoidState.Aggressive)
             {
-                distance = Vector2.Distance(transform.position, _aggroEnemy.transform.position);
+                distance = Vector2.Distance(transform.position, AggroTarget.transform.position);
             }
 
             // if (distance < stopRadius)
@@ -187,8 +185,8 @@ namespace Units.Boids
 
         private Vector2 ComputeFollowEnemy()
         {
-            if (!_aggroEnemy) return Vector2.zero;
-            return ((Vector2)_aggroEnemy.transform.position - (Vector2)transform.position).normalized;
+            if (!AggroTarget) return Vector2.zero;
+            return ((Vector2)AggroTarget.transform.position - (Vector2)transform.position).normalized;
         }
 
         protected override List<AbstractBoid> GetNeighbors()
@@ -204,6 +202,8 @@ namespace Units.Boids
 
             return neighbors;
         }
+        
+        
     }
 
     public enum AllyBoidState

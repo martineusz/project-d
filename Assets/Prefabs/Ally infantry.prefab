@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8555765317292512330}
   - component: {fileID: 8523863603407543958}
   - component: {fileID: 1155157049974063260}
+  - component: {fileID: 1482229494112748767}
   - component: {fileID: -7130550587155595638}
   - component: {fileID: -6849181045095259022}
   m_Layer: 0
@@ -146,8 +147,24 @@ MonoBehaviour:
   playerSeparationWeight: 4
   playerSeparationRadius: 3.5
   playerAlignmentWeight: 3
-  slowDownRadius: 5
-  minimumSlowDown: 0.1
+  slowDownRadius: 4
+  minimumSlowDown: 0.5
+--- !u!114 &1482229494112748767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411102760633059870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1deee3c062db43818c5d638f2e12954c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  attackDamage: 999
+  attackSpeed: 1
+  isAlive: 1
 --- !u!58 &-7130550587155595638
 CircleCollider2D:
   m_ObjectHideFlags: 0

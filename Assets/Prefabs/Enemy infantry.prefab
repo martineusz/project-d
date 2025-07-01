@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8555765317292512330}
   - component: {fileID: 8523863603407543958}
   - component: {fileID: 3959228008791643491}
+  - component: {fileID: 8538106558782171487}
   - component: {fileID: -7130550587155595638}
   - component: {fileID: 5330849408989550434}
   m_Layer: 0
@@ -143,7 +144,23 @@ MonoBehaviour:
   colorChasing: {r: 1, g: 0.514151, b: 0.514151, a: 1}
   colorDistracted: {r: 1, g: 0.15566039, b: 0.15566039, a: 1}
   slowDownRadius: 3
-  minimumSlowDown: 0.1
+  minimumSlowDown: 0.7
+--- !u!114 &8538106558782171487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411102760633059870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3a65f50fc245bc83d39aaf56558cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  attackDamage: 999
+  attackSpeed: 1
+  isAlive: 1
 --- !u!58 &-7130550587155595638
 CircleCollider2D:
   m_ObjectHideFlags: 0
