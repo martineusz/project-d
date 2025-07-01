@@ -11,6 +11,7 @@ namespace Units.Boids
         public int allyBoidCount = 30;
         public int enemyBoidCount = 10;
         public float spawnRadius = 10f;
+        public Vector2 enemySpawnCenter = new Vector2(20f, 0f); // Set this to your desired enemy spawn area
 
         [HideInInspector] public List<AllyBoid> allAllyBoids = new List<AllyBoid>();
         [HideInInspector] public List<EnemyBoid> allEnemyBoids = new List<EnemyBoid>();
@@ -25,7 +26,7 @@ namespace Units.Boids
         {
             for (int i = 0; i < enemyBoidCount; i++)
             {
-                Vector2 spawnPos = Random.insideUnitCircle * spawnRadius;
+                Vector2 spawnPos = enemySpawnCenter + Random.insideUnitCircle * spawnRadius;
                 GameObject boidGo = Instantiate(enemyBoidPrefab, spawnPos, Quaternion.identity);
                 EnemyBoid boid = boidGo.GetComponent<EnemyBoid>();
                 boid.manager = this;
@@ -49,22 +50,21 @@ namespace Units.Boids
         {
             foreach (AllyBoid boid in allAllyBoids)
             {
-                if (boid.GetBoidState() == BoidState.Following)
+                if (boid.GetBoidState() == AllyBoidState.Following)
                 {
-                    boid.SetBoidState(BoidState.Idle);
+                    boid.SetBoidState(AllyBoidState.Idle);
                     return;
                 }
             }
         }
         
-    
         public void SelectNearestUnselectedAllyBoid()
         {
             AllyBoid nearest = FindNearestUnselectedAllyBoid();
 
             if (nearest)
             {
-                nearest.SetBoidState(BoidState.Following);
+                nearest.SetBoidState(AllyBoidState.Following);
             }
         }
 
@@ -75,7 +75,7 @@ namespace Units.Boids
 
             foreach (AllyBoid boid in allAllyBoids)
             {
-                if (boid.GetBoidState() == BoidState.Idle)
+                if (boid.GetBoidState() == AllyBoidState.Idle)
                 {
                     float dist = Vector3.Distance(player.position, boid.transform.position);
                     if (dist < minDistance)

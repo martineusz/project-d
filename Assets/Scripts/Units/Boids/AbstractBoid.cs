@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Units.Boids
 {
-    public abstract class Boid : MonoBehaviour
+    public abstract class AbstractBoid : MonoBehaviour
     {
         protected BoidType Type;
 
@@ -24,12 +24,20 @@ namespace Units.Boids
         protected SpriteRenderer SpriteRenderer;
 
         protected Vector2 Velocity;
-
+        
+        protected abstract void HandleMovement();
+        protected abstract List<AbstractBoid> GetNeighbors();
+        
         protected virtual void Start()
         {
             SpriteRenderer = GetComponent<SpriteRenderer>();
             Velocity = Random.insideUnitCircle.normalized * speed;
             AssignPlayer();
+        }
+        
+        protected void FixedUpdate()
+        {
+            HandleMovement();
         }
 
         private void AssignPlayer()
@@ -49,10 +57,10 @@ namespace Units.Boids
             }
         }
 
-        protected Vector2 ComputeSeparation(List<Boid> neighbors)
+        protected Vector2 ComputeSeparation(List<AbstractBoid> neighbors)
         {
             Vector2 force = Vector2.zero;
-            foreach (Boid other in neighbors)
+            foreach (AbstractBoid other in neighbors)
             {
                 float dist = Vector2.Distance(transform.position, other.transform.position);
                 if (dist < separationRadius)
@@ -62,21 +70,21 @@ namespace Units.Boids
             return force.normalized;
         }
 
-        protected Vector2 ComputeAlignment(List<Boid> neighbors)
+        protected Vector2 ComputeAlignment(List<AbstractBoid> neighbors)
         {
             if (neighbors.Count == 0) return Vector2.zero;
             Vector2 avgVelocity = Vector2.zero;
-            foreach (Boid other in neighbors)
+            foreach (AbstractBoid other in neighbors)
                 avgVelocity += other.Velocity;
             avgVelocity /= neighbors.Count;
             return (avgVelocity - Velocity).normalized;
         }
 
-        protected Vector2 ComputeCohesion(List<Boid> neighbors)
+        protected Vector2 ComputeCohesion(List<AbstractBoid> neighbors)
         {
             if (neighbors.Count == 0) return Vector2.zero;
             Vector2 center = Vector2.zero;
-            foreach (Boid other in neighbors)
+            foreach (AbstractBoid other in neighbors)
                 center += (Vector2)other.transform.position;
             center /= neighbors.Count;
             return (center - (Vector2)transform.position).normalized;

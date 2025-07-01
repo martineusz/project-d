@@ -3,20 +3,22 @@ using UnityEngine;
 
 namespace Units.Boids
 {
-    public class AllyBoid : Boid
+    public class AllyBoid : AbstractBoid
     {
         public Color colorIdle = Color.white;
         public Color colorFollowing = Color.blue;
         public Color colorAggresive = Color.blue;
 
-        private BoidState _boidState = BoidState.Idle;
+        private AllyBoidState _allyBoidState = AllyBoidState.Idle;
+
+        public float enemyFollowWeight = 6f;
 
         public float playerFollowWeight = 2f;
         public float playerSeparationWeight = 1.5f;
         public float playerSeparationRadius = 1.5f;
         public float playerAlignmentWeight = 1f;
 
-        public float stopRadius = 2.0f;
+        //public float stopRadius = 2.0f;
 
         public float slowDownRadius = 1.5f;
         public float minimumSlowDown = 0.1f;
@@ -32,53 +34,63 @@ namespace Units.Boids
             SpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        protected void Update()
+        protected override void HandleMovement()
         {
-            List<Boid> neighbors = GetNeighbors();
-
-            Vector2 separation = ComputeSeparation(neighbors) * separationWeight;
-            Vector2 alignment = ComputeAlignment(neighbors) * alignmentWeight;
-            Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
-
-            Vector2 followPlayer;
-            Vector2 playerSeparation;
-            Vector2 playerAlignment;
-            if (_boidState == BoidState.Following)
-            {
-                followPlayer = ComputeFollowPlayer() * playerFollowWeight;
-                playerSeparation = ComputePlayerSeparation() * playerSeparationWeight;
-                playerAlignment = ComputePlayerAlignment() * playerAlignmentWeight;
-            }
-            else
-            {
-                followPlayer = Vector2.zero;
-                playerSeparation = Vector2.zero;
-                playerAlignment = Vector2.zero;
-            }
-
-            Vector2 acceleration =
-                separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment;
-
+            Vector2 acceleration = ComputeAcceleration();
             float slowDownFactor = ComputeSlowDownFactor();
 
-            Velocity += acceleration * (Time.deltaTime * responsiveness);
+            float resp = responsiveness;
+            if (_allyBoidState == AllyBoidState.Aggressive)
+            {
+                resp *= 2f;
+            }
+
+            Velocity += acceleration * (Time.deltaTime * resp);
             Velocity = Velocity.normalized * (speed * slowDownFactor);
 
             transform.position += (Vector3)(Velocity * Time.deltaTime);
             transform.up = Velocity;
         }
 
+        private Vector2 ComputeAcceleration()
+        {
+            List<AbstractBoid> neighbors = GetNeighbors();
+
+            Vector2 separation = ComputeSeparation(neighbors) * separationWeight;
+            Vector2 alignment = ComputeAlignment(neighbors) * alignmentWeight;
+            Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
+
+            Vector2 followPlayer = Vector2.zero;
+            Vector2 playerSeparation = Vector2.zero;
+            Vector2 playerAlignment = Vector2.zero;
+            Vector2 followEnemy = Vector2.zero;
+            if (_allyBoidState == AllyBoidState.Following)
+            {
+                followPlayer = ComputeFollowPlayer() * playerFollowWeight;
+                playerSeparation = ComputePlayerSeparation() * playerSeparationWeight;
+                playerAlignment = ComputePlayerAlignment() * playerAlignmentWeight;
+            }
+            else if (_allyBoidState == AllyBoidState.Aggressive)
+            {
+                followEnemy = ComputeFollowEnemy() * enemyFollowWeight;
+            }
+
+            Vector2 acceleration =
+                separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment + followEnemy;
+            return acceleration;
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy"))
+            if (other.CompareTag("Enemy") && _aggroEnemy == null)
             {
-                if (_boidState == BoidState.Following)
+                if (_allyBoidState == AllyBoidState.Following)
                 {
                     _wasFollowing = true;
                 }
 
                 _aggroEnemy = other.gameObject;
-                SetBoidState(BoidState.Aggressive);
+                SetBoidState(AllyBoidState.Aggressive);
             }
         }
 
@@ -87,37 +99,37 @@ namespace Units.Boids
             if (other.CompareTag("Enemy") && other.gameObject == _aggroEnemy)
             {
                 _aggroEnemy = null;
-                
+
                 if (_wasFollowing)
                 {
                     _wasFollowing = false;
-                    SetBoidState(BoidState.Following);
+                    SetBoidState(AllyBoidState.Following);
                 }
                 else
                 {
-                    SetBoidState(BoidState.Idle);
+                    SetBoidState(AllyBoidState.Idle);
                 }
             }
         }
 
-        public BoidState GetBoidState()
+        public AllyBoidState GetBoidState()
         {
-            return _boidState;
+            return _allyBoidState;
         }
 
-        public void SetBoidState(BoidState newState)
+        public void SetBoidState(AllyBoidState newState)
         {
-            _boidState = newState;
+            _allyBoidState = newState;
 
-            switch (_boidState)
+            switch (_allyBoidState)
             {
-                case BoidState.Idle:
+                case AllyBoidState.Idle:
                     SpriteRenderer.color = colorIdle;
                     break;
-                case BoidState.Following:
+                case AllyBoidState.Following:
                     SpriteRenderer.color = colorFollowing;
                     break;
-                case BoidState.Aggressive:
+                case AllyBoidState.Aggressive:
                     SpriteRenderer.color = colorAggresive;
                     break;
             }
@@ -126,18 +138,20 @@ namespace Units.Boids
 
         private float ComputeSlowDownFactor()
         {
-            if (_boidState == BoidState.Idle) return minimumSlowDown;
-            if (_boidState == BoidState.Aggressive) return 1f;
-            if (!Player || !PlayerRb) return 1f;
-            if (!(PlayerRb.linearVelocity.magnitude <= 0.001f)) return 1f;
-
-
+            if (_allyBoidState == AllyBoidState.Idle) return minimumSlowDown;
+            if (_allyBoidState == AllyBoidState.Following && (PlayerRb.linearVelocity.magnitude > 0.001f)) return 1f;
             float distance = Vector2.Distance(transform.position, Player.position);
 
-            if (distance < stopRadius)
+
+            if (_allyBoidState == AllyBoidState.Aggressive)
             {
-                return 0f;
+                distance = Vector2.Distance(transform.position, _aggroEnemy.transform.position);
             }
+
+            // if (distance < stopRadius)
+            // {
+            //     return 0f;
+            // }
 
             if (distance < slowDownRadius)
             {
@@ -171,10 +185,16 @@ namespace Units.Boids
             return playerVelocity.normalized;
         }
 
-        protected List<Boid> GetNeighbors()
+        private Vector2 ComputeFollowEnemy()
         {
-            List<Boid> neighbors = new List<Boid>();
-            foreach (Boid other in manager.allAllyBoids)
+            if (!_aggroEnemy) return Vector2.zero;
+            return ((Vector2)_aggroEnemy.transform.position - (Vector2)transform.position).normalized;
+        }
+
+        protected override List<AbstractBoid> GetNeighbors()
+        {
+            List<AbstractBoid> neighbors = new List<AbstractBoid>();
+            foreach (AbstractBoid other in manager.allAllyBoids)
             {
                 if (other == this) continue;
                 float dist = Vector2.Distance(transform.position, other.transform.position);
@@ -186,7 +206,7 @@ namespace Units.Boids
         }
     }
 
-    public enum BoidState
+    public enum AllyBoidState
     {
         Idle,
         Following,
