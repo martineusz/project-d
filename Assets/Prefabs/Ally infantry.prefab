@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   responsiveness: 5
-  speed: 4.5
+  speed: 3.5
   neighborRadius: 4
   separationRadius: 2
   separationWeight: 0.8

@@ -6,7 +6,9 @@ namespace Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-        public float speed = 5f;
+        private float _speed;
+        public float runSpeed = 5f;
+        public float walkSpeed = 3.5f;
         private Vector2 _movement;
         private Rigidbody2D _rb;
     
@@ -14,6 +16,7 @@ namespace Player
 
         private void Awake()
         {
+            _speed = runSpeed;
             _rb = GetComponent<Rigidbody2D>();
         }
 
@@ -27,6 +30,14 @@ namespace Player
             {
                 boidManager.DeselectFirstSelectedAllyBoid();
             }
+            if (Keyboard.current.leftShiftKey.isPressed)
+            {
+                _speed = walkSpeed;
+            }
+            else
+            {
+                _speed = runSpeed;
+            }
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -36,7 +47,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            _rb.linearVelocity = _movement * speed;
+            _rb.linearVelocity = _movement * _speed;
         }
 
     }
