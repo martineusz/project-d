@@ -114,7 +114,8 @@ namespace Units.Boids
         private Vector2 ComputeFollowAlly()
         {
             if (!AggroTarget) return Vector2.zero;
-            return ((Vector2)AggroTarget.transform.position - (Vector2)transform.position).normalized;
+            AIPath.destination = AggroTarget.transform.position;
+            return AIPath.desiredVelocity.normalized;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

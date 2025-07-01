@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 namespace Units.Boids
@@ -8,6 +9,7 @@ namespace Units.Boids
         protected BoidType Type;
         
         protected GameObject AggroTarget;
+        protected AIPath AIPath;
 
         protected Transform Player;
         protected Rigidbody2D PlayerRb;
@@ -34,6 +36,8 @@ namespace Units.Boids
         {
             SpriteRenderer = GetComponent<SpriteRenderer>();
             Velocity = Random.insideUnitCircle.normalized * speed;
+            AIPath = GetComponent<AIPath>();
+            
             AssignPlayer();
         }
         
@@ -48,14 +52,6 @@ namespace Units.Boids
             {
                 Player = manager.player;
                 PlayerRb = Player.GetComponent<Rigidbody2D>();
-                if (PlayerRb == null)
-                {
-                    Debug.LogWarning("Player Rigidbody2D not found, player alignment will be zero.");
-                }
-            }
-            else
-            {
-                Debug.LogError("AllyBoid requires a player");
             }
         }
 
@@ -99,8 +95,9 @@ namespace Units.Boids
         
         protected Vector2 ComputeFollowPlayer()
         {
-            if (!Player) return Vector2.zero;
-            return ((Vector2)Player.position - (Vector2)transform.position).normalized;
+            if (!Player || !AIPath) return Vector2.zero;
+            AIPath.destination = Player.position;
+            return AIPath.desiredVelocity.normalized;
         }
         
         public GameObject GetAggroTarget()

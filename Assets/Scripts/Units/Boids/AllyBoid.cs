@@ -78,18 +78,16 @@ namespace Units.Boids
             return acceleration;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy") && AggroTarget == null)
+            if (!other.CompareTag("Enemy") || AggroTarget != null) return;
+            if (_allyBoidState == AllyBoidState.Following)
             {
-                if (_allyBoidState == AllyBoidState.Following)
-                {
-                    _wasFollowing = true;
-                }
-
-                AggroTarget = other.gameObject;
-                SetBoidState(AllyBoidState.Aggressive);
+                _wasFollowing = true;
             }
+
+            AggroTarget = other.gameObject;
+            SetBoidState(AllyBoidState.Aggressive);
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -119,18 +117,13 @@ namespace Units.Boids
         {
             _allyBoidState = newState;
 
-            switch (_allyBoidState)
+            SpriteRenderer.color = _allyBoidState switch
             {
-                case AllyBoidState.Idle:
-                    SpriteRenderer.color = colorIdle;
-                    break;
-                case AllyBoidState.Following:
-                    SpriteRenderer.color = colorFollowing;
-                    break;
-                case AllyBoidState.Aggressive:
-                    SpriteRenderer.color = colorAggresive;
-                    break;
-            }
+                AllyBoidState.Idle => colorIdle,
+                AllyBoidState.Following => colorFollowing,
+                AllyBoidState.Aggressive => colorAggresive,
+                _ => SpriteRenderer.color
+            };
         }
 
 
@@ -138,18 +131,8 @@ namespace Units.Boids
         {
             if (_allyBoidState == AllyBoidState.Idle) return minimumSlowDown;
             if (_allyBoidState == AllyBoidState.Following && (PlayerRb.linearVelocity.magnitude > 0.001f)) return 1f;
+            if (_allyBoidState == AllyBoidState.Aggressive) return 1f;
             float distance = Vector2.Distance(transform.position, Player.position);
-
-
-            if (_allyBoidState == AllyBoidState.Aggressive)
-            {
-                distance = Vector2.Distance(transform.position, AggroTarget.transform.position);
-            }
-
-            // if (distance < stopRadius)
-            // {
-            //     return 0f;
-            // }
 
             if (distance < slowDownRadius)
             {
@@ -186,13 +169,14 @@ namespace Units.Boids
         private Vector2 ComputeFollowEnemy()
         {
             if (!AggroTarget) return Vector2.zero;
-            return ((Vector2)AggroTarget.transform.position - (Vector2)transform.position).normalized;
+            AIPath.destination = AggroTarget.transform.position;
+            return AIPath.desiredVelocity.normalized;
         }
 
         protected override List<AbstractBoid> GetNeighbors()
         {
             List<AbstractBoid> neighbors = new List<AbstractBoid>();
-            foreach (AbstractBoid other in manager.allAllyBoids)
+            foreach (AllyBoid other in manager.allAllyBoids)
             {
                 if (other == this) continue;
                 float dist = Vector2.Distance(transform.position, other.transform.position);
