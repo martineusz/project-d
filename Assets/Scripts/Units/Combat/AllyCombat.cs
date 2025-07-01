@@ -7,7 +7,7 @@ namespace Units.Combat
     {
         protected override void Die()
         {
-            isAlive = false;
+            IsAlive = false;
             Boid.manager.allAllyBoids.Remove((AllyBoid)Boid);
             Destroy(gameObject);
         }

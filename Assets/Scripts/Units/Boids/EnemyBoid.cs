@@ -27,7 +27,6 @@ namespace Units.Boids
 
         protected override void HandleMovement()
         {
-            //TODO: Implement full player focus when in range
             Vector2 acceleration = ComputeAcceleration();
             float slowDownFactor = ComputeSlowDownFactor();
 

@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   responsiveness: 7
-  speed: 3
+  speed: 2
   neighborRadius: 4
   separationRadius: 3
   separationWeight: 1
@@ -143,7 +143,7 @@ MonoBehaviour:
   allyFollowWeight: 6
   colorChasing: {r: 1, g: 0.514151, b: 0.514151, a: 1}
   colorDistracted: {r: 1, g: 0.15566039, b: 0.15566039, a: 1}
-  slowDownRadius: 3
+  slowDownRadius: 2
   minimumSlowDown: 0.7
 --- !u!114 &8538106558782171487
 MonoBehaviour:

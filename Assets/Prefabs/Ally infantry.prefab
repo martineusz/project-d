@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   responsiveness: 5
-  speed: 3.5
+  speed: 1.5
   neighborRadius: 4
   separationRadius: 2
   separationWeight: 0.8
@@ -147,8 +147,8 @@ MonoBehaviour:
   playerSeparationWeight: 4
   playerSeparationRadius: 3.5
   playerAlignmentWeight: 3
-  slowDownRadius: 4
-  minimumSlowDown: 0.5
+  slowDownRadius: 1.5
+  minimumSlowDown: 0.7
 --- !u!114 &1482229494112748767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 100
-  attackDamage: 999
+  attackDamage: 20
   attackSpeed: 1
   isAlive: 1
 --- !u!58 &-7130550587155595638
