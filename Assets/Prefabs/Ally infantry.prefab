@@ -145,7 +145,7 @@ MonoBehaviour:
   colorFollowing: {r: 0.5990566, g: 0.9105333, b: 1, a: 1}
   colorAggresive: {r: 0.6745283, g: 0.7173824, b: 1, a: 1}
   enemyFollowWeight: 6
-  playerFollowWeight: 6
+  playerFollowWeight: 8
   playerSeparationWeight: 3
   playerSeparationRadius: 2.5
   playerAlignmentWeight: 1.5
