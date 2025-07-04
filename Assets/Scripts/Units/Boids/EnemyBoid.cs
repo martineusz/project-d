@@ -80,7 +80,7 @@ namespace Units.Boids
         protected override List<AbstractBoid> GetNeighbors()
         {
             List<AbstractBoid> neighbors = new List<AbstractBoid>();
-            foreach (AbstractBoid other in manager.allEnemyBoids)
+            foreach (EnemyBoid other in manager.allEnemyBoids)
             {
                 if (other == this) continue;
                 float dist = Vector2.Distance(transform.position, other.transform.position);
@@ -118,9 +118,10 @@ namespace Units.Boids
             return AIPath.desiredVelocity.normalized;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
             if (_playerInRange) return;
+            
             if (other.CompareTag("Player"))
             {
                 _playerInRange = true;
@@ -128,6 +129,8 @@ namespace Units.Boids
                 AggroTarget = null;
                 return;
             }
+
+            if (AggroTarget != null) return;
 
             if (other.CompareTag("Ally") && AggroTarget == null)
             {
@@ -138,11 +141,15 @@ namespace Units.Boids
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Player")) _playerInRange = false;
-            if (!other.CompareTag("Ally") || other.gameObject != AggroTarget) return;
-            
-            SetBoidState(EnemyBoidState.Chasing);
-            AggroTarget = null;
+            if (other.CompareTag("Player"))
+            {
+                _playerInRange = false;
+            }
+            if (other.CompareTag("Ally") && other.gameObject == AggroTarget)
+            {
+                SetBoidState(EnemyBoidState.Chasing);
+                AggroTarget = null;
+            }
         }
     }
 

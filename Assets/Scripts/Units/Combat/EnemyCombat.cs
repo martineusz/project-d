@@ -14,9 +14,9 @@ namespace Units.Combat
             Destroy(gameObject);
         }
 
-        protected override void OnCollisionEnter2D(Collision2D collision)
+        protected override void OnCollisionStay2D(Collision2D collision)
         {
-            base.OnCollisionEnter2D(collision);
+            base.OnCollisionStay2D(collision);
             if (collision.gameObject.CompareTag("Player"))
             {
                 DealDamagePlayer(collision.gameObject.GetComponent<PlayerCombat>());

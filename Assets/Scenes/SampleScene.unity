@@ -3113,8 +3113,8 @@ MonoBehaviour:
   player: {fileID: 842971756}
   allyBoidPrefab: {fileID: 6411102760633059870, guid: 60730e8e4c52ba84e80aa339396fd955, type: 3}
   enemyBoidPrefab: {fileID: 6411102760633059870, guid: e468c2223d3744a4e896a291c11d22f9, type: 3}
-  allyBoidCount: 7
-  enemyBoidCount: 4
+  allyBoidCount: 9
+  enemyBoidCount: 3
   spawnRadius: 5
   enemySpawnCenter: {x: 20, y: 0}
   allAllyBoids: []

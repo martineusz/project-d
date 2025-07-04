@@ -19,9 +19,10 @@ namespace Units.Combat
         protected virtual void Awake()
         {
             Boid = GetComponent<AbstractBoid>();
+            Hp = maxHp;
         }
 
-        protected virtual void OnCollisionEnter2D(Collision2D collision)
+        protected virtual void OnCollisionStay2D(Collision2D collision)
         {
             if (Boid.GetAggroTarget() != null && collision.gameObject == Boid.GetAggroTarget())
             {
@@ -42,7 +43,7 @@ namespace Units.Combat
 
         private void DealDamageUnit(Collision2D collision)
         {
-            if (!(Time.time - LastAttackTime >= 1f / attackSpeed)) return;
+            if ((Time.time - LastAttackTime < 1f / attackSpeed)) return;
             
             var enemyCombat = collision.gameObject.GetComponent<AbstractCombat>();
             if (enemyCombat == null) return;
