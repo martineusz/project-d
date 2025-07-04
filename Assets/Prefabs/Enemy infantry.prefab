@@ -137,7 +137,7 @@ MonoBehaviour:
   speed: 2
   neighborRadius: 4
   separationRadius: 3
-  separationWeight: 1
+  separationWeight: 2.5
   alignmentWeight: 0.3
   cohesionWeight: 0.6
   manager: {fileID: 0}
