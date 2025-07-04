@@ -112,6 +112,7 @@ namespace Units.Boids
     {
         Ally,
         Enemy,
+        Worker,
         Neutral
     }
 }

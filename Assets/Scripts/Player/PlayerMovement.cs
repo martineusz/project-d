@@ -11,7 +11,7 @@ namespace Player
         public float walkSpeed = 3.5f;
         private Vector2 _movement;
         private Rigidbody2D _rb;
-    
+
         public BoidManager boidManager;
 
         private void Awake()
@@ -26,10 +26,22 @@ namespace Player
             {
                 boidManager.SelectNearestUnselectedAllyBoid();
             }
+
             if (Keyboard.current.qKey.wasPressedThisFrame)
             {
                 boidManager.DeselectFirstSelectedAllyBoid();
             }
+            if (Keyboard.current.zKey.wasPressedThisFrame)
+            {
+                boidManager.SelectNearestUnselectedWorkerBoid();
+            }
+
+            if (Keyboard.current.xKey.wasPressedThisFrame)
+            {
+                boidManager.DeselectFirstSelectedWorkerBoid();
+            }
+            
+
             if (Keyboard.current.leftShiftKey.isPressed)
             {
                 _speed = walkSpeed;
@@ -49,6 +61,5 @@ namespace Player
         {
             _rb.linearVelocity = _movement * _speed;
         }
-
     }
 }
