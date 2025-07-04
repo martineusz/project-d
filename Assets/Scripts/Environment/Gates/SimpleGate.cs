@@ -9,7 +9,7 @@ namespace Environment.Gates
 
         private void Awake()
         {
-            Collider col = GetComponent<Collider>();
+            Collider2D col = GetComponent<Collider2D>();
             if (col != null)
             {
                 _bounds = col.bounds;
