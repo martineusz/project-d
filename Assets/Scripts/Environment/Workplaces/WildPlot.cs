@@ -84,7 +84,6 @@ namespace Environment.Workplaces
 
         public void AddWorker(WorkerBoid worker)
         {
-            Debug.Log("Adding worker");
             workers.Add(worker);
         }
 

@@ -185,6 +185,8 @@ namespace Units.Boids
 
         public void SetBoidState(WorkerBoidState newState)
         {
+            if (newState != WorkerBoidState.Working) _targetWorkplace = null;
+            
             if (newState == WorkerBoidState.Following && _workerBoidState == WorkerBoidState.Working)
             {
                 UnassignFromWorkspace();
@@ -205,7 +207,6 @@ namespace Units.Boids
         {
             var workplace = _targetWorkplace.GetComponent<Environment.Workplaces.IWorkplace>();
             workplace?.RemoveWorker(this);
-            _targetWorkplace = null;
         }
     }
 
