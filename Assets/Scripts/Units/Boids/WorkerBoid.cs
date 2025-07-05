@@ -8,13 +8,17 @@ namespace Units.Boids
         public Color colorIdle;
         public Color colorFollowing;
         public Color colorWorking;
+        
+        private Transform _targetWorkplace;
 
-        private WorkerBoidState _workerBoidState = WorkerBoidState.Idle;
+        private WorkerBoidState _workerBoidState = WorkerBoidState.GoingToWork;
 
         public float playerFollowWeight = 2f;
         public float playerSeparationWeight = 1.5f;
         public float playerSeparationRadius = 1.5f;
         public float playerAlignmentWeight = 1f;
+        
+        public float workplaceFollowWeight = 6f;
 
         protected void Awake()
         {
@@ -40,19 +44,24 @@ namespace Units.Boids
             Vector2 separation = ComputeSeparation(neighbors) * separationWeight;
             Vector2 alignment = ComputeAlignment(neighbors) * alignmentWeight;
             Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
-
+            
+            Vector2 workplaceFollow = Vector2.zero;
             Vector2 followPlayer = Vector2.zero;
             Vector2 playerSeparation = Vector2.zero;
             Vector2 playerAlignment = Vector2.zero;
 
-            if (_workerBoidState == WorkerBoidState.Following)
+            if (_workerBoidState == WorkerBoidState.GoingToWork)
+            {
+                workplaceFollow = ComputeWorkplaceFollow() * workplaceFollowWeight;
+            }
+            else if (_workerBoidState == WorkerBoidState.Following)
             {
                 followPlayer = ComputeFollowPlayer() * playerFollowWeight;
                 playerSeparation = ComputePlayerSeparation() * playerSeparationWeight;
                 playerAlignment = ComputePlayerAlignment() * playerAlignmentWeight;
             }
 
-            return separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment;
+            return separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment + workplaceFollow;
         }
 
 
@@ -77,6 +86,35 @@ namespace Units.Boids
             if (playerVelocity == Vector2.zero) return Vector2.zero;
 
             return playerVelocity.normalized;
+        }
+
+        private Vector2 ComputeWorkplaceFollow()
+        {
+            if (!_targetWorkplace || !AIPath) return Vector2.zero;
+            AIPath.destination = _targetWorkplace.position;
+            return AIPath.desiredVelocity.normalized;
+        }
+        
+        private GameObject FindClosestWorkplace()
+        {
+            GameObject[] workplaces = GameObject.FindGameObjectsWithTag("Workplace");
+            if (workplaces.Length == 0) return null;
+
+            GameObject nearest = null;
+            float minDist = float.MaxValue;
+            Vector2 currentPosition = transform.position;
+
+            foreach (var workplace in workplaces)
+            {
+                float dist = Vector2.Distance(currentPosition, workplace.transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    nearest = workplace;
+                }
+            }
+
+            return nearest;
         }
 
         protected override List<AbstractBoid> GetNeighbors()
@@ -104,17 +142,19 @@ namespace Units.Boids
 
             SpriteRenderer.color = _workerBoidState switch
             {
-                WorkerBoidState.Idle => colorIdle,
+                WorkerBoidState.GoingToWork => colorIdle,
                 WorkerBoidState.Following => colorFollowing,
                 WorkerBoidState.Working => colorWorking,
                 _ => SpriteRenderer.color
             };
         }
+        
+        
     }
 
     public enum WorkerBoidState
     {
-        Idle,
+        GoingToWork,
         Following,
         Working
     }

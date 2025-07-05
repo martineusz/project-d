@@ -83,7 +83,7 @@ namespace Units.Boids
             {
                 if (boid.GetBoidState() == WorkerBoidState.Following)
                 {
-                    boid.SetBoidState(WorkerBoidState.Idle);
+                    boid.SetBoidState(WorkerBoidState.GoingToWork);
                     return;
                 }
             }
@@ -137,7 +137,7 @@ namespace Units.Boids
 
             foreach (WorkerBoid boid in allWorkerBoids)
             {
-                if (boid.GetBoidState() == WorkerBoidState.Idle)
+                if (boid.GetBoidState() == WorkerBoidState.GoingToWork)
                 {
                     float dist = Vector3.Distance(player.position, boid.transform.position);
                     if (dist < minDistance)
