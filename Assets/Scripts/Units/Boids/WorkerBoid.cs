@@ -20,6 +20,8 @@ namespace Units.Boids
         
         public float workplaceFollowWeight = 6f;
 
+        private Bounds _workplaceBounds = default;
+
         protected void Awake()
         {
             Type = BoidType.Worker;
@@ -28,6 +30,11 @@ namespace Units.Boids
 
         protected override void HandleMovement()
         {
+            if (_workerBoidState == WorkerBoidState.GoingToWork && !_targetWorkplace)
+            {
+                FindClosestWorkplace();
+            }
+            
             Vector2 acceleration = ComputeAcceleration();
 
             Velocity += acceleration * (Time.deltaTime * responsiveness);
@@ -95,10 +102,10 @@ namespace Units.Boids
             return AIPath.desiredVelocity.normalized;
         }
         
-        private GameObject FindClosestWorkplace()
+        private void FindClosestWorkplace()
         {
             GameObject[] workplaces = GameObject.FindGameObjectsWithTag("Workplace");
-            if (workplaces.Length == 0) return null;
+            if (workplaces.Length == 0) return;
 
             GameObject nearest = null;
             float minDist = float.MaxValue;
@@ -114,7 +121,7 @@ namespace Units.Boids
                 }
             }
 
-            return nearest;
+            if (nearest) _targetWorkplace = nearest.transform;
         }
 
         protected override List<AbstractBoid> GetNeighbors()
