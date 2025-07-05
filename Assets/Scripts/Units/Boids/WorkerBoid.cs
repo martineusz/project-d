@@ -8,8 +8,10 @@ namespace Units.Boids
         public Color colorIdle;
         public Color colorFollowing;
         public Color colorWorking;
-        
+
         private Transform _targetWorkplace;
+
+        public Transform TargetWorkplace => _targetWorkplace;
 
         private WorkerBoidState _workerBoidState = WorkerBoidState.GoingToWork;
 
@@ -17,8 +19,12 @@ namespace Units.Boids
         public float playerSeparationWeight = 1.5f;
         public float playerSeparationRadius = 1.5f;
         public float playerAlignmentWeight = 1f;
-        
+
         public float workplaceFollowWeight = 6f;
+        
+        public float boundaryBuffer = 0.5f;
+        public float boundarySeparationWeight = 5f;
+        
 
         private Bounds _workplaceBounds = default;
 
@@ -28,13 +34,14 @@ namespace Units.Boids
             SpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+
         protected override void HandleMovement()
         {
             if (_workerBoidState == WorkerBoidState.GoingToWork && !_targetWorkplace)
             {
                 FindClosestWorkplace();
             }
-            
+
             Vector2 acceleration = ComputeAcceleration();
 
             Velocity += acceleration * (Time.deltaTime * responsiveness);
@@ -51,11 +58,12 @@ namespace Units.Boids
             Vector2 separation = ComputeSeparation(neighbors) * separationWeight;
             Vector2 alignment = ComputeAlignment(neighbors) * alignmentWeight;
             Vector2 cohesion = ComputeCohesion(neighbors) * cohesionWeight;
-            
+
             Vector2 workplaceFollow = Vector2.zero;
             Vector2 followPlayer = Vector2.zero;
             Vector2 playerSeparation = Vector2.zero;
             Vector2 playerAlignment = Vector2.zero;
+            Vector2 boundarySeparation = Vector2.zero;
 
             if (_workerBoidState == WorkerBoidState.GoingToWork)
             {
@@ -67,8 +75,13 @@ namespace Units.Boids
                 playerSeparation = ComputePlayerSeparation() * playerSeparationWeight;
                 playerAlignment = ComputePlayerAlignment() * playerAlignmentWeight;
             }
+            else if (_workerBoidState == WorkerBoidState.Working)
+            {
+                boundarySeparation = ComputeBoundarySeparation() * boundarySeparationWeight;
+            }
 
-            return separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment + workplaceFollow;
+            return separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment +
+                   workplaceFollow + boundarySeparation;
         }
 
 
@@ -94,6 +107,25 @@ namespace Units.Boids
 
             return playerVelocity.normalized;
         }
+        private Vector2 ComputeBoundarySeparation()
+        {
+            if (_workplaceBounds == default) return Vector2.zero;
+
+            Vector2 force = Vector2.zero;
+            Vector2 pos = transform.position;
+
+            if (pos.x < _workplaceBounds.min.x + boundaryBuffer)
+                force.x += 1f;
+            else if (pos.x > _workplaceBounds.max.x - boundaryBuffer)
+                force.x -= 1f;
+
+            if (pos.y < _workplaceBounds.min.y + boundaryBuffer)
+                force.y += 1f;
+            else if (pos.y > _workplaceBounds.max.y - boundaryBuffer)
+                force.y -= 1f;
+
+            return force.normalized;
+        }
 
         private Vector2 ComputeWorkplaceFollow()
         {
@@ -101,7 +133,7 @@ namespace Units.Boids
             AIPath.destination = _targetWorkplace.position;
             return AIPath.desiredVelocity.normalized;
         }
-        
+
         private void FindClosestWorkplace()
         {
             GameObject[] workplaces = GameObject.FindGameObjectsWithTag("Workplace");
@@ -121,7 +153,15 @@ namespace Units.Boids
                 }
             }
 
-            if (nearest) _targetWorkplace = nearest.transform;
+            if (nearest)
+            {
+                _targetWorkplace = nearest.transform;
+                Collider2D targetCollider = nearest.GetComponent<Collider2D>();
+                if (targetCollider)
+                {
+                    _workplaceBounds = targetCollider.bounds;
+                }
+            }
         }
 
         protected override List<AbstractBoid> GetNeighbors()
@@ -137,14 +177,19 @@ namespace Units.Boids
 
             return neighbors;
         }
-        
+
         public WorkerBoidState GetBoidState()
         {
             return _workerBoidState;
         }
-        
+
         public void SetBoidState(WorkerBoidState newState)
         {
+            if (newState == WorkerBoidState.Following && _workerBoidState == WorkerBoidState.Working)
+            {
+                UnassignFromWorkspace();
+            }
+
             _workerBoidState = newState;
 
             SpriteRenderer.color = _workerBoidState switch
@@ -155,8 +200,13 @@ namespace Units.Boids
                 _ => SpriteRenderer.color
             };
         }
-        
-        
+
+        private void UnassignFromWorkspace()
+        {
+            var workplace = _targetWorkplace.GetComponent<Environment.Workplaces.IWorkplace>();
+            workplace?.RemoveWorker(this);
+            _targetWorkplace = null;
+        }
     }
 
     public enum WorkerBoidState

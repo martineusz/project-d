@@ -31,12 +31,12 @@ namespace Player
             {
                 boidManager.DeselectFirstSelectedAllyBoid();
             }
-            if (Keyboard.current.zKey.wasPressedThisFrame)
+            if (Keyboard.current.xKey.wasPressedThisFrame)
             {
                 boidManager.SelectNearestUnselectedWorkerBoid();
             }
 
-            if (Keyboard.current.xKey.wasPressedThisFrame)
+            if (Keyboard.current.zKey.wasPressedThisFrame)
             {
                 boidManager.DeselectFirstSelectedWorkerBoid();
             }

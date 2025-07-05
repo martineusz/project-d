@@ -2588,7 +2588,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6493405, g: 1, b: 0.5801887, a: 1}
   m_FlipX: 0
@@ -2610,7 +2610,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.51, y: -9.06, z: 0}
-  m_LocalScale: {x: 0.36868867, y: 0.3633645, z: 0.3776}
+  m_LocalScale: {x: 0.36868867, y: 0.3633645, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1137388331}
@@ -3139,8 +3139,10 @@ MonoBehaviour:
   allyBoidCount: 9
   enemyBoidCount: 3
   workerBoidCount: 4
-  spawnRadius: 5
+  spawnRadius: 3
+  allySpawnCenter: {x: 0, y: 0}
   enemySpawnCenter: {x: 20, y: 0}
+  workerSpawnCenter: {x: 0, y: -7}
   allAllyBoids: []
   allEnemyBoids: []
   allWorkerBoids: []
@@ -5062,9 +5064,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1908202340}
   - component: {fileID: 1908202339}
+  - component: {fileID: 1908202342}
+  - component: {fileID: 1908202343}
   - component: {fileID: 1908202341}
   m_Layer: 0
-  m_Name: Plot
+  m_Name: WildPlot
   m_TagString: Workplace
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5186,6 +5190,38 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1908202342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908202338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705ed77b4928faa4bbf80c6cbc9c6bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceDataFactory: {fileID: 1908202343}
+  workerLimit: 3
+  stashLimit: 10
+  cropsLimit: 5
+  neediness: 1
+  workers: []
+--- !u!114 &1908202343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908202338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d4247ef8bf47be933cc929f3e44833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultResourceName: unnamed
+  defaultIcon: {fileID: 0}
 --- !u!1 &2003947134
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Items
 {
-    public class ResourceDataFactory
+    public class ResourceDataFactory : MonoBehaviour
     {
-        private string _defaultResourceName = "unnamed";
-        private Sprite _defaultIcon = null;
+        [SerializeField] private string defaultResourceName = "unnamed";
+        [SerializeField] private Sprite defaultIcon = null;
+
         public ResourceData GenerateNewResource()
         {
             ResourceData resource = ScriptableObject.CreateInstance<ResourceData>();
-            resource.itemName = _defaultResourceName;
-            resource.icon = _defaultIcon;
-            
+            resource.itemName = defaultResourceName;
+            resource.icon = defaultIcon;
             return resource;
         }
     }

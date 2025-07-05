@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Items;
+using Units.Boids;
 using Units.Logic;
 using UnityEngine;
 
 namespace Environment.Workplaces
 {
-    public class WildPlot : MonoBehaviour
+    public class WildPlot : MonoBehaviour, IWorkplace
     {
         public ResourceDataFactory ResourceDataFactory;
         
@@ -69,8 +70,34 @@ namespace Environment.Workplaces
                 Debug.Log("adding new crop");
             }
         }
-        
-        
-        
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            WorkerBoid workerBoid = other.GetComponent<WorkerBoid>();
+            if (workerBoid != null && workerBoid.TargetWorkplace == transform)
+            {
+                workerBoid.SetBoidState(WorkerBoidState.Working);
+                AddWorker(workerBoid);
+            }
+        }
+
+        public void AddWorker(WorkerBoid worker)
+        {
+            Debug.Log("Adding worker");
+            WorkerLogic workerLogic = worker.GetComponent<WorkerLogic>();
+            if (workerLogic != null)
+            {
+                workers.Add(workerLogic);
+            }
+        }
+
+        public void RemoveWorker(WorkerBoid worker)
+        {
+            WorkerLogic workerLogic = worker.GetComponent<WorkerLogic>();
+            if (workerLogic != null)
+            {
+                workers.Remove(workerLogic);
+            }
+        }
     }
 }
