@@ -7,8 +7,10 @@ namespace Units.Combat
     {
         protected override void Die()
         {
+            WorkerBoid boid = (WorkerBoid)Boid;
             IsAlive = false;
-            Boid.manager.allWorkerBoids.Remove((WorkerBoid)Boid);
+            boid.UnassignFromWorkspace();
+            boid.manager.allWorkerBoids.Remove(boid);
             Destroy(gameObject);
         }
     }

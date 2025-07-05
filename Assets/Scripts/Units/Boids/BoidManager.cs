@@ -83,7 +83,7 @@ namespace Units.Boids
         {
             foreach (WorkerBoid boid in allWorkerBoids)
             {
-                if (boid.GetBoidState() == WorkerBoidState.Following || boid.GetBoidState() == WorkerBoidState.Working)
+                if (boid.GetBoidState() == WorkerBoidState.Following)
                 {
                     boid.SetBoidState(WorkerBoidState.GoingToWork);
                     return;

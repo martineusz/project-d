@@ -1,4 +1,5 @@
 ﻿using Items;
+using UnityEngine;
 
 namespace Environment.Workplaces
 {
@@ -16,6 +17,7 @@ namespace Environment.Workplaces
         
         public void Grow(float growthEfficiency)
         {
+            Debug.Log("Crop growing: " + Maturity);
             if (Maturity < 1) Maturity += growthEfficiency * GrowthRate;
         }
 

@@ -201,7 +201,7 @@ namespace Units.Boids
             };
         }
 
-        private void UnassignFromWorkspace()
+        public void UnassignFromWorkspace()
         {
             var workplace = _targetWorkplace.GetComponent<Environment.Workplaces.IWorkplace>();
             workplace?.RemoveWorker(this);

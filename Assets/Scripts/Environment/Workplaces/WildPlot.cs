@@ -2,22 +2,22 @@ using System;
 using System.Collections.Generic;
 using Items;
 using Units.Boids;
-using Units.Logic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Environment.Workplaces
 {
     public class WildPlot : MonoBehaviour, IWorkplace
     {
-        public ResourceDataFactory ResourceDataFactory;
+        public ResourceDataFactory resourceDataFactory;
         
         public int workerLimit = 3;
-        public int stashLimit = 10;
-        public int cropsLimit = 5;
+        public int stashLimit = 3;
+        public int cropsLimit = 1;
 
         public float neediness = 1f; //growth = (W/maxW) ^ neediness
         
-        [HideInInspector] public List<WorkerLogic> workers = new List<WorkerLogic>();
+        [HideInInspector] public List<WorkerBoid> workers = new List<WorkerBoid>();
         
         private List<Crop> _crops = new List<Crop>();
         private List<ResourceData> _resourceStash = new List<ResourceData>();
@@ -64,7 +64,7 @@ namespace Environment.Workplaces
         {
             while (_crops.Count < cropsLimit)
             {
-                ResourceData newResData = ResourceDataFactory.GenerateNewResource();
+                ResourceData newResData = resourceDataFactory.GenerateNewResource();
                 Crop newCrop = new Crop(newResData);
                 _crops.Add(newCrop);
                 Debug.Log("adding new crop");
@@ -73,8 +73,9 @@ namespace Environment.Workplaces
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (workers.Count >= workerLimit) return;
             WorkerBoid workerBoid = other.GetComponent<WorkerBoid>();
-            if (workerBoid != null && workerBoid.TargetWorkplace == transform)
+            if (workerBoid != null && !workers.Contains(workerBoid) && workerBoid.TargetWorkplace == transform)
             {
                 workerBoid.SetBoidState(WorkerBoidState.Working);
                 AddWorker(workerBoid);
@@ -84,20 +85,12 @@ namespace Environment.Workplaces
         public void AddWorker(WorkerBoid worker)
         {
             Debug.Log("Adding worker");
-            WorkerLogic workerLogic = worker.GetComponent<WorkerLogic>();
-            if (workerLogic != null)
-            {
-                workers.Add(workerLogic);
-            }
+            workers.Add(worker);
         }
 
         public void RemoveWorker(WorkerBoid worker)
         {
-            WorkerLogic workerLogic = worker.GetComponent<WorkerLogic>();
-            if (workerLogic != null)
-            {
-                workers.Remove(workerLogic);
-            }
+            workers.Remove(worker);
         }
     }
 }
