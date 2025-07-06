@@ -25,6 +25,12 @@ namespace Units.Boids
         public float boundaryBuffer = 0.5f;
         public float boundarySeparationWeight = 5f;
         
+        
+        public float slowDownRadius = 1.5f;
+        public float minimumSlowDown = 0.2f;
+        public float workingSlowDown = 0.25f;
+        private const float MaxSlowDown = 0.5f;
+        
 
         private Bounds _workplaceBounds = default;
 
@@ -43,9 +49,10 @@ namespace Units.Boids
             }
 
             Vector2 acceleration = ComputeAcceleration();
+            float slowDownFactor = ComputeSlowDownFactor();
 
             Velocity += acceleration * (Time.deltaTime * responsiveness);
-            Velocity = Velocity.normalized * speed;
+            Velocity = Velocity.normalized * (speed * slowDownFactor);
 
             transform.position += (Vector3)(Velocity * Time.deltaTime);
             transform.up = Velocity;
@@ -82,6 +89,23 @@ namespace Units.Boids
 
             return separation + alignment + cohesion + followPlayer + playerSeparation + playerAlignment +
                    workplaceFollow + boundarySeparation;
+        }
+        
+        private float ComputeSlowDownFactor()
+        {
+            if (_workerBoidState == WorkerBoidState.Working) return workingSlowDown;
+            if (_workerBoidState == WorkerBoidState.GoingToWork) return 1f;
+            if (_workerBoidState == WorkerBoidState.Following && (PlayerRb.linearVelocity.magnitude > 0.001f)) return 1f;
+            
+            float distance = Vector2.Distance(transform.position, Player.position);
+
+            if (distance < slowDownRadius)
+            {
+                float t = distance / slowDownRadius;
+                return Mathf.Lerp(minimumSlowDown, MaxSlowDown, t);
+            }
+
+            return 1f;
         }
 
 

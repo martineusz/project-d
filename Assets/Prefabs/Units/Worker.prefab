@@ -148,6 +148,10 @@ MonoBehaviour:
   playerSeparationRadius: 2.5
   playerAlignmentWeight: 1.5
   workplaceFollowWeight: 6
+  boundaryBuffer: 0.5
+  boundarySeparationWeight: 5
+  slowDownRadius: 1.5
+  minimumSlowDown: 0.1
 --- !u!114 &1692729005000645794
 MonoBehaviour:
   m_ObjectHideFlags: 0
