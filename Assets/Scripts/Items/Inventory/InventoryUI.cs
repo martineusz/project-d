@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 namespace Items.Inventory
 {
@@ -7,6 +8,11 @@ namespace Items.Inventory
     {
         public Transform itemsParent;
         public GameObject inventoryUI;
+
+        public GameObject itemDetailsPanel;
+        public TextMeshProUGUI nameText;
+        public TextMeshProUGUI descriptionText;
+        public TextMeshProUGUI rarityText;
 
         private Inventory _inventory;
         private InventorySlot[] _slots;
@@ -17,11 +23,17 @@ namespace Items.Inventory
             _inventory.OnItemChangedCallback += UpdateUI;
             _slots = itemsParent.GetComponentsInChildren<InventorySlot>();
             inventoryUI.SetActive(false);
+
+            foreach (var slot in _slots)
+            {
+                slot.OnSlotClicked += ShowItemDetails;
+            }
+            itemDetailsPanel.SetActive(false);
         }
-        
+
         void Update()
         {
-            if (Keyboard.current.iKey.wasPressedThisFrame)
+            if (UnityEngine.InputSystem.Keyboard.current.iKey.wasPressedThisFrame)
             {
                 inventoryUI.SetActive(!inventoryUI.activeSelf);
             }
@@ -36,6 +48,14 @@ namespace Items.Inventory
                 else
                     _slots[i].ClearSlot();
             }
+        }
+
+        void ShowItemDetails(ItemData item)
+        {
+            itemDetailsPanel.SetActive(true);
+            nameText.text = item.itemName;
+            descriptionText.text = item.description;
+            rarityText.text = item.rarity.ToString();
         }
     }
 }
