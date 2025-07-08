@@ -81,6 +81,18 @@ namespace Environment.Workplaces
                 AddWorker(workerBoid);
             }
         }
+        
+        public bool TryTakeResource(out ResourceData resource)
+        {
+            if (_resourceStash.Count > 0)
+            {
+                resource = _resourceStash[0];
+                _resourceStash.RemoveAt(0);
+                return true;
+            }
+            resource = null;
+            return false;
+        }
 
         public void AddWorker(WorkerBoid worker)
         {

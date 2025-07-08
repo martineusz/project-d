@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Items.Inventory;
+using UnityEngine;
 
 namespace Environment.Workplaces
 {
@@ -7,7 +8,16 @@ namespace Environment.Workplaces
         public WildPlot plot;
         public void Use()
         {
-            
+            if (!plot) return;
+            if (plot.TryTakeResource(out var resource))
+            {
+                Inventory.Instance.Add(resource);
+                Debug.Log("Resource taken from plot and added to inventory.");
+            }
+            else
+            {
+                Debug.Log("No resources in plot stash.");
+            }
         }
     }
 }
