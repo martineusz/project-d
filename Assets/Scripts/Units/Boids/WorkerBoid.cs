@@ -229,6 +229,8 @@ namespace Units.Boids
 
         public void UnassignFromWorkspace()
         {
+            if (_targetWorkplace == null) return; 
+
             var workplace = _targetWorkplace.GetComponent<Environment.Workplaces.IWorkplace>();
             workplace?.RemoveWorker(this);
         }

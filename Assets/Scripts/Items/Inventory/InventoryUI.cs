@@ -13,6 +13,7 @@ namespace Items.Inventory
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI descriptionText;
         public TextMeshProUGUI rarityText;
+        public Image itemImage;
 
         private Inventory _inventory;
         private InventorySlot[] _slots;
@@ -56,6 +57,8 @@ namespace Items.Inventory
             nameText.text = item.itemName;
             descriptionText.text = item.description;
             rarityText.text = item.rarity.ToString();
+            itemImage.sprite = item.icon; 
+            itemImage.enabled = item.icon != null;
         }
     }
 }
