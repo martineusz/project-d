@@ -24,12 +24,12 @@ namespace Items.Inventory
             _inventory.OnItemChangedCallback += UpdateUI;
             _slots = itemsParent.GetComponentsInChildren<InventorySlot>();
             inventoryUI.SetActive(false);
+            itemDetailsPanel.SetActive(false);
 
             foreach (var slot in _slots)
             {
                 slot.OnSlotClicked += ShowItemDetails;
             }
-            itemDetailsPanel.SetActive(false);
         }
 
         void Update()
@@ -37,6 +37,7 @@ namespace Items.Inventory
             if (UnityEngine.InputSystem.Keyboard.current.iKey.wasPressedThisFrame)
             {
                 inventoryUI.SetActive(!inventoryUI.activeSelf);
+                itemDetailsPanel.SetActive(!itemDetailsPanel.activeSelf);
             }
         }
 
