@@ -214,13 +214,15 @@ namespace Units.Boids
 
         public void SetBoidState(WorkerBoidState newState)
         {
-            if (newState != WorkerBoidState.Working) _targetWorkplace = null;
-            
+            if (newState == WorkerBoidState.Following && _workerBoidState == WorkerBoidState.GoingToWork)
+            {
+                UnassignFromQueue();
+            }
             if (newState == WorkerBoidState.Following && _workerBoidState == WorkerBoidState.Working)
             {
                 UnassignFromWorkspace();
             }
-
+            if (newState != WorkerBoidState.Working) _targetWorkplace = null;
             _workerBoidState = newState;
 
             SpriteRenderer.color = _workerBoidState switch
@@ -238,6 +240,16 @@ namespace Units.Boids
 
             var workplace = _targetWorkplace.GetComponent<Environment.Workplaces.IWorkplace>();
             workplace?.RemoveWorker(this);
+        }
+        
+        public void UnassignFromQueue()
+        {
+            Debug.Log("Inassigning from queue");
+            if (!_targetWorkplace) return; 
+
+            
+            var workplace = _targetWorkplace.GetComponent<Environment.Workplaces.IWorkplace>();
+            workplace?.UnqueueWorker(this);
         }
     }
 

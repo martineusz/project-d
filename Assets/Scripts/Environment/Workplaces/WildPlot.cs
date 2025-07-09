@@ -35,6 +35,9 @@ namespace Environment.Workplaces
                 HandleGrowth();
                 _growthTimer = 0f;
             }
+            
+            Debug.Log("Queue size: " + workerQueue.Count);
+            Debug.Log("Workers number: " + workers.Count);
         }
 
         private void HandleGrowth()

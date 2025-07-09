@@ -14,10 +14,14 @@ namespace UI.Inventory
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI descriptionText;
         public TextMeshProUGUI rarityText;
+        public TextMeshProUGUI priceText;
         public Image itemImage;
+        public Button sellButton; // Add this field
+        public ShopLogic shopLogic; // Reference to ShopLogic
 
         private UI.Inventory.Inventory _inventory;
         private InventorySlot[] _slots;
+        private ItemData _currentItem; // Store selected item
 
         void Start()
         {
@@ -31,6 +35,9 @@ namespace UI.Inventory
             {
                 slot.OnSlotClicked += ShowItemDetails;
             }
+
+            sellButton.onClick.AddListener(OnSellButtonClicked); // Assign click event
+            sellButton.gameObject.SetActive(false);
         }
 
         void Update()
@@ -38,7 +45,7 @@ namespace UI.Inventory
             if (UnityEngine.InputSystem.Keyboard.current.iKey.wasPressedThisFrame)
             {
                 inventoryUI.SetActive(!inventoryUI.activeSelf);
-                itemDetailsPanel.SetActive(!itemDetailsPanel.activeSelf);
+                itemDetailsPanel.SetActive(inventoryUI.activeSelf);
             }
         }
 
@@ -55,12 +62,25 @@ namespace UI.Inventory
 
         void ShowItemDetails(ItemData item)
         {
+            _currentItem = item;
             itemDetailsPanel.SetActive(true);
             nameText.text = item.itemName;
             descriptionText.text = item.description;
             rarityText.text = item.rarity.ToString();
-            itemImage.sprite = item.icon; 
+            priceText.text = item.price.ToString();
+            itemImage.sprite = item.icon;
             itemImage.enabled = item.icon != null;
+            sellButton.gameObject.SetActive(true);
+        }
+
+        void OnSellButtonClicked()
+        {
+            if (_currentItem != null && shopLogic != null)
+            {
+                shopLogic.SellItem(_currentItem);
+                _inventory.Remove(_currentItem);
+                itemDetailsPanel.SetActive(false);
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Items
 
         public string description;
         public Rarity rarity;
+        public int price;
     }
 
     public enum Rarity

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb1730be3db4c529a81dde8d87c0d44, type: 3}
   m_Name: Diamenciak
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
-  description: 
-  rarity: 0
+  itemName: Diamenciak
+  icon: {fileID: 1546353380395810245, guid: 42c90d667702bc04493713ec674bbcd2, type: 3}
+  description: Potezny diament o wielkiej wartosci
+  rarity: 2
+  price: 55

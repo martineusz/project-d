@@ -16,3 +16,4 @@ MonoBehaviour:
   icon: {fileID: 859682207787787508, guid: 03cdacdabb0c6a54d878d8cd3f9119a1, type: 3}
   description: Mocny grzyb
   rarity: 0
+  price: 2
