@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using Items;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace Items.Inventory
+namespace UI.Inventory
 {
     public class InventorySlot : MonoBehaviour, IPointerClickHandler
     {

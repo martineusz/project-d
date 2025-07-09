@@ -1,4 +1,4 @@
-﻿using Items.Inventory;
+﻿using UI.Inventory;
 using UnityEngine;
 
 namespace Environment.Workplaces

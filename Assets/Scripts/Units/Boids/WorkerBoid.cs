@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Environment.Workplaces;
 using UnityEngine;
 
 namespace Units.Boids
@@ -172,8 +173,12 @@ namespace Units.Boids
                 float dist = Vector2.Distance(currentPosition, workplace.transform.position);
                 if (dist < minDist)
                 {
-                    minDist = dist;
-                    nearest = workplace;
+                    IWorkplace iworkplace = workplace.gameObject.GetComponent<IWorkplace>();
+                    if (iworkplace.QueueWorker(this))
+                    {
+                        minDist = dist;
+                        nearest = workplace;
+                    }
                 }
             }
 
@@ -229,7 +234,7 @@ namespace Units.Boids
 
         public void UnassignFromWorkspace()
         {
-            if (_targetWorkplace == null) return; 
+            if (!_targetWorkplace) return; 
 
             var workplace = _targetWorkplace.GetComponent<Environment.Workplaces.IWorkplace>();
             workplace?.RemoveWorker(this);

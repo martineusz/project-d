@@ -28,5 +28,16 @@ namespace Environment.Workplaces
         {
             workers.Remove(worker);
         }
+        
+        public bool QueueWorker(WorkerBoid worker)
+        {
+            // StartBeacon does not queue workers, they are added directly upon entering the trigger
+            return true;
+        }
+
+        public void UnqueueWorker(WorkerBoid worker)
+        {
+            // Not applicable for StartBeacon
+        }
     }
 }

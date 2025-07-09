@@ -18,6 +18,7 @@ namespace Environment.Workplaces
         public float neediness = 1f; //growth = (W/maxW) ^ neediness
         
         [HideInInspector] public List<WorkerBoid> workers = new List<WorkerBoid>();
+        [HideInInspector] public List<WorkerBoid> workerQueue = new List<WorkerBoid>();
         
         private List<Crop> _crops = new List<Crop>();
         private List<ResourceData> _resourceStash = new List<ResourceData>();
@@ -102,6 +103,23 @@ namespace Environment.Workplaces
         public void RemoveWorker(WorkerBoid worker)
         {
             workers.Remove(worker);
+            UnqueueWorker(worker);
+        }
+
+        public bool QueueWorker(WorkerBoid worker)
+        {
+            if (workerQueue.Count < workerLimit - workers.Count)
+            {
+                workerQueue.Add(worker);
+                return true;
+            }
+            
+            return false;
+        }
+
+        public void UnqueueWorker(WorkerBoid worker)
+        {
+            workerQueue.Remove(worker);
         }
     }
 }

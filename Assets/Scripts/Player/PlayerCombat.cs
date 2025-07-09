@@ -7,18 +7,19 @@ namespace Player
     {
         private PlayerMovement _playerMovement;
 
-        private float _hp;
+        public float hp;
         public float maxHp;
 
         private void Awake()
         {
             _playerMovement = GetComponent<PlayerMovement>();
+            hp = maxHp;
         }
         
         public void TakeDamage(float damage)
         {
-            _hp -= damage;
-            if (_hp <= 0)
+            hp -= damage;
+            if (hp <= 0)
             {
                 Die();
             }

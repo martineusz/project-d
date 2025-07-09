@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using Items;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
-namespace Items.Inventory
+namespace UI.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
@@ -15,12 +16,12 @@ namespace Items.Inventory
         public TextMeshProUGUI rarityText;
         public Image itemImage;
 
-        private Inventory _inventory;
+        private UI.Inventory.Inventory _inventory;
         private InventorySlot[] _slots;
 
         void Start()
         {
-            _inventory = Inventory.Instance;
+            _inventory = UI.Inventory.Inventory.Instance;
             _inventory.OnItemChangedCallback += UpdateUI;
             _slots = itemsParent.GetComponentsInChildren<InventorySlot>();
             inventoryUI.SetActive(false);
