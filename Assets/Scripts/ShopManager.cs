@@ -2,7 +2,7 @@
 using Items;
 using UnityEngine;
 
-public class ShopLogic : MonoBehaviour
+public class ShopManager : MonoBehaviour
 {
     public int playerCash = 1000;
 

@@ -16,12 +16,12 @@ namespace UI.Inventory
         public TextMeshProUGUI rarityText;
         public TextMeshProUGUI priceText;
         public Image itemImage;
-        public Button sellButton; // Add this field
-        public ShopLogic shopLogic; // Reference to ShopLogic
+        public Button sellButton; 
+        public ShopManager shopManager; 
 
         private UI.Inventory.Inventory _inventory;
         private InventorySlot[] _slots;
-        private ItemData _currentItem; // Store selected item
+        private ItemData _currentItem;
 
         void Start()
         {
@@ -44,9 +44,19 @@ namespace UI.Inventory
         {
             if (UnityEngine.InputSystem.Keyboard.current.iKey.wasPressedThisFrame)
             {
-                inventoryUI.SetActive(!inventoryUI.activeSelf);
-                itemDetailsPanel.SetActive(inventoryUI.activeSelf);
+                HandleInventoryToggle();
             }
+        }
+        
+        void HandleInventoryToggle()
+        {
+            if (!inventoryUI.activeSelf && UIManager.Instance.IsAnyUIOpen)
+                return;
+
+            bool newState = !inventoryUI.activeSelf;
+            inventoryUI.SetActive(newState);
+            itemDetailsPanel.SetActive(newState);
+            UIManager.Instance.SetUIOpen(newState);
         }
 
         void UpdateUI()
@@ -75,9 +85,9 @@ namespace UI.Inventory
 
         void OnSellButtonClicked()
         {
-            if (_currentItem != null && shopLogic != null)
+            if (_currentItem != null && shopManager != null)
             {
-                shopLogic.SellItem(_currentItem);
+                shopManager.SellItem(_currentItem);
                 _inventory.Remove(_currentItem);
                 itemDetailsPanel.SetActive(false);
             }
