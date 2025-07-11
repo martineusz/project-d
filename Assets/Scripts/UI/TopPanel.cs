@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using UI.Shop;
 using UnityEngine;
 
 namespace UI
@@ -10,7 +11,7 @@ namespace UI
         public TextMeshProUGUI dayText;
         
         public Player.PlayerCombat playerCombat;
-        public ShopManager shopManager;
+        public Shop.Shop shop;
         public TimeManager timeManager;
 
         void Update()
@@ -18,8 +19,8 @@ namespace UI
             if (playerCombat)
                 healthText.text = $"HP: {playerCombat.hp}";
 
-            if (shopManager)
-                cashText.text = $"Cash: {shopManager.playerCash}";
+            if (shop)
+                cashText.text = $"Cash: {shop.playerCash}";
 
             if (timeManager)
             {

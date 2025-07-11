@@ -1,5 +1,6 @@
 ﻿using Environment;
 using UI;
+using UI.Shop;
 using UnityEngine;
 
 namespace Shop

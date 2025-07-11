@@ -1,5 +1,6 @@
 ﻿using Items;
 using TMPro;
+using UI.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ namespace UI.Inventory
         public TextMeshProUGUI priceText;
         public Image itemImage;
         public Button sellButton; 
-        public ShopManager shopManager; 
+        public Shop.Shop shop; 
 
         private UI.Inventory.Inventory _inventory;
         private InventorySlot[] _slots;
@@ -85,9 +86,9 @@ namespace UI.Inventory
 
         void OnSellButtonClicked()
         {
-            if (_currentItem != null && shopManager != null)
+            if (_currentItem != null && shop != null)
             {
-                shopManager.SellItem(_currentItem);
+                shop.SellItem(_currentItem);
                 _inventory.Remove(_currentItem);
                 itemDetailsPanel.SetActive(false);
             }
