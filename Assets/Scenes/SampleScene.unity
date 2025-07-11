@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 192885151}
   - component: {fileID: 192885150}
   m_Layer: 0
-  m_Name: Shop
+  m_Name: ShopPlace
   m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4539,7 +4539,7 @@ MonoBehaviour:
   priceText: {fileID: 938520509}
   itemImage: {fileID: 1343688602}
   sellButton: {fileID: 1861716177}
-  shop: {fileID: 0}
+  shop: {fileID: 1745124701}
 --- !u!114 &795901272
 MonoBehaviour:
   m_ObjectHideFlags: 0

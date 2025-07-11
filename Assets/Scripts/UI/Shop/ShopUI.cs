@@ -98,6 +98,17 @@ namespace UI.Shop
                 //     Inventory.Instance.Add(_currentItem);
                 //     itemDetailsPanel.SetActive(false);
                 // }
+                bool isBought = shop.BuyItem(_currentItem);
+                if (isBought)
+                {
+                    _currentItem = null;
+                    itemDetailsPanel.SetActive(false);
+                    PopulateShopSlots(); // Refresh the shop slots
+                }
+                else
+                {
+                    Debug.Log("Not enough cash to buy the item.");
+                }
             }
         }
     }
