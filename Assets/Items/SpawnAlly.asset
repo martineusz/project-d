@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 615c75f45e5e48bb8bd378a018d5a9e0, type: 3}
-  m_Name: SpawnWorker
+  m_Name: SpawnAlly
   m_EditorClassIdentifier: 
-  itemName: Simple worker
-  icon: {fileID: -5406531530088523295, guid: 425ae573b6a27894b993f708723f5bd3, type: 3}
-  description: Basic worker
+  itemName: Basic Infantry
+  icon: {fileID: 3409067591249154617, guid: 78640b7cf4b64fb47a7aa7ca0eb283c6, type: 3}
+  description: 'Basic infantry soldier '
   rarity: 0
-  price: 20
+  price: 25
   instantUse: 1
-  prefabToSpawn: {fileID: 6411102760633059870, guid: 5b9a287feb880d14ca7cfa286b25d621, type: 3}
-  spawnPosition: {x: -7.27, y: 21, z: 0}
+  prefabToSpawn: {fileID: 6411102760633059870, guid: 60730e8e4c52ba84e80aa339396fd955, type: 3}
+  spawnPosition: {x: -5, y: 21, z: 0}
   spawnRotation: {x: 0, y: 0, z: 0, w: 1}
   spawnRadius: 1.5
