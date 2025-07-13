@@ -11,7 +11,7 @@ namespace Environment.Workplaces
             if (!plot) return;
             if (plot.TryTakeResource(out var resource))
             {
-                Inventory.Instance.Add(resource);
+                Inventory.instance.Add(resource);
                 Debug.Log("Resource taken from plot and added to inventory.");
             }
             else

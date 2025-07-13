@@ -26,7 +26,7 @@ namespace UI.Inventory
 
         void Start()
         {
-            _inventory = UI.Inventory.Inventory.Instance;
+            _inventory = UI.Inventory.Inventory.instance;
             _inventory.OnItemChangedCallback += UpdateUI;
             _slots = itemsParent.GetComponentsInChildren<InventorySlot>();
             inventoryUI.SetActive(false);

@@ -30,6 +30,12 @@ namespace Units.Boids
         {
             Type = BoidType.Ally;
             SpriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (manager == null)
+                manager = FindFirstObjectByType<BoidManager>();
+
+            if (manager != null && !manager.allAllyBoids.Contains(this))
+                manager.allAllyBoids.Add(this);
         }
 
         protected override void HandleMovement()

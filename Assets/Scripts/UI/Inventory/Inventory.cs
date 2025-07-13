@@ -6,7 +6,7 @@ namespace UI.Inventory
 {
     public class Inventory : MonoBehaviour
     {
-        public static Inventory Instance;
+        public static Inventory instance;
 
         public List<ItemData> items = new List<ItemData>();
         public int space = 20;
@@ -16,12 +16,12 @@ namespace UI.Inventory
 
         private void Awake()
         {
-            if (Instance != null)
+            if (instance != null)
             {
                 Debug.LogWarning("More than one inventory instance");
                 return;
             }
-            Instance = this;
+            instance = this;
         }
 
         public bool Add(ItemData item)
@@ -31,7 +31,7 @@ namespace UI.Inventory
                 Debug.Log("Not enough space.");
                 return false;
             }
-
+            
             items.Add(item);
             OnItemChangedCallback?.Invoke();
             return true;

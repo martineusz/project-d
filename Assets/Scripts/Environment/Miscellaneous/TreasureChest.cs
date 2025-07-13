@@ -13,7 +13,7 @@ namespace Environment.Miscellaneous
         {
             if (TryTakeResource(out var resource))
             {
-                Inventory.Instance.Add(resource);
+                Inventory.instance.Add(resource);
                 Debug.Log("Item taken from treasure and added to inventory.");
             }
             else

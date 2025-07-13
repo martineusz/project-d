@@ -22,8 +22,15 @@ namespace UI.Shop
             {
                 return false;
             }
-
-            if (Inventory.Inventory.Instance.Add(item))
+            
+            if (item.instantUse)
+            {
+                item.Use();
+                playerCash -= item.price;
+                return true;
+            }
+            
+            if (Inventory.Inventory.instance.Add(item))
             {
                 playerCash -= item.price;
                 itemsForSale.Remove(item);

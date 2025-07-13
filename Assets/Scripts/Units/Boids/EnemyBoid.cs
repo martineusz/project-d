@@ -22,7 +22,13 @@ namespace Units.Boids
 
         protected void Awake()
         {
-            Type = BoidType.Enemy;
+            Type = BoidType.Worker;
+
+            if (manager == null)
+                manager = FindFirstObjectByType<BoidManager>();
+
+            if (manager != null && !manager.allEnemyBoids.Contains(this))
+                manager.allEnemyBoids.Add(this);
         }
 
         protected override void HandleMovement()

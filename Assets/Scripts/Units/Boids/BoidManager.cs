@@ -39,7 +39,6 @@ namespace Units.Boids
                 GameObject boidGo = Instantiate(enemyBoidPrefab, spawnPos, Quaternion.identity);
                 EnemyBoid boid = boidGo.GetComponent<EnemyBoid>();
                 boid.manager = this;
-                allEnemyBoids.Add(boid);
             }
         }
 
@@ -51,7 +50,6 @@ namespace Units.Boids
                 GameObject boidGo = Instantiate(allyBoidPrefab, spawnPos, Quaternion.identity);
                 AllyBoid boid = boidGo.GetComponent<AllyBoid>();
                 boid.manager = this;
-                allAllyBoids.Add(boid);
             }
         }
 
@@ -63,7 +61,6 @@ namespace Units.Boids
                 GameObject boidGo = Instantiate(workerBoidPrefab, spawnPos, Quaternion.identity);
                 WorkerBoid boid = boidGo.GetComponent<WorkerBoid>();
                 boid.manager = this;
-                allWorkerBoids.Add(boid);
             }
         }
 

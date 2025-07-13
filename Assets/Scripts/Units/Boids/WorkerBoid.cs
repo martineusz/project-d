@@ -39,6 +39,12 @@ namespace Units.Boids
         {
             Type = BoidType.Worker;
             SpriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (manager == null)
+                manager = FindFirstObjectByType<BoidManager>();
+
+            if (manager != null && !manager.allWorkerBoids.Contains(this))
+                manager.allWorkerBoids.Add(this);
         }
 
 
