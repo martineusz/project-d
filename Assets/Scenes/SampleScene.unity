@@ -5846,7 +5846,7 @@ MonoBehaviour:
   workerBoidPrefab: {fileID: 6411102760633059870, guid: 5b9a287feb880d14ca7cfa286b25d621, type: 3}
   allyBoidCount: 5
   enemyBoidCount: 3
-  workerBoidCount: 5
+  workerBoidCount: 0
   spawnRadius: 3
   allySpawnCenter: {x: 0, y: 0}
   enemySpawnCenter: {x: 20, y: 0}
@@ -10919,7 +10919,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dcbd22ac4cc19cc4ca745d22e2f71749, type: 2}
   - {fileID: 11400000, guid: dcbd22ac4cc19cc4ca745d22e2f71749, type: 2}
   - {fileID: 11400000, guid: dcbd22ac4cc19cc4ca745d22e2f71749, type: 2}
-  - {fileID: 11400000, guid: dcbd22ac4cc19cc4ca745d22e2f71749, type: 2}
+  - {fileID: 11400000, guid: 1b15def42048e6f4e8166336110dbb4e, type: 2}
+  - {fileID: 11400000, guid: 1b15def42048e6f4e8166336110dbb4e, type: 2}
+  - {fileID: 11400000, guid: 1b15def42048e6f4e8166336110dbb4e, type: 2}
 --- !u!114 &1745124702
 MonoBehaviour:
   m_ObjectHideFlags: 0
