@@ -5842,10 +5842,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 842971756}
   allyBoidPrefab: {fileID: 6411102760633059870, guid: 60730e8e4c52ba84e80aa339396fd955, type: 3}
-  enemyBoidPrefab: {fileID: 6411102760633059870, guid: e468c2223d3744a4e896a291c11d22f9, type: 3}
+  enemyBoidPrefab: {fileID: 6411102760633059870, guid: a07b230fd11642143bb3ac1e8386e9c1, type: 3}
   workerBoidPrefab: {fileID: 6411102760633059870, guid: 5b9a287feb880d14ca7cfa286b25d621, type: 3}
   allyBoidCount: 3
-  enemyBoidCount: 0
+  enemyBoidCount: 1
   workerBoidCount: 0
   spawnRadius: 3
   allySpawnCenter: {x: 0, y: 0}
@@ -12150,7 +12150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199f96f209bf4c04b8ea1985ea3a1520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBoidPrefab: {fileID: 6411102760633059870, guid: e468c2223d3744a4e896a291c11d22f9, type: 3}
+  enemyBoidPrefab: {fileID: 6411102760633059870, guid: a07b230fd11642143bb3ac1e8386e9c1, type: 3}
   spawnInterval: 4
   proximityRadius: 5
   spawnRadius: 1

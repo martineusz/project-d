@@ -30,7 +30,7 @@ namespace Units.Combat
             }
         }
 
-        private void TakeDamage(float damage)
+        public void TakeDamage(float damage)
         {
             Hp -= damage;
             if (Hp <= 0)
