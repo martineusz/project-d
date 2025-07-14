@@ -37,7 +37,7 @@ namespace Units.Boids.Enemies
             float slowDownFactor = ComputeSlowDownFactor();
 
             Velocity += acceleration * (Time.deltaTime * responsiveness);
-            Velocity = Velocity.normalized * (speed * slowDownFactor);
+            Velocity = Velocity.normalized * (speed * slowDownFactor * externalSpeedFactor);
 
 
             transform.position += (Vector3)(Velocity * Time.deltaTime);

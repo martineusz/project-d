@@ -11,6 +11,7 @@ namespace Player
         public float walkSpeed = 3.5f;
         private Vector2 _movement;
         private Rigidbody2D _rb;
+        [HideInInspector] public float externalSpeedFactor = 1f;
 
         public BoidManager boidManager;
 
@@ -59,7 +60,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            _rb.linearVelocity = _movement * _speed;
+            _rb.linearVelocity = _movement * (_speed * externalSpeedFactor);
         }
     }
 }

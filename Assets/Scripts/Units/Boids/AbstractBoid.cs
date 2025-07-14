@@ -25,6 +25,8 @@ namespace Units.Boids
         public float separationWeight = 1.5f;
         public float alignmentWeight = 1f;
         public float cohesionWeight = 1f;
+        
+        [HideInInspector] public float externalSpeedFactor = 1f;
 
         [HideInInspector] public BoidManager manager;
         protected SpriteRenderer SpriteRenderer;

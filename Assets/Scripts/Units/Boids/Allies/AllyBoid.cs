@@ -50,7 +50,7 @@ namespace Units.Boids.Allies
             }
 
             Velocity += acceleration * (Time.deltaTime * resp);
-            Velocity = Velocity.normalized * (speed * slowDownFactor);
+            Velocity = Velocity.normalized * (speed * slowDownFactor * externalSpeedFactor);
 
             transform.position += (Vector3)(Velocity * Time.deltaTime);
             transform.up = Velocity;
