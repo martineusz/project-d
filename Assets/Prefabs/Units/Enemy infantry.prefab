@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 150
-  attackDamage: 50
+  attackDamage: 0
   attackSpeed: 1
 --- !u!58 &-7130550587155595638
 CircleCollider2D:

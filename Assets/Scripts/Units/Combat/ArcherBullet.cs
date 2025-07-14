@@ -22,6 +22,8 @@ namespace Units.Combat
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (collision.isTrigger) return;
+            
             if (collision.CompareTag("Player"))
             {
                 PlayerCombat pc = collision.GetComponent<PlayerCombat>();

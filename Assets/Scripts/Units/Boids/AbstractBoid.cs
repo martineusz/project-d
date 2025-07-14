@@ -13,6 +13,7 @@ namespace Units.Boids
 
         protected Transform Player;
         protected Rigidbody2D PlayerRb;
+        protected Rigidbody2D Rb;
 
         public float responsiveness = 5f;
 
@@ -35,6 +36,7 @@ namespace Units.Boids
         protected virtual void Start()
         {
             SpriteRenderer = GetComponent<SpriteRenderer>();
+            Rb = GetComponent<Rigidbody2D>();
             Velocity = Random.insideUnitCircle.normalized * speed;
             AIPath = GetComponent<AIPath>();
             

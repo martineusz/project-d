@@ -6,7 +6,7 @@ namespace Units.Boids
     public class EnemyBoid : AbstractBoid
     {
         public float playerFollowWeight = 6f;
-        private EnemyBoidState _enemyBoidState = EnemyBoidState.Chasing;
+        protected EnemyBoidState EnemyBoidState = EnemyBoidState.Chasing;
 
         public float allyFollowWeight = 6f;
 
@@ -16,9 +16,9 @@ namespace Units.Boids
 
         public float slowDownRadius = 1.5f;
         public float minimumSlowDown = 0.1f;
-        private const float MaxSlowDown = 0.5f;
+        protected const float MaxSlowDown = 0.5f;
 
-        private bool _playerInRange = false;
+        protected bool PlayerInRange = false;
 
         protected void Awake()
         {
@@ -44,7 +44,7 @@ namespace Units.Boids
             transform.up = Velocity;
         }
 
-        private Vector2 ComputeAcceleration()
+        protected virtual Vector2 ComputeAcceleration()
         {
             List<AbstractBoid> neighbors = GetNeighbors();
 
@@ -54,7 +54,7 @@ namespace Units.Boids
 
             Vector2 followPlayer = ComputeFollowPlayer() * playerFollowWeight;
             Vector2 followAlly = Vector2.zero;
-            if (_enemyBoidState == EnemyBoidState.Distracted)
+            if (EnemyBoidState == EnemyBoidState.Distracted)
             {
                 followPlayer = Vector2.zero;
                 followAlly = ComputeFollowAlly() * allyFollowWeight;
@@ -64,9 +64,9 @@ namespace Units.Boids
             return acceleration;
         }
 
-        private float ComputeSlowDownFactor()
+        protected float ComputeSlowDownFactor()
         {
-            if (_enemyBoidState == EnemyBoidState.Chasing) return 1f;
+            if (EnemyBoidState == EnemyBoidState.Chasing) return 1f;
             float distance = Vector2.Distance(transform.position, AggroTarget.transform.position);
 
             // if (distance < stopRadius)
@@ -99,14 +99,14 @@ namespace Units.Boids
 
         public EnemyBoidState GetBoidState()
         {
-            return _enemyBoidState;
+            return EnemyBoidState;
         }
 
         public void SetBoidState(EnemyBoidState newState)
         {
-            _enemyBoidState = newState;
+            EnemyBoidState = newState;
 
-            switch (_enemyBoidState)
+            switch (EnemyBoidState)
             {
                 case EnemyBoidState.Chasing:
                     SpriteRenderer.color = colorChasing;
@@ -117,7 +117,7 @@ namespace Units.Boids
             }
         }
 
-        private Vector2 ComputeFollowAlly()
+        protected Vector2 ComputeFollowAlly()
         {
             if (!AggroTarget) return Vector2.zero;
             AIPath.destination = AggroTarget.transform.position;
@@ -126,17 +126,15 @@ namespace Units.Boids
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (_playerInRange) return;
+            if (PlayerInRange) return;
             
             if (other.CompareTag("Player"))
             {
-                _playerInRange = true;
+                PlayerInRange = true;
                 SetBoidState(EnemyBoidState.Chasing);
                 AggroTarget = null;
                 return;
             }
-
-            if (AggroTarget != null) return;
 
             if (other.CompareTag("Ally") && AggroTarget == null)
             {
@@ -149,7 +147,7 @@ namespace Units.Boids
         {
             if (other.CompareTag("Player"))
             {
-                _playerInRange = false;
+                PlayerInRange = false;
             }
             if (other.CompareTag("Ally") && other.gameObject == AggroTarget)
             {

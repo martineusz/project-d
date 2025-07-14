@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 308107230994336508}
   - component: {fileID: 8555765317292512330}
   - component: {fileID: 8523863603407543958}
-  - component: {fileID: 3959228008791643491}
+  - component: {fileID: -5613654364947113755}
   - component: {fileID: -7130550587155595638}
   - component: {fileID: 5330849408989550434}
   - component: {fileID: 6569829119369872811}
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3959228008791643491
+--- !u!114 &-5613654364947113755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6411102760633059870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71fda07f6d343b88a2db96bc4841895, type: 3}
+  m_Script: {fileID: 11500000, guid: a38c83705b0a4c4997882a428f332a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   responsiveness: 8
@@ -144,10 +144,10 @@ MonoBehaviour:
   manager: {fileID: 0}
   playerFollowWeight: 8
   allyFollowWeight: 6
-  colorChasing: {r: 1, g: 0.4666667, b: 0.6356329, a: 1}
-  colorDistracted: {r: 1, g: 0.15686274, b: 0.5766222, a: 1}
-  slowDownRadius: 2
-  minimumSlowDown: 0.7
+  colorChasing: {r: 1, g: 0.4666667, b: 0.63529414, a: 1}
+  colorDistracted: {r: 1, g: 0.15686275, b: 0.5764706, a: 1}
+  slowDownRadius: 1
+  minimumSlowDown: 0
 --- !u!58 &-7130550587155595638
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.21133333}
-  m_Radius: 2.5
+  m_Radius: 7.48
 --- !u!114 &6569829119369872811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +307,7 @@ MonoBehaviour:
   attackSpeed: 1.5
   bulletPrefab: {fileID: 1878406392165882926, guid: 88ebc2d586493114db9e052a65040643, type: 3}
   shootPoint: {fileID: 4627034201623181105}
+  archerBoid: {fileID: -5613654364947113755}
 --- !u!1 &7922919174338719646
 GameObject:
   m_ObjectHideFlags: 0

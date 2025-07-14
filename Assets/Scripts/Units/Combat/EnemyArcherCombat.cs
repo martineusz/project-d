@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using Units.Boids;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Units.Combat
 {
     public class ArcherEnemyCombat : EnemyCombat
     {
         public GameObject bulletPrefab;
-        public Transform shootPoint;  // Set this in the prefab or scene
+        public Transform shootPoint;
+        public EnemyArcherBoid archerBoid;
 
         private float shootCooldown = 2f;
         private float lastShotTime;
@@ -20,9 +23,7 @@ namespace Units.Combat
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (!player) return;
 
-            float distance = Vector2.Distance(transform.position, player.transform.position);
-
-            if (distance < 10f && Time.time > lastShotTime + shootCooldown)
+            if (Time.time > lastShotTime + shootCooldown && archerBoid.GetBoidState() == EnemyBoidState.Distracted)
             {
                 ShootAt(player.transform.position);
                 lastShotTime = Time.time;
