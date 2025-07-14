@@ -2,7 +2,7 @@
 
 namespace Items
 {
-    public class ItemData : ScriptableObject
+    public abstract class ItemData : ScriptableObject
     {
         public string itemName;
         public Sprite icon;
@@ -10,20 +10,17 @@ namespace Items
         public string description;
         public Rarity rarity;
         public int price;
-        public bool instantUse=false;
+        public bool instantUse = false;
 
-        public virtual void Use()
-        {
-            
-        }
+        public abstract void Use();
     }
+}
 
-    public enum Rarity
-    {
-        Common,
-        Uncommon,
-        Rare,
-        Epic,
-        Legendary
-    }
+public enum Rarity
+{
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary
 }

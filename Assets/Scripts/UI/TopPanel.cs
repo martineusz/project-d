@@ -9,9 +9,11 @@ namespace UI
         public TextMeshProUGUI healthText;
         public TextMeshProUGUI cashText;
         public TextMeshProUGUI dayText;
+        public TextMeshProUGUI torchText;
         
         public Player.PlayerCombat playerCombat;
         public Shop.Shop shop;
+        public Inventory.Inventory inventory;
         public TimeManager timeManager;
 
         void Update()
@@ -21,6 +23,9 @@ namespace UI
 
             if (shop)
                 cashText.text = $"Cash: {shop.playerCash}";
+            
+            if (inventory)
+                torchText.text = $"{inventory.torchesCount} / {inventory.torchesLimit} Torches";
 
             if (timeManager)
             {

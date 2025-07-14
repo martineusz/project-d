@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edb1730be3db4c529a81dde8d87c0d44, type: 3}
-  m_Name: Torczyk
+  m_Script: {fileID: 11500000, guid: a21e10d148614f5883d7d630a18cdf3b, type: 3}
+  m_Name: Torczini
   m_EditorClassIdentifier: 
-  itemName: torczyk
+  itemName: Torczini
   icon: {fileID: 825004287430607988, guid: 8e5ad2847cb4fe14ca05fd0e44de3998, type: 3}
-  description: PPochodnia zeby bylo swiatlo
+  description: 1 pochodnia dla Pana!!!!
   rarity: 0
-  price: 15
+  price: 1
+  instantUse: 1
+  torchCount: 1

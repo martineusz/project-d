@@ -45,5 +45,17 @@ namespace UI.Inventory
             items.Remove(item);
             OnItemChangedCallback?.Invoke();
         }
+        
+        public bool AddTorch(int count)
+        {
+            if (torchesCount + count > torchesLimit)
+            {
+                Debug.Log("Cannot add more torches, limit reached.");
+                return false;
+            }
+
+            torchesCount += count;
+            return true;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UI.Inventory;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
@@ -7,6 +8,7 @@ namespace LightManipulation
     public class PlayerTorch : MonoBehaviour
     {
         public Light2D torchLight;
+        public Inventory inventory;
 
         public float lightDiminishFrequency = 1f;
         public float lightDiminishSpeed = 0.001f;
@@ -57,8 +59,9 @@ namespace LightManipulation
 
         public bool ResetLight()
         {
-            if (!torchLight) return false;
+            if (!torchLight || inventory.torchesCount <= 0) return false;
             
+            inventory.torchesCount--;
             lightModifier = 1f;
             torchLight.pointLightInnerRadius = _innerRadius;
             torchLight.pointLightOuterRadius = _outerRadius;
