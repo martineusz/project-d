@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Units.Boids
+namespace Units.Boids.Enemies
 {
     public class EnemyBoid : AbstractBoid
     {
@@ -67,7 +67,7 @@ namespace Units.Boids
         protected float ComputeSlowDownFactor()
         {
             if (EnemyBoidState == EnemyBoidState.Chasing) return 1f;
-            float distance = Vector2.Distance(transform.position, AggroTarget.transform.position);
+            float distance = Vector2.Distance(transform.position, aggroTarget.transform.position);
 
             // if (distance < stopRadius)
             // {
@@ -119,8 +119,8 @@ namespace Units.Boids
 
         protected Vector2 ComputeFollowAlly()
         {
-            if (!AggroTarget) return Vector2.zero;
-            AIPath.destination = AggroTarget.transform.position;
+            if (!aggroTarget) return Vector2.zero;
+            AIPath.destination = aggroTarget.transform.position;
             return AIPath.desiredVelocity.normalized;
         }
 
@@ -132,13 +132,13 @@ namespace Units.Boids
             {
                 PlayerInRange = true;
                 SetBoidState(EnemyBoidState.Chasing);
-                AggroTarget = null;
+                aggroTarget = null;
                 return;
             }
 
-            if (other.CompareTag("Ally") && AggroTarget == null)
+            if (other.CompareTag("Ally") && aggroTarget == null)
             {
-                AggroTarget = other.gameObject;
+                aggroTarget = other.gameObject;
                 SetBoidState(EnemyBoidState.Distracted);
             }
         }
@@ -149,10 +149,10 @@ namespace Units.Boids
             {
                 PlayerInRange = false;
             }
-            if (other.CompareTag("Ally") && other.gameObject == AggroTarget)
+            if (other.CompareTag("Ally") && other.gameObject == aggroTarget)
             {
                 SetBoidState(EnemyBoidState.Chasing);
-                AggroTarget = null;
+                aggroTarget = null;
             }
         }
     }

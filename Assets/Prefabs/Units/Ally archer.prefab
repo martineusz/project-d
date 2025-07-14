@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 308107230994336508}
   - component: {fileID: 8555765317292512330}
   - component: {fileID: 8523863603407543958}
-  - component: {fileID: 1155157049974063260}
-  - component: {fileID: 1482229494112748767}
+  - component: {fileID: 2261372004939161385}
   - component: {fileID: -7130550587155595638}
   - component: {fileID: -6849181045095259022}
   - component: {fileID: 6283351834069339369}
   - component: {fileID: 5021941929504320128}
+  - component: {fileID: 3750087337092980981}
   m_Layer: 0
-  m_Name: Ally infantry
+  m_Name: Ally archer
   m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,9 +34,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.36797, y: -15.02781, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.38, y: 0.72, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6690154795092608229}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8555765317292512330
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.69411767, g: 0.79215693, b: 1, a: 1}
+  m_Color: {r: 0.7019608, g: 0.9607844, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -121,7 +122,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1155157049974063260
+--- !u!114 &2261372004939161385
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +131,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6411102760633059870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331b390041e142558a5b42ce2ceb9fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: fb8ab30c0f814edc9969d272ae4803da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aggroTarget: {fileID: 0}
   responsiveness: 5
   speed: 1.5
   neighborRadius: 3.5
@@ -141,9 +143,9 @@ MonoBehaviour:
   alignmentWeight: 0.5
   cohesionWeight: 0.6
   manager: {fileID: 0}
-  colorIdle: {r: 0.6933962, g: 0.79213303, b: 1, a: 1}
-  colorFollowing: {r: 0.5896226, g: 0.7194596, b: 1, a: 1}
-  colorAggresive: {r: 0.3066038, g: 0.5253938, b: 1, a: 1}
+  colorIdle: {r: 0.7019608, g: 1, b: 0.9921569, a: 1}
+  colorFollowing: {r: 0.45882356, g: 0.9058824, b: 1, a: 1}
+  colorAggresive: {r: 0.10588236, g: 0.93725497, b: 0.9921569, a: 1}
   enemyFollowWeight: 6
   playerFollowWeight: 6
   playerSeparationWeight: 4
@@ -151,21 +153,6 @@ MonoBehaviour:
   playerAlignmentWeight: 1.5
   slowDownRadius: 3.5
   minimumSlowDown: 0.2
---- !u!114 &1482229494112748767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6411102760633059870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1deee3c062db43818c5d638f2e12954c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 100
-  attackDamage: 40
-  attackSpeed: 1
 --- !u!58 &-7130550587155595638
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -237,7 +224,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.21133332}
-  m_Radius: 5.5
+  m_Radius: 4.1
 --- !u!114 &6283351834069339369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,3 +295,52 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
+--- !u!114 &3750087337092980981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411102760633059870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668ed8a846cb416eaf627b2bd0f44d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  attackDamage: 40
+  attackSpeed: 1
+  bulletPrefab: {fileID: 1878406392165882926, guid: 88ebc2d586493114db9e052a65040643, type: 3}
+  shootPoint: {fileID: 6690154795092608229}
+  archerBoid: {fileID: 2261372004939161385}
+--- !u!1 &7550803783544377309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6690154795092608229}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6690154795092608229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550803783544377309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.46, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 308107230994336508}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

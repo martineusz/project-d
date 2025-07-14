@@ -1,9 +1,9 @@
-﻿using System;
-using Player;
+﻿using Player;
 using Units.Boids;
+using Units.Boids.Enemies;
 using UnityEngine;
 
-namespace Units.Combat
+namespace Units.Combat.Enemies
 {
     public class EnemyCombat : AbstractCombat
     {

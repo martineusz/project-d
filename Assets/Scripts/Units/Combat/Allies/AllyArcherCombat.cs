@@ -1,14 +1,13 @@
-﻿using Units.Boids;
+﻿using Units.Boids.Allies;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Units.Combat
+namespace Units.Combat.Allies
 {
-    public class ArcherEnemyCombat : EnemyCombat
+    public class AllyArcherCombat : AllyCombat
     {
         public GameObject bulletPrefab;
         public Transform shootPoint;
-        public EnemyArcherBoid archerBoid;
+        public AllyArcherBoid archerBoid;
 
         private float shootCooldown = 2f;
         private float lastShotTime;
@@ -20,12 +19,10 @@ namespace Units.Combat
 
         private void Update()
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (!player) return;
-
-            if (Time.time > lastShotTime + shootCooldown && archerBoid.GetBoidState() == EnemyBoidState.Distracted)
+            if (Time.time > lastShotTime + shootCooldown && archerBoid.GetBoidState() == AllyBoidState.Aggressive)
             {
-                ShootAt(player.transform.position);
+                Vector2 target = archerBoid.aggroTarget.transform.position;
+                ShootAt(target);
                 lastShotTime = Time.time;
             }
         }
@@ -34,7 +31,7 @@ namespace Units.Combat
         {
             Vector2 shootDir = target - (Vector2)shootPoint.position;
             GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-            bullet.GetComponent<ArcherBullet>().Initialize(shootDir);
+            bullet.GetComponent<ArcherBullet>().Initialize(shootDir, true);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Units.Boids
 {
@@ -8,7 +9,7 @@ namespace Units.Boids
     {
         protected BoidType Type;
         
-        protected GameObject AggroTarget;
+        public GameObject aggroTarget;
         protected AIPath AIPath;
 
         protected Transform Player;
@@ -104,7 +105,7 @@ namespace Units.Boids
         
         public GameObject GetAggroTarget()
         {
-            return AggroTarget;
+            return aggroTarget;
         }
     }
     

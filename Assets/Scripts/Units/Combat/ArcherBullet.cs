@@ -8,9 +8,11 @@ namespace Units.Combat
         public float speed = 5f;
         public int damage = 10;
         private Vector2 direction;
+        private bool _isAllied = false;
 
-        public void Initialize(Vector2 shootDirection)
+        public void Initialize(Vector2 shootDirection, bool isAllied)
         {
+            _isAllied = isAllied;
             direction = shootDirection.normalized;
             Destroy(gameObject, 5f); // Auto-destroy after 5 sec
         }
@@ -24,7 +26,7 @@ namespace Units.Combat
         {
             if (collision.isTrigger) return;
             
-            if (collision.CompareTag("Player"))
+            if (collision.CompareTag("Player") && !_isAllied)
             {
                 PlayerCombat pc = collision.GetComponent<PlayerCombat>();
                 if (pc != null)
@@ -33,7 +35,16 @@ namespace Units.Combat
                 }
                 Destroy(gameObject);
             }
-            else if (collision.CompareTag("Ally"))
+            else if (collision.CompareTag("Ally")&& !_isAllied)
+            {
+                AbstractCombat c = collision.GetComponent<AbstractCombat>();
+                if (c != null)
+                {
+                    c.TakeDamage(damage);
+                }
+                Destroy(gameObject);
+            }
+            else if (collision.CompareTag("Enemy")&& _isAllied)
             {
                 AbstractCombat c = collision.GetComponent<AbstractCombat>();
                 if (c != null)

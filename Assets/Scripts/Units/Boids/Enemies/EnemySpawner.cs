@@ -1,9 +1,8 @@
-﻿using Player;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
-namespace Units.Boids
+namespace Units.Boids.Enemies
 {
     public class EnemySpawner : MonoBehaviour
     {

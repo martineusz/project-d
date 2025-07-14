@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Pathfinding;
 using UnityEngine;
 
-namespace Units.Boids
+namespace Units.Boids.Enemies
 {
     public class EnemyArcherBoid : EnemyBoid
     {
@@ -56,14 +55,14 @@ namespace Units.Boids
             {
                 SetBoidState(EnemyBoidState.Distracted);
                 PlayerInRange = true;
-                AggroTarget = null;
+                aggroTarget = null;
                 return;
             }
 
-            if (other.CompareTag("Ally") && AggroTarget == null)
+            if (other.CompareTag("Ally") && aggroTarget == null)
             {
                 SetBoidState(EnemyBoidState.Distracted);
-                AggroTarget = other.gameObject;
+                aggroTarget = other.gameObject;
             }
         }
 
@@ -75,10 +74,10 @@ namespace Units.Boids
                 PlayerInRange = false;
             }
 
-            if (other.CompareTag("Ally") && other.gameObject == AggroTarget)
+            if (other.CompareTag("Ally") && other.gameObject == aggroTarget)
             {
                 SetBoidState(EnemyBoidState.Chasing);
-                AggroTarget = null;
+                aggroTarget = null;
             }
         }
     }

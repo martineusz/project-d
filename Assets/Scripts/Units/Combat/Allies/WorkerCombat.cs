@@ -1,7 +1,7 @@
 ﻿using Units.Boids;
-using UnityEngine;
+using Units.Boids.Allies;
 
-namespace Units.Combat
+namespace Units.Combat.Allies
 {
     public class WorkerCombat : AbstractCombat
     {

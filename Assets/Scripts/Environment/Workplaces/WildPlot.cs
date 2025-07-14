@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Items;
 using Units.Boids;
+using Units.Boids.Allies;
 using UnityEngine;
 using UnityEngine.Serialization;
 

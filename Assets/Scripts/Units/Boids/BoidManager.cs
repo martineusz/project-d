@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Units.Boids.Allies;
+using Units.Boids.Enemies;
 using UnityEngine;
 
 namespace Units.Boids

@@ -1,4 +1,5 @@
 ﻿using Units.Boids;
+using Units.Boids.Allies;
 
 namespace Environment.Workplaces
 {

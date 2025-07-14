@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Units.Boids
+namespace Units.Boids.Allies
 {
     public class AllyBoid : AbstractBoid
     {
@@ -86,21 +86,21 @@ namespace Units.Boids
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (!other.CompareTag("Enemy") || AggroTarget != null) return;
+            if (!other.CompareTag("Enemy") || aggroTarget != null) return;
             if (_allyBoidState == AllyBoidState.Following)
             {
                 _wasFollowing = true;
             }
 
-            AggroTarget = other.gameObject;
+            aggroTarget = other.gameObject;
             SetBoidState(AllyBoidState.Aggressive);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy") && other.gameObject == AggroTarget)
+            if (other.CompareTag("Enemy") && other.gameObject == aggroTarget)
             {
-                AggroTarget = null;
+                aggroTarget = null;
 
                 if (_wasFollowing)
                 {
@@ -174,8 +174,8 @@ namespace Units.Boids
 
         private Vector2 ComputeFollowEnemy()
         {
-            if (!AggroTarget) return Vector2.zero;
-            AIPath.destination = AggroTarget.transform.position;
+            if (!aggroTarget) return Vector2.zero;
+            AIPath.destination = aggroTarget.transform.position;
             return AIPath.desiredVelocity.normalized;
         }
 

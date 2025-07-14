@@ -2,7 +2,7 @@
 using Environment.Workplaces;
 using UnityEngine;
 
-namespace Units.Boids
+namespace Units.Boids.Allies
 {
     public class WorkerBoid : AbstractBoid
     {

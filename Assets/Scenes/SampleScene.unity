@@ -5841,7 +5841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 842971756}
-  allyBoidPrefab: {fileID: 6411102760633059870, guid: 60730e8e4c52ba84e80aa339396fd955, type: 3}
+  allyBoidPrefab: {fileID: 6411102760633059870, guid: 8162ef3a7eaeabb41b5447ee9497691e, type: 3}
   enemyBoidPrefab: {fileID: 6411102760633059870, guid: a07b230fd11642143bb3ac1e8386e9c1, type: 3}
   workerBoidPrefab: {fileID: 6411102760633059870, guid: 5b9a287feb880d14ca7cfa286b25d621, type: 3}
   allyBoidCount: 3

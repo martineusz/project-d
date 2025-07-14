@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Units.Boids;
+using Units.Boids.Allies;
 using UnityEngine;
 
 namespace Environment.Workplaces
