@@ -7,6 +7,9 @@ namespace UI.Inventory
     public class Inventory : MonoBehaviour
     {
         public static Inventory instance;
+        
+        public int torchesLimit = 5;
+        public int torchesCount = 2;
 
         public List<ItemData> items = new List<ItemData>();
         public int space = 20;
