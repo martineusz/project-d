@@ -9,7 +9,7 @@ namespace Units.Boids
     {
         protected BoidType Type;
         
-        public GameObject aggroTarget;
+        [HideInInspector] public GameObject aggroTarget;
         protected AIPath AIPath;
 
         protected Transform Player;

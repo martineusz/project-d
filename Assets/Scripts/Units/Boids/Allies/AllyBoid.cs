@@ -9,7 +9,7 @@ namespace Units.Boids.Allies
         public Color colorFollowing = Color.blue;
         public Color colorAggresive = Color.blue;
 
-        private AllyBoidState _allyBoidState = AllyBoidState.Idle;
+        protected AllyBoidState AllyBoidState = AllyBoidState.Idle;
 
         public float enemyFollowWeight = 6f;
 
@@ -24,7 +24,7 @@ namespace Units.Boids.Allies
         public float minimumSlowDown = 0.1f;
         private const float MaxSlowDown = 0.5f;
 
-        private bool _wasFollowing = false;
+        protected bool WasFollowing = false;
 
         protected void Awake()
         {
@@ -44,7 +44,7 @@ namespace Units.Boids.Allies
             float slowDownFactor = ComputeSlowDownFactor();
 
             float resp = responsiveness;
-            if (_allyBoidState == AllyBoidState.Aggressive)
+            if (AllyBoidState == AllyBoidState.Aggressive)
             {
                 resp *= 2f;
             }
@@ -56,7 +56,7 @@ namespace Units.Boids.Allies
             transform.up = Velocity;
         }
 
-        private Vector2 ComputeAcceleration()
+        protected Vector2 ComputeAcceleration()
         {
             List<AbstractBoid> neighbors = GetNeighbors();
 
@@ -68,13 +68,13 @@ namespace Units.Boids.Allies
             Vector2 playerSeparation = Vector2.zero;
             Vector2 playerAlignment = Vector2.zero;
             Vector2 followEnemy = Vector2.zero;
-            if (_allyBoidState == AllyBoidState.Following)
+            if (AllyBoidState == AllyBoidState.Following)
             {
                 followPlayer = ComputeFollowPlayer() * playerFollowWeight;
                 playerSeparation = ComputePlayerSeparation() * playerSeparationWeight;
                 playerAlignment = ComputePlayerAlignment() * playerAlignmentWeight;
             }
-            else if (_allyBoidState == AllyBoidState.Aggressive)
+            else if (AllyBoidState == AllyBoidState.Aggressive)
             {
                 followEnemy = ComputeFollowEnemy() * enemyFollowWeight;
             }
@@ -87,9 +87,9 @@ namespace Units.Boids.Allies
         private void OnTriggerStay2D(Collider2D other)
         {
             if (!other.CompareTag("Enemy") || aggroTarget != null) return;
-            if (_allyBoidState == AllyBoidState.Following)
+            if (AllyBoidState == AllyBoidState.Following)
             {
-                _wasFollowing = true;
+                WasFollowing = true;
             }
 
             aggroTarget = other.gameObject;
@@ -102,9 +102,9 @@ namespace Units.Boids.Allies
             {
                 aggroTarget = null;
 
-                if (_wasFollowing)
+                if (WasFollowing)
                 {
-                    _wasFollowing = false;
+                    WasFollowing = false;
                     SetBoidState(AllyBoidState.Following);
                 }
                 else
@@ -116,14 +116,14 @@ namespace Units.Boids.Allies
 
         public AllyBoidState GetBoidState()
         {
-            return _allyBoidState;
+            return AllyBoidState;
         }
 
         public void SetBoidState(AllyBoidState newState)
         {
-            _allyBoidState = newState;
+            AllyBoidState = newState;
 
-            SpriteRenderer.color = _allyBoidState switch
+            SpriteRenderer.color = AllyBoidState switch
             {
                 AllyBoidState.Idle => colorIdle,
                 AllyBoidState.Following => colorFollowing,
@@ -133,11 +133,11 @@ namespace Units.Boids.Allies
         }
 
 
-        private float ComputeSlowDownFactor()
+        protected float ComputeSlowDownFactor()
         {
-            if (_allyBoidState == AllyBoidState.Idle) return minimumSlowDown;
-            if (_allyBoidState == AllyBoidState.Following && (PlayerRb.linearVelocity.magnitude > 0.001f)) return 1f;
-            if (_allyBoidState == AllyBoidState.Aggressive) return 1f;
+            if (AllyBoidState == AllyBoidState.Idle) return minimumSlowDown;
+            if (AllyBoidState == AllyBoidState.Following && (PlayerRb.linearVelocity.magnitude > 0.001f)) return 1f;
+            if (AllyBoidState == AllyBoidState.Aggressive) return 1f;
             float distance = Vector2.Distance(transform.position, Player.position);
 
             if (distance < slowDownRadius)
