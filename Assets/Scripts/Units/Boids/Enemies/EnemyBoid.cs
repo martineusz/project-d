@@ -41,7 +41,7 @@ namespace Units.Boids.Enemies
 
 
             transform.position += (Vector3)(Velocity * Time.deltaTime);
-            transform.up = Velocity;
+            //transform.up = Velocity;
         }
 
         protected virtual Vector2 ComputeAcceleration()
