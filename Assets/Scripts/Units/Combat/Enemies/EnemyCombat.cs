@@ -7,6 +7,8 @@ namespace Units.Combat.Enemies
 {
     public class EnemyCombat : AbstractCombat
     {
+        public float fearOfLightModifier = 1f;
+        
         protected override void Die()
         {
             IsAlive = false;

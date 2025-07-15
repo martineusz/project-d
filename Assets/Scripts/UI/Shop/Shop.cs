@@ -27,6 +27,7 @@ namespace UI.Shop
             {
                 item.Use();
                 playerCash -= item.price;
+                itemsForSale.Remove(item);
                 return true;
             }
             
