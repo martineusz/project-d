@@ -22,12 +22,12 @@ namespace Environment.Workplaces
         [HideInInspector] public List<WorkerBoid> workers = new List<WorkerBoid>();
         [HideInInspector] public List<WorkerBoid> workerQueue = new List<WorkerBoid>();
         
-        private List<Crop> _crops = new List<Crop>();
-        private List<ResourceData> _resourceStash = new List<ResourceData>();
+        protected List<Crop> Crops = new List<Crop>();
+        protected List<ResourceData> ResourceStash = new List<ResourceData>();
 
         private float _growthTimer = 0f;
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             RefillCrops();
             
@@ -37,9 +37,6 @@ namespace Environment.Workplaces
                 HandleGrowth();
                 _growthTimer = 0f;
             }
-            
-            Debug.Log("Queue size: " + workerQueue.Count);
-            Debug.Log("Workers number: " + workers.Count);
         }
 
         private void HandleGrowth()
@@ -48,12 +45,12 @@ namespace Environment.Workplaces
 
             List<Crop> cropsToRemove = new List<Crop>();
 
-            foreach (Crop crop in _crops)
+            foreach (Crop crop in Crops)
             {
                 crop.Grow(growthEfficiency);
-                if (crop.Maturity >= 1 && _resourceStash.Count < stashLimit)
+                if (crop.Maturity >= 1 && ResourceStash.Count < stashLimit)
                 {
-                    _resourceStash.Add(crop.GiveResource());
+                    ResourceStash.Add(crop.GiveResource());
                     cropsToRemove.Add(crop);
                     Debug.Log("Stashing crop");
                 }
@@ -61,20 +58,24 @@ namespace Environment.Workplaces
 
             foreach (Crop crop in cropsToRemove)
             {
-                Debug.Log("Removing crop");
-                _crops.Remove(crop);
+                Crops.Remove(crop);
             }
         }
 
         private void RefillCrops()
         {
-            while (_crops.Count < cropsLimit)
+            while (Crops.Count < cropsLimit)
             {
-                ResourceData newResData = resourceDataFactory.GenerateNewResource();
-                Crop newCrop = new Crop(newResData);
-                _crops.Add(newCrop);
-                Debug.Log("adding new crop");
+                if (!AddNewCrop()) break;
             }
+        }
+
+        protected virtual bool AddNewCrop()
+        {
+            ResourceData newResData = resourceDataFactory.GenerateNewResource();
+            Crop newCrop = new Crop(newResData);
+            Crops.Add(newCrop);
+            return true;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -90,10 +91,10 @@ namespace Environment.Workplaces
         
         public bool TryTakeResource(out ResourceData resource)
         {
-            if (_resourceStash.Count > 0)
+            if (ResourceStash.Count > 0)
             {
-                resource = _resourceStash[0];
-                _resourceStash.RemoveAt(0);
+                resource = ResourceStash[0];
+                ResourceStash.RemoveAt(0);
                 return true;
             }
             resource = null;

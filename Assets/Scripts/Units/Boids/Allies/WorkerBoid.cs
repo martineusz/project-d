@@ -38,7 +38,6 @@ namespace Units.Boids.Allies
         protected void Awake()
         {
             Type = BoidType.Worker;
-            spriteRenderer = GetComponent<SpriteRenderer>();
 
             if (manager == null)
                 manager = FindFirstObjectByType<BoidManager>();
@@ -62,7 +61,7 @@ namespace Units.Boids.Allies
             Velocity = Velocity.normalized * (speed * slowDownFactor);
 
             transform.position += (Vector3)(Velocity * Time.deltaTime);
-            transform.up = Velocity;
+            // transform.up = Velocity;
         }
 
         private Vector2 ComputeAcceleration()
@@ -180,8 +179,13 @@ namespace Units.Boids.Allies
                 if (dist < minDist)
                 {
                     IWorkplace iworkplace = workplace.gameObject.GetComponent<IWorkplace>();
+                    
+                    // Skip if null OR disabled
+                    if (iworkplace == null || !((MonoBehaviour)iworkplace).enabled) continue;
+                    
                     if (iworkplace.QueueWorker(this))
                     {
+                        Debug.Log($"Worker {name} assigned to workplace {workplace.name}");
                         minDist = dist;
                         nearest = workplace;
                     }
