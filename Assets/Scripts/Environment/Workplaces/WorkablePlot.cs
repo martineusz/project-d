@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Environment.Miscellaneous;
 using Items;
 using Units.Boids;
 using Units.Boids.Allies;
@@ -8,7 +9,7 @@ using UnityEngine.Serialization;
 
 namespace Environment.Workplaces
 {
-    public class WildPlot : MonoBehaviour, IWorkplace
+    public class WorkablePlot : MonoBehaviour, IWorkplace
     {
         public ResourceDataFactory resourceDataFactory;
         

@@ -11,7 +11,8 @@ namespace LightManipulation
 
         public float lightDiminishFrequency = 1f;
         public float lightDiminishSpeed = 0.001f;
-        [HideInInspector] public float lightModifier = 1f;
+        [HideInInspector] public float torchPower = 1f;
+        [HideInInspector] public float lightEnvironmentModifier = 1f;
         protected float InnerRadius;
         protected float OuterRadius;
 
@@ -26,8 +27,8 @@ namespace LightManipulation
             InnerRadius = torchLight.pointLightInnerRadius;
             OuterRadius = torchLight.pointLightOuterRadius;
 
-            torchTrigger.radius = InnerRadius;
-            MaxForceRadius = InnerRadius + maxForceRadiusOffset;
+            torchTrigger.radius = OuterRadius;
+            MaxForceRadius = OuterRadius + maxForceRadiusOffset;
 
             if (torchLight == null)
             {
@@ -35,23 +36,33 @@ namespace LightManipulation
             }
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             DiminishLight();
+        }
+
+        private void LateUpdate()
+        {
+            HandleLightChanges();
+        }
+
+        private void HandleLightChanges()
+        {
+            torchLight.pointLightInnerRadius = InnerRadius * torchPower * lightEnvironmentModifier;
+            torchLight.pointLightOuterRadius = OuterRadius * torchPower * lightEnvironmentModifier;
+
+            torchTrigger.radius = torchLight.pointLightOuterRadius;
+            MaxForceRadius = torchLight.pointLightOuterRadius + maxForceRadiusOffset;
         }
 
         private void DiminishLight()
         {
             if (!torchLight) return;
-            if (lightModifier <= 0f) return;
+            if (torchPower <= 0f) return;
             if ((Time.time - _lastDiminishTime < 1f / lightDiminishFrequency)) return;
 
 
-            lightModifier -= lightDiminishSpeed;
-            torchLight.pointLightInnerRadius = InnerRadius * lightModifier;
-            torchLight.pointLightOuterRadius = OuterRadius * lightModifier;
-            torchTrigger.radius = torchLight.pointLightInnerRadius;
-            MaxForceRadius = torchLight.pointLightInnerRadius + maxForceRadiusOffset;
+            torchPower -= lightDiminishSpeed;
 
             _lastDiminishTime = Time.time;
         }
@@ -70,7 +81,7 @@ namespace LightManipulation
 
                 // lightModifier and fearOfLightModifier are used to scale the force applied to the enemy
                 float forceAmount = Mathf.Clamp01(1 - (distance / MaxForceRadius)) * maxForce *
-                                    (1 / enemyCombat.fearOfLightModifier) * lightModifier;
+                                    (1 / enemyCombat.fearOfLightModifier) * torchPower;
                 enemyRb.AddForce(forceDirection * forceAmount, ForceMode2D.Impulse);
             }
         }

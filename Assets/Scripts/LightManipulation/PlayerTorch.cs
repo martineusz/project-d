@@ -26,11 +26,7 @@ namespace LightManipulation
             if (!torchLight || inventory.torchesCount <= 0) return false;
 
             inventory.torchesCount--;
-            lightModifier = 1f;
-            torchLight.pointLightInnerRadius = InnerRadius;
-            torchLight.pointLightOuterRadius = OuterRadius;
-            torchTrigger.radius = InnerRadius;
-            MaxForceRadius = InnerRadius + maxForceRadiusOffset;
+            torchPower = 1f;
 
             return true;
         }

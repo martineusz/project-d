@@ -1,7 +1,6 @@
 ﻿using Items;
-using UnityEngine;
 
-namespace Environment.Workplaces
+namespace Environment.Miscellaneous
 {
     public class Crop
     {

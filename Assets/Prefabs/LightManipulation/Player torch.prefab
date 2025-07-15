@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3778760959270886314}
   m_Layer: 0
   m_Name: Player torch
-  m_TagString: Untagged
+  m_TagString: Torch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,10 +102,12 @@ MonoBehaviour:
   torchTrigger: {fileID: 3778760959270886314}
   lightDiminishFrequency: 10
   lightDiminishSpeed: 0.0002
-  lightModifier: 1
+  torchPower: 1
+  lightEnvironmentModifier: 1
   maxForce: 20
   maxForceRadiusOffset: 5
   inventory: {fileID: 0}
+  placableTorchPrefab: {fileID: 6793068501756328550, guid: e7aa06db4fb51d240ad1eb9271963c5f, type: 3}
 --- !u!58 &3778760959270886314
 CircleCollider2D:
   m_ObjectHideFlags: 0

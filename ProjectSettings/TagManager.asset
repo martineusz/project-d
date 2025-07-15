@@ -8,6 +8,7 @@ TagManager:
   - Ally
   - Interactive
   - Workplace
+  - Torch
   layers:
   - Default
   - TransparentFX

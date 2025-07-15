@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aggroTarget: {fileID: 0}
   responsiveness: 5
-  speed: 1.5
+  speed: 1.2
   neighborRadius: 3.5
   separationRadius: 2
   separationWeight: 1.5

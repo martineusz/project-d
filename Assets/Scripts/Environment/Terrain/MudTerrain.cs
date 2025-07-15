@@ -1,8 +1,7 @@
-﻿using System;
-using Player;
+﻿using Player;
 using UnityEngine;
 
-namespace Environment
+namespace Environment.Terrain
 {
     public class MudTerrain:MonoBehaviour
     {

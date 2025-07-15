@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3272731135223790763}
   - component: {fileID: 6434462178782364655}
   m_Layer: 0
-  m_Name: WildPlot
+  m_Name: WorkablePlot
   m_TagString: Workplace
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   cropsLimit: 2
   neediness: 1
   workers: []
+  workerQueue: []
 --- !u!114 &3272731135223790763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultResourceName: unnamed
   defaultIcon: {fileID: 0}
+  defaltDescription: No description provided.
+  defaultRarity: 0
+  defaultPrice: 0
 --- !u!61 &6434462178782364655
 BoxCollider2D:
   m_ObjectHideFlags: 0

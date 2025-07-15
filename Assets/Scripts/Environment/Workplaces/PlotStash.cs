@@ -5,7 +5,7 @@ namespace Environment.Workplaces
 {
     public class PlotStash : MonoBehaviour, INteractive
     {
-        public WildPlot plot;
+        public WorkablePlot plot;
         public void Use()
         {
             if (!plot) return;
