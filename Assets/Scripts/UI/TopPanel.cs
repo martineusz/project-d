@@ -10,11 +10,10 @@ namespace UI
         public TextMeshProUGUI cashText;
         public TextMeshProUGUI dayText;
         public TextMeshProUGUI torchText;
-        
+
         public Player.PlayerCombat playerCombat;
         public Shop.Shop shop;
         public Inventory.Inventory inventory;
-        public TimeManager timeManager;
 
         void Update()
         {
@@ -23,22 +22,19 @@ namespace UI
 
             if (shop)
                 cashText.text = $"Cash: {shop.playerCash}";
-            
+
             if (inventory)
                 torchText.text = $"{inventory.torchesCount} / {inventory.torchesLimit} Torches";
 
+            
+            var timeManager = TimeManager.Instance;
             if (timeManager)
             {
-                dayText.text = $"Day: {timeManager.day}";
-                
-                if (timeManager.currentDayType == TimeManager.DayType.BloodMoon)
-                {
-                    dayText.text += " (Blood Moon)";
-                }
-                else
-                {
-                    dayText.text += " (Normal)";
-                }
+                string dayTypeStr = timeManager.currentDayType == TimeManager.DayType.BloodMoon
+                    ? "Blood Moon"
+                    : "Normal";
+
+                dayText.text = $"Day: {timeManager.day} ({dayTypeStr})";
             }
         }
     }

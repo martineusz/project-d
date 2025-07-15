@@ -37,7 +37,7 @@ namespace UI.Inventory
                 slot.OnSlotClicked += ShowItemDetails;
             }
 
-            sellButton.onClick.AddListener(OnSellButtonClicked); // Assign click event
+            sellButton.onClick.AddListener(OnSellButtonClicked);
             sellButton.gameObject.SetActive(false);
         }
 
