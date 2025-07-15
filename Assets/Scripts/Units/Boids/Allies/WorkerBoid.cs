@@ -38,7 +38,7 @@ namespace Units.Boids.Allies
         protected void Awake()
         {
             Type = BoidType.Worker;
-            SpriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
 
             if (manager == null)
                 manager = FindFirstObjectByType<BoidManager>();
@@ -231,12 +231,12 @@ namespace Units.Boids.Allies
             if (newState != WorkerBoidState.Working) _targetWorkplace = null;
             _workerBoidState = newState;
 
-            SpriteRenderer.color = _workerBoidState switch
+            spriteRenderer.color = _workerBoidState switch
             {
                 WorkerBoidState.GoingToWork => colorIdle,
                 WorkerBoidState.Following => colorFollowing,
                 WorkerBoidState.Working => colorWorking,
-                _ => SpriteRenderer.color
+                _ => spriteRenderer.color
             };
         }
 

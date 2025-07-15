@@ -109,10 +109,10 @@ namespace Units.Boids.Enemies
             switch (EnemyBoidState)
             {
                 case EnemyBoidState.Chasing:
-                    SpriteRenderer.color = colorChasing;
+                    spriteRenderer.color = colorChasing;
                     break;
                 case EnemyBoidState.Distracted:
-                    SpriteRenderer.color = colorDistracted;
+                    spriteRenderer.color = colorDistracted;
                     break;
             }
         }

@@ -14,18 +14,25 @@ namespace Units.Combat
         {
             _isAllied = isAllied;
             direction = shootDirection.normalized;
-            Destroy(gameObject, 5f); // Auto-destroy after 5 sec
+
+            // Rotate the bullet to face the direction.
+            // Assuming the bullet sprite faces UP (Vector3.up)
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            Destroy(gameObject, 5f); // auto destroy after 5 sec
         }
 
         private void Update()
         {
-            transform.Translate(direction * (speed * Time.deltaTime));
+            // Move forward along the local UP axis (bullet’s forward)
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.isTrigger) return;
-            
+
             if (collision.CompareTag("Player") && !_isAllied)
             {
                 PlayerCombat pc = collision.GetComponent<PlayerCombat>();
@@ -33,24 +40,27 @@ namespace Units.Combat
                 {
                     pc.TakeDamage(damage);
                 }
+
                 Destroy(gameObject);
             }
-            else if (collision.CompareTag("Ally")&& !_isAllied)
+            else if (collision.CompareTag("Ally") && !_isAllied)
             {
                 AbstractCombat c = collision.GetComponent<AbstractCombat>();
                 if (c != null)
                 {
                     c.TakeDamage(damage);
                 }
+
                 Destroy(gameObject);
             }
-            else if (collision.CompareTag("Enemy")&& _isAllied)
+            else if (collision.CompareTag("Enemy") && _isAllied)
             {
                 AbstractCombat c = collision.GetComponent<AbstractCombat>();
                 if (c != null)
                 {
                     c.TakeDamage(damage);
                 }
+
                 Destroy(gameObject);
             }
             else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
@@ -60,6 +70,7 @@ namespace Units.Combat
                 {
                     c.TakeDamage(damage);
                 }
+
                 Destroy(gameObject);
             }
         }

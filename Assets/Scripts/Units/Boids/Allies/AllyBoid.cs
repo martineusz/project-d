@@ -29,7 +29,6 @@ namespace Units.Boids.Allies
         protected void Awake()
         {
             Type = BoidType.Ally;
-            SpriteRenderer = GetComponent<SpriteRenderer>();
 
             if (manager == null)
                 manager = FindFirstObjectByType<BoidManager>();
@@ -53,7 +52,7 @@ namespace Units.Boids.Allies
             Velocity = Velocity.normalized * (speed * slowDownFactor * externalSpeedFactor);
 
             transform.position += (Vector3)(Velocity * Time.deltaTime);
-            transform.up = Velocity;
+            //transform.up = Velocity;
         }
 
         protected Vector2 ComputeAcceleration()
@@ -123,12 +122,12 @@ namespace Units.Boids.Allies
         {
             AllyBoidState = newState;
 
-            SpriteRenderer.color = AllyBoidState switch
+            spriteRenderer.color = AllyBoidState switch
             {
                 AllyBoidState.Idle => colorIdle,
                 AllyBoidState.Following => colorFollowing,
                 AllyBoidState.Aggressive => colorAggresive,
-                _ => SpriteRenderer.color
+                _ => spriteRenderer.color
             };
         }
 
