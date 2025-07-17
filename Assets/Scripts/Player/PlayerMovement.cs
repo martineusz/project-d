@@ -12,6 +12,18 @@ namespace Player
         private Vector2 _movement;
         private Rigidbody2D _rb;
         [HideInInspector] public float externalSpeedFactor = 1f;
+        
+        [Header("Stamina Settings")]
+        public float maxStamina = 100f;
+        public float staminaDrainRate = 15f;
+        public float staminaRegenRate = 10f;
+        public float minStaminaToRun = 5f;
+        
+        private float staminaCooldownTimer = 0f;
+        public float staminaCooldownDuration = 2f;
+        
+        private float currentStamina;
+        private bool isRunning;
 
         public BoidManager boidManager;
 
@@ -19,37 +31,50 @@ namespace Player
         {
             _speed = runSpeed;
             _rb = GetComponent<Rigidbody2D>();
+            currentStamina = maxStamina;
         }
 
         private void Update()
         {
+            // --- Boid selection controls ---
             if (Keyboard.current.eKey.wasPressedThisFrame)
-            {
                 boidManager.SelectNearestUnselectedAllyBoid();
-            }
 
             if (Keyboard.current.qKey.wasPressedThisFrame)
-            {
                 boidManager.DeselectFirstSelectedAllyBoid();
-            }
+
             if (Keyboard.current.xKey.wasPressedThisFrame)
-            {
                 boidManager.SelectNearestUnselectedWorkerBoid();
-            }
 
             if (Keyboard.current.zKey.wasPressedThisFrame)
-            {
                 boidManager.DeselectFirstSelectedWorkerBoid();
-            }
-            
 
-            if (Keyboard.current.leftShiftKey.isPressed)
+            // --- Stamina-controlled running ---
+            bool shiftHeld = Keyboard.current.leftShiftKey.isPressed;
+
+            if (staminaCooldownTimer > 0f)
             {
-                _speed = walkSpeed;
+                staminaCooldownTimer -= Time.deltaTime;
+            }
+
+            if (shiftHeld && currentStamina > minStaminaToRun && staminaCooldownTimer <= 0f)
+            {
+                isRunning = true;
+                _speed = runSpeed;
+                currentStamina -= staminaDrainRate * Time.deltaTime;
+                currentStamina = Mathf.Max(currentStamina, 0f);
+
+                if (currentStamina <= minStaminaToRun)
+                {
+                    staminaCooldownTimer = staminaCooldownDuration;
+                }
             }
             else
             {
-                _speed = runSpeed;
+                isRunning = false;
+                _speed = walkSpeed;
+                currentStamina += staminaRegenRate * Time.deltaTime;
+                currentStamina = Mathf.Min(currentStamina, maxStamina);
             }
         }
 
