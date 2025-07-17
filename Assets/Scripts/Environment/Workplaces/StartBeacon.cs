@@ -40,5 +40,10 @@ namespace Environment.Workplaces
         {
             // Not applicable for StartBeacon
         }
+
+        public bool IsQueueFull()
+        {
+            return false;
+        }
     }
 }

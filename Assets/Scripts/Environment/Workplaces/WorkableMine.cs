@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Units.Boids.Allies;
 using UnityEngine;
 
 namespace Environment.Workplaces
@@ -9,27 +10,21 @@ namespace Environment.Workplaces
         
         protected override void FixedUpdate()
         {
-            Debug.Log("Crops count: " + Crops.Count);
-            Debug.Log("Resource left: " + resourceAmount);
-            Debug.Log("Resource stash count: " + ResourceStash.Count);
-            Debug.Log("Workers count: " + workers.Count);
-            
             if (resourceAmount <= 0 && Crops.Count <= 0)
             {
-                Debug.Log("Triggering worker unassignment...");
+                gameObject.SetActive(false);
+                
                 foreach (var worker in workers.ToList())
                 {
-                    Debug.Log("Unassigning form w...");
                     worker.UnassignFromWorkspace();
+                    worker.SetBoidState(WorkerBoidState.GoingToWork);
                 }
 
                 foreach (var worker in workerQueue.ToList())
                 {
-                    Debug.Log("Unassigning form q...");
-                    
                     worker.UnassignFromQueue();
+                    worker.SetBoidState(WorkerBoidState.GoingToWork);
                 }
-                enabled = false;
                 return;
             }
 

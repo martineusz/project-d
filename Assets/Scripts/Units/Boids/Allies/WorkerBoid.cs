@@ -166,6 +166,7 @@ namespace Units.Boids.Allies
 
         private void FindClosestWorkplace()
         {
+            Debug.Log("Finding closest workplace for worker " + name);
             GameObject[] workplaces = GameObject.FindGameObjectsWithTag("Workplace");
             if (workplaces.Length == 0) return;
 
@@ -183,7 +184,7 @@ namespace Units.Boids.Allies
                     // Skip if null OR disabled
                     if (iworkplace == null || !((MonoBehaviour)iworkplace).enabled) continue;
                     
-                    if (iworkplace.QueueWorker(this))
+                    if (!iworkplace.IsQueueFull())
                     {
                         Debug.Log($"Worker {name} assigned to workplace {workplace.name}");
                         minDist = dist;
@@ -194,6 +195,9 @@ namespace Units.Boids.Allies
 
             if (nearest)
             {
+                IWorkplace iworkplace = nearest.GetComponent<IWorkplace>();
+                iworkplace.QueueWorker(this);
+                
                 _targetWorkplace = nearest.transform;
                 Collider2D targetCollider = nearest.GetComponent<Collider2D>();
                 if (targetCollider)
@@ -228,11 +232,21 @@ namespace Units.Boids.Allies
             {
                 UnassignFromQueue();
             }
+            if (newState == WorkerBoidState.Working)
+            {
+                UnassignFromQueue();
+            }
             if (newState == WorkerBoidState.Following && _workerBoidState == WorkerBoidState.Working)
             {
                 UnassignFromWorkspace();
             }
-            if (newState != WorkerBoidState.Working) _targetWorkplace = null;
+            if (newState == WorkerBoidState.GoingToWork)
+            {
+                FindClosestWorkplace();
+                UnassignFromWorkspace();
+            }
+            
+
             _workerBoidState = newState;
 
             spriteRenderer.color = _workerBoidState switch
@@ -243,6 +257,7 @@ namespace Units.Boids.Allies
                 _ => spriteRenderer.color
             };
         }
+
 
         public void UnassignFromWorkspace()
         {
