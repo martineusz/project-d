@@ -5,6 +5,10 @@ namespace Environment.Gates
 {
     public class SimpleLever : MonoBehaviour, INteractive
     {
+        public SpriteRenderer spriteRenderer;
+        private Color _originalColor;
+        private bool _isHighlighted;
+        
         public SimpleGate gate;
         public float waitTime = 3f;
 
@@ -12,6 +16,12 @@ namespace Environment.Gates
 
         private float _lastUseTime = -Mathf.Infinity;
 
+        
+        private void Awake()
+        {
+            _originalColor = spriteRenderer.color;
+        }
+        
         public void Use()
         {
             if (Time.time - _lastUseTime < waitTime) return;
@@ -27,7 +37,21 @@ namespace Environment.Gates
                 _isPulled = true;
             }
 
-            _lastUseTime = Time.time;
+            _lastUseTime = Time.time; 
+        }
+
+        public void Highlight()
+        {
+            if (_isHighlighted) return;
+            spriteRenderer.color = Color.white;
+            _isHighlighted = true;
+        }
+
+        public void DisableHighlight()
+        {
+            if (!_isHighlighted) return;
+            spriteRenderer.color = _originalColor;
+            _isHighlighted = false;
         }
 
         private IEnumerator OpenGateWithDelay()

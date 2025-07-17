@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf13030dbfda40d89c0a48514bbb36e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 5611988600753800324}
   gate: {fileID: 0}
   waitTime: 0.5
 --- !u!61 &3003948900340831949

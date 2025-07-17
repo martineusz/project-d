@@ -55,7 +55,8 @@ namespace Player
         private void FindClosestInteractive()
         {
             float minDist = float.MaxValue;
-            _closestInteractive = null;
+            
+            INteractive currentClosestInteractive = null;
             Vector3 playerPos = transform.position;
 
             foreach (var interactive in _interactives)
@@ -65,8 +66,29 @@ namespace Player
                 if (dist < minDist)
                 {
                     minDist = dist;
-                    _closestInteractive = interactive;
+                    currentClosestInteractive = interactive;
                 }
+            }
+            if (currentClosestInteractive == null)
+            {
+                if (_closestInteractive != null)
+                {
+                    Debug.LogWarning("Disabling highlight");
+                    _closestInteractive.DisableHighlight();
+                    _closestInteractive = null;
+                }
+                return;
+            }
+            if (currentClosestInteractive != _closestInteractive)
+            {
+                if (_closestInteractive != null)
+                {
+                    Debug.LogWarning("Disabling highlight");
+                    _closestInteractive.DisableHighlight();
+                }
+                _closestInteractive = currentClosestInteractive;
+                Debug.LogWarning("Highigihgh gigih");
+                _closestInteractive.Highlight();
             }
         }
     }

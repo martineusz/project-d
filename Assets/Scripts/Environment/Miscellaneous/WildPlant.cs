@@ -6,6 +6,10 @@ namespace Environment.Miscellaneous
 {
     public class WildPlant : MonoBehaviour, INteractive
     {
+        public SpriteRenderer spriteRenderer;
+        private Color _originalColor;
+        private bool _isHighlighted;
+        
         public ResourceDataFactory resourceDataFactory;
 
         private Crop _crop;
@@ -15,6 +19,12 @@ namespace Environment.Miscellaneous
         [HideInInspector] public bool isHarvestable = true;
         private float _growthTimer = 0f;
 
+        
+        private void Awake()
+        {
+            _originalColor = spriteRenderer.color;
+        }
+        
         private void Start()
         {
             ResetCrop();
@@ -71,6 +81,19 @@ namespace Environment.Miscellaneous
             {
                 Debug.Log("No resource available in plant.");
             }
+        }
+        public void Highlight()
+        {
+            if (_isHighlighted) return;
+            spriteRenderer.color = Color.white;
+            _isHighlighted = true;
+        }
+
+        public void DisableHighlight()
+        {
+            if (!_isHighlighted) return;
+            spriteRenderer.color = _originalColor;
+            _isHighlighted = false;
         }
     }
 }

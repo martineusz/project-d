@@ -137,4 +137,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3cabdb92844636b54cc0466954f4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 2567906626513975824}
   plot: {fileID: 0}

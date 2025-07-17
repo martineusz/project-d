@@ -7,8 +7,17 @@ namespace Environment.Miscellaneous
 {
     public class TreasureChest : MonoBehaviour, INteractive
     {
+        public SpriteRenderer spriteRenderer;
+        private Color _originalColor;
+        private bool _isHighlighted;
+
         public List<ItemData> treasureItems = new List<ItemData>();
-        
+
+        private void Awake()
+        {
+            _originalColor = spriteRenderer.color;
+        }
+
         public void Use()
         {
             if (TryTakeResource(out var resource))
@@ -20,6 +29,20 @@ namespace Environment.Miscellaneous
             {
                 Destroy(gameObject);
             }
+        }
+
+        public void Highlight()
+        {
+            if (_isHighlighted) return;
+            spriteRenderer.color = Color.white;
+            _isHighlighted = true;
+        }
+
+        public void DisableHighlight()
+        {
+            if (!_isHighlighted) return;
+            spriteRenderer.color = _originalColor;
+            _isHighlighted = false;
         }
 
         private bool TryTakeResource(out ItemData resource)

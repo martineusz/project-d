@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58304012564f4a569cf4b62d19214c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 6094110498130755242}
   resourceDataFactory: {fileID: -3568709279929846995}
   growthEfficiency: 1
   isHarvestable: 1
