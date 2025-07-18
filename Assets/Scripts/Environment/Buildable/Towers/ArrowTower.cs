@@ -1,32 +1,27 @@
-﻿using Units.Boids.Allies;
+﻿using Units.Combat;
+using Units.Combat.Enemies;
 using UnityEngine;
 
-namespace Units.Combat.Allies
+namespace Environment.Buildable.Towers
 {
-    public class AllyArcherCombat : AllyCombat
+    public class ArrowTower : AbstractTower
     {
         public GameObject arrowPrefab;
         public Transform shootPoint;
-        public AllyArcherBoid archerBoid;
-
+        
         public float shootCooldown = 2f;
         private float lastShotTime;
-
-        protected override void OnCollisionStay2D(Collision2D collision)
+        
+        protected override void Update()
         {
-            // Disable melee damage from base class
-        }
-
-        private void Update()
-        {
-            if (Time.time > lastShotTime + shootCooldown && archerBoid.GetBoidState() == AllyBoidState.Aggressive)
+            base.Update();
+            if (TargetEnemy && Time.time > lastShotTime + shootCooldown)
             {
-                Vector2 target = archerBoid.aggroTarget.transform.position;
-                ShootAt(target);
+                ShootAt(TargetEnemy.transform.position);
                 lastShotTime = Time.time;
             }
         }
-
+        
         private void ShootAt(Vector2 target)
         {
             Vector2 shootDir = target - (Vector2)shootPoint.position;
