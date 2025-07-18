@@ -166,7 +166,6 @@ namespace Units.Boids.Allies
 
         private void FindClosestWorkplace()
         {
-            Debug.Log("Finding closest workplace for worker " + name);
             GameObject[] workplaces = GameObject.FindGameObjectsWithTag("Workplace");
             if (workplaces.Length == 0) return;
 
@@ -186,7 +185,6 @@ namespace Units.Boids.Allies
                     
                     if (!iworkplace.IsQueueFull())
                     {
-                        Debug.Log($"Worker {name} assigned to workplace {workplace.name}");
                         minDist = dist;
                         nearest = workplace;
                     }
@@ -269,7 +267,6 @@ namespace Units.Boids.Allies
         
         public void UnassignFromQueue()
         {
-            Debug.Log("Inassigning from queue");
             if (!_targetWorkplace) return; 
 
             

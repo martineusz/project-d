@@ -29,8 +29,6 @@ namespace Environment.Workplaces
 
         protected virtual void FixedUpdate()
         {
-            Debug.Log(gameObject.name + ": worker count: " + workers.Count);
-            Debug.Log(gameObject.name + ": worker in queue count: " + workerQueue.Count);
             RefillCrops();
             
             _growthTimer += Time.fixedDeltaTime;
@@ -105,14 +103,12 @@ namespace Environment.Workplaces
 
         public void AddWorker(WorkerBoid worker)
         {
-            Debug.Log($"Adding worker {worker.name} to workplace {name}");
             UnqueueWorker(worker);
             workers.Add(worker);
         }
 
         public void RemoveWorker(WorkerBoid worker)
         {
-            Debug.Log("removing worker " + worker.name + " from workplace " + name);
             workers.Remove(worker);
         }
 
@@ -120,7 +116,6 @@ namespace Environment.Workplaces
         {
             if (workerQueue.Count < workerLimit - workers.Count)
             {
-                Debug.Log($"Queuing worker {worker.name} for workplace {name}");
                 workerQueue.Add(worker);
                 return true;
             }
