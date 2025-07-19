@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8566101043271669224}
   - component: {fileID: 43655105431463068}
   - component: {fileID: 119170358924766462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 3403176096415973958}
   - component: {fileID: 428368183244955243}
   - component: {fileID: 8936546624095273486}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1454339053493080086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
