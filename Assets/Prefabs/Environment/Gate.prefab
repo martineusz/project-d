@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6275978583214777207}
   - component: {fileID: 4146496564946609308}
   - component: {fileID: 3532751960828404796}
-  - component: {fileID: 8250044749682464563}
+  - component: {fileID: 7374707789347110165}
   m_Layer: 8
   m_Name: Gate
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.68, y: -5.78, z: 0}
-  m_LocalScale: {x: 1.1019295, y: 11.548613, z: 7.8094697}
+  m_LocalScale: {x: 5.1230907, y: 0.45601472, z: 7.8094697}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.2924528, g: 0.17787814, b: 0.13381097, a: 1}
   m_FlipX: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e02faf6cca4f47a658c8604ea5359a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8250044749682464563
+--- !u!114 &7374707789347110165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,24 +161,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShadowGroup: 0
-  m_Priority: 0
+  m_Priority: -1
   m_ComponentVersion: 5
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
-  m_AlphaCutoff: 0.1
+  m_AlphaCutoff: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
   - {x: -0.5, y: -0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
-  - {x: 0.49999952, y: 0.5, z: 0}
-  - {x: 0.49999952, y: -0.5, z: 0}
+  - {x: 0.49999997, y: 0.5, z: 0}
+  - {x: 0.49999997, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_InstanceId: 0
   m_ShadowShape2DComponent: {fileID: 6275978583214777207}
   m_ShadowShape2DProvider:
-    rid: 8762262486507585814
+    rid: 8762262486507585815
   m_ShadowCastingSource: 2
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
@@ -198,6 +198,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8762262486507585814
+    - rid: 8762262486507585815
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
