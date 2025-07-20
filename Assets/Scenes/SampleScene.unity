@@ -5785,7 +5785,12 @@ MonoBehaviour:
   - {fileID: 7315194027647395408, guid: 1e6579d4016b90444b6c3db024f25566, type: 3}
   - {fileID: 6954793245232231086, guid: d5f03fdc28d08a94da0635ac4612523b, type: 3}
   - {fileID: 6605313552627745869, guid: 1100ab021f6038742a02fbf2345d1fd0, type: 3}
+  - {fileID: 7315194027647395408, guid: ccf5be0b74dde76499517452a33a0cc2, type: 3}
+  - {fileID: 7315194027647395408, guid: c8a11c5a72b5f264d9405610482913c4, type: 3}
+  - {fileID: 7315194027647395408, guid: 4de368dea4170154982238b386599ef8, type: 3}
   fullTilePrefab: {fileID: 7315194027647395408, guid: b78aa574e6039274daa9434348f2c5ae, type: 3}
+  floorElementPrefabs:
+  - {fileID: 6944186138658564087, guid: 10f01b7b53067a0449f4895bb991e3e7, type: 3}
   maxTiles: 100
   deadEndChance: 0
   tileSize: 10
