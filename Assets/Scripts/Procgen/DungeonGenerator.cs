@@ -12,6 +12,12 @@ namespace Procgen
         
         [Header("Elements Prefabs")]
         public List<GameObject> floorElementPrefabs;
+        public float floorElementChance = 0.1f;
+        public List<GameObject> airElementPrefabs;
+        public float airElementChance = 0.1f;
+        [Header("Elements Prefabs/Objects")]
+        public List<GameObject> objectElementPrefabs;
+        public float objectElementChance = 0.1f;
         
         [Header("Generation Settings")]
         public int maxTiles = 50;
@@ -75,10 +81,23 @@ namespace Procgen
                 
                 GameObject newObj = Instantiate(prefab, worldPos, rotation);
                 
-                if (Random.value <= 0.1f)
+                if (Random.value <= floorElementChance)
                 {
                     GameObject randomFloorPrefab = floorElementPrefabs[Random.Range(0, floorElementPrefabs.Count)];
                     GameObject floor = Instantiate(randomFloorPrefab, newObj.transform);
+                    floor.transform.localPosition = Vector3.zero;
+                }
+                if (Random.value <= airElementChance)
+                {
+                    GameObject randomEnvPrefab = airElementPrefabs[Random.Range(0, airElementPrefabs.Count)];
+                    GameObject floor = Instantiate(randomEnvPrefab, newObj.transform);
+                    floor.transform.localPosition = Vector3.zero;
+                }
+                var tileConnector = newObj.GetComponent<TileConnector>();
+                if (tileConnector.tileType == TileType.Open && Random.value <= objectElementChance)
+                {
+                    GameObject randomObjPrefab = objectElementPrefabs[Random.Range(0, objectElementPrefabs.Count)];
+                    GameObject floor = Instantiate(randomObjPrefab, newObj.transform);
                     floor.transform.localPosition = Vector3.zero;
                 }
                 

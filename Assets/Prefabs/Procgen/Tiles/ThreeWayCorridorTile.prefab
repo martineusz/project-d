@@ -526,6 +526,7 @@ MonoBehaviour:
   - {fileID: 2105141621508275713}
   - {fileID: 6809753348419274151}
   weight: 15
+  tileType: 1
 --- !u!1 &7543607940918961620
 GameObject:
   m_ObjectHideFlags: 0

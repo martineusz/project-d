@@ -11,9 +11,9 @@ namespace Procgen
         public List<Direction> exitDirections = new();
         public List<Transform> exitPoints = new();
         
-        [Header("Tile Selection Weight")]
+        [Header("Tile Metadata")]
         public float weight = 1.0f;
-
+        public TileType tileType = TileType.Closed;
 
         public Transform GetExitPoint(Direction dir)
         {
@@ -22,4 +22,6 @@ namespace Procgen
             return null;
         }
     }
+    
+    public enum TileType { Open, Corridor, Closed }
 }

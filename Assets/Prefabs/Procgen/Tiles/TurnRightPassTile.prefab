@@ -872,6 +872,7 @@ MonoBehaviour:
   exitPoints:
   - {fileID: 2983529326596762225}
   weight: 3
+  tileType: 0
 --- !u!1 &7904079968117420330
 GameObject:
   m_ObjectHideFlags: 0
