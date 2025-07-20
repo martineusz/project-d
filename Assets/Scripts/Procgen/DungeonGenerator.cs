@@ -77,8 +77,8 @@ namespace Procgen
                 // Calculate world position of the tile based on grid position and tile size
                 Vector3 worldPos = new Vector3(gridPos.x * tileSize, gridPos.y * tileSize, 0);
 
-                // Instantiate the tile with rotation
                 Instantiate(prefab, worldPos, rotation);
+                
                 tileCount++;
                 occupied.Add(gridPos);
 
@@ -153,7 +153,6 @@ namespace Procgen
                 }
             }
 
-            // Instantiate FullTilePrefab at each empty neighbor spot
             foreach (var pos in positionsToFill)
             {
                 Vector3 worldPos = new Vector3(pos.x * tileSize, pos.y * tileSize, 0);
