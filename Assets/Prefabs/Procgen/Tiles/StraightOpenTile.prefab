@@ -514,6 +514,7 @@ MonoBehaviour:
   exitDirections: 00000000
   exitPoints:
   - {fileID: 5289269939720705264}
+  weight: 3
 --- !u!1 &7738089887410354929
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,18 +54,15 @@ namespace Procgen
 
                 if (occupied.Contains(gridPos))
                 {
-                    // Already a tile here
                     continue;
                 }
 
                 if (Random.value < deadEndChance)
                 {
-                    // Random chance to create a dead end
                     continue;
                 }
 
-                // Pick a random tile prefab
-                GameObject prefab = tilePrefabs[Random.Range(0, tilePrefabs.Count)];
+                GameObject prefab = GetRandomWeightedTile();
                 TileConnector prefabConn = prefab.GetComponent<TileConnector>();
 
                 // Calculate rotation needed to align prefab's baseEntryDirection with enterFrom
@@ -158,6 +155,34 @@ namespace Procgen
                 Vector3 worldPos = new Vector3(pos.x * tileSize, pos.y * tileSize, 0);
                 Instantiate(fullTilePrefab, worldPos, Quaternion.identity);
             }
+        }
+        
+        GameObject GetRandomWeightedTile()
+        {
+            float totalWeight = 0f;
+
+            foreach (GameObject tile in tilePrefabs)
+            {
+                TileConnector conn = tile.GetComponent<TileConnector>();
+                totalWeight += conn.weight;
+            }
+
+            float randomValue = Random.Range(0, totalWeight);
+            float cumulative = 0f;
+
+            foreach (GameObject tile in tilePrefabs)
+            {
+                TileConnector conn = tile.GetComponent<TileConnector>();
+                cumulative += conn.weight;
+
+                if (randomValue <= cumulative)
+                {
+                    return tile;
+                }
+            }
+
+            // Fallback
+            return tilePrefabs[0];
         }
     }
 }
