@@ -19,7 +19,7 @@ namespace Shop
         }
         public void Use()
         {
-            shopUI.OpenShop();
+            shopUI.OpenShop(gameObject);
         }
         
         public void Highlight()

@@ -16,7 +16,7 @@ namespace Environment.Buildable
         }
         public void Use()
         {
-            buildableUI.OpenShop();
+            buildableUI.OpenShop(gameObject);
         }
         
         public void Highlight()

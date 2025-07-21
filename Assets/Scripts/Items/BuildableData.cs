@@ -2,19 +2,16 @@
 
 namespace Items
 {
-    [CreateAssetMenu(fileName = "newSpawnable", menuName = "Items/Spawnables", order = 0)]
-    public class SpawnableData : ItemData
+    [CreateAssetMenu(fileName = "newBuildable", menuName = "Items/Buildings", order = 0)]
+    public class BuildableData : ItemData
     {
         public GameObject prefabToSpawn;
         public Quaternion spawnRotation = Quaternion.identity;
-        public float spawnRadius = 0f;
-
         public override void Use()
         {
             if (prefabToSpawn != null)
             {
-                Vector3 randomOffset = Random.insideUnitSphere * spawnRadius;
-                Vector3 finalPosition = spawnPosition + randomOffset;
+                Vector3 finalPosition = spawnPosition;
                 Object.Instantiate(prefabToSpawn, finalPosition, spawnRotation);
             }
         }

@@ -8,6 +8,8 @@ namespace UI.Shop
 {
     public class ShopUI : MonoBehaviour
     {
+        [HideInInspector] public GameObject usedShopPlace;
+        
         public GameObject shopUIPanel;
 
         public Transform itemsParent;
@@ -50,7 +52,7 @@ namespace UI.Shop
             }
         }
 
-        public void OpenShop()
+        public void OpenShop(GameObject usedShop)
         {
             if (UIManager.Instance.IsAnyUIOpen || !shopUIPanel) return;
             
@@ -58,6 +60,8 @@ namespace UI.Shop
             PopulateShopSlots();
             shopUIPanel.SetActive(true);
             UIManager.Instance.SetUIOpen(true);
+            
+            usedShopPlace = usedShop;
         }
 
         void Update()
@@ -72,6 +76,8 @@ namespace UI.Shop
         {
             shopUIPanel.SetActive(false);
             UIManager.Instance.SetUIOpen(false);
+            
+            usedShopPlace = null;
         }
 
         void ShowItemDetails(ItemData item)
@@ -91,12 +97,12 @@ namespace UI.Shop
         {
             if (_currentItem != null && shop != null)
             {
-                bool isBought = shop.BuyItem(_currentItem);
+                bool isBought = shop.BuyItem(_currentItem, usedShopPlace);
                 if (isBought)
                 {
                     _currentItem = null;
                     itemDetailsPanel.SetActive(false);
-                    PopulateShopSlots(); // Refresh the shop slots
+                    PopulateShopSlots();
                 }
                 else
                 {

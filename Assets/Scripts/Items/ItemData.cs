@@ -10,7 +10,11 @@ namespace Items
         public string description;
         public Rarity rarity;
         public int price;
+        
         public bool instantUse = false;
+        public bool destroyShopPlaceOnUse = false;
+        
+        public Vector3 spawnPosition;
 
         public abstract void Use();
     }

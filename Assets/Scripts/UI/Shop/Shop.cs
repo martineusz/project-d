@@ -17,7 +17,7 @@ namespace UI.Shop
             player.playerCash += item.price;
         }
         
-        public bool BuyItem(ItemData item)
+        public bool BuyItem(ItemData item, GameObject usedShopPlace)
         {
             if (item == null || player.playerCash < item.price)
             {
@@ -26,6 +26,11 @@ namespace UI.Shop
             
             if (item.instantUse)
             {
+                item.spawnPosition = usedShopPlace.gameObject.transform.position;
+                if (item.destroyShopPlaceOnUse)
+                {
+                    Destroy(usedShopPlace);
+                }
                 item.Use();
                 player.playerCash -= item.price;
                 itemsForSale.Remove(item);

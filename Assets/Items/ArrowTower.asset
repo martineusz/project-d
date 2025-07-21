@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5881eaaedc14198bfdc5b1ea6110776, type: 3}
+  m_Name: ArrowTower
+  m_EditorClassIdentifier: 
+  itemName: Arrow Tower
+  icon: {fileID: -1870920915107529024, guid: b270a84a0d2d02c458ce97dd783dea5f, type: 3}
+  description: Aroow tower that skibidisidisdis
+  rarity: 0
+  price: 500
+  instantUse: 1
+  destroyShopPlaceOnUse: 1
+  spawnPosition: {x: 0.571, y: 1.016, z: 0}
+  prefabToSpawn: {fileID: 5537278169252756777, guid: 9a9a898842d8135418ad15d1f3f011a6, type: 3}
+  spawnRotation: {x: 0, y: 0, z: 0, w: 1}
