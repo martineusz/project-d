@@ -5,22 +5,18 @@ namespace Procgen
 {
     public class DungeonGenerator : MonoBehaviour
     {
-        [Header("Tile Prefabs")]
-        public GameObject startTile;
+        [Header("Tile Prefabs")] public GameObject startTile;
         public List<GameObject> tilePrefabs;
         public GameObject fullTilePrefab;
-        
-        [Header("Elements Prefabs")]
-        public List<GameObject> floorElementPrefabs;
+
+        [Header("Elements Prefabs")] public List<GameObject> floorElementPrefabs;
         public float floorElementChance = 0.1f;
         public List<GameObject> airElementPrefabs;
         public float airElementChance = 0.1f;
-        [Header("Elements Prefabs/Objects")]
-        public List<GameObject> objectElementPrefabs;
+        [Header("Elements Prefabs/Objects")] public List<GameObject> objectElementPrefabs;
         public float objectElementChance = 0.1f;
-        
-        [Header("Generation Settings")]
-        public int maxTiles = 50;
+
+        [Header("Generation Settings")] public int maxTiles = 50;
         public float deadEndChance = 0.1f;
         public float tileSize = 10f;
 
@@ -78,29 +74,42 @@ namespace Procgen
 
                 Vector3 worldPos = new Vector3(gridPos.x * tileSize, gridPos.y * tileSize, 0);
 
-                
+
                 GameObject newObj = Instantiate(prefab, worldPos, rotation);
-                
+
                 if (Random.value <= floorElementChance)
                 {
                     GameObject randomFloorPrefab = floorElementPrefabs[Random.Range(0, floorElementPrefabs.Count)];
                     GameObject floor = Instantiate(randomFloorPrefab, newObj.transform);
                     floor.transform.localPosition = Vector3.zero;
                 }
+
                 if (Random.value <= airElementChance)
                 {
                     GameObject randomEnvPrefab = airElementPrefabs[Random.Range(0, airElementPrefabs.Count)];
                     GameObject floor = Instantiate(randomEnvPrefab, newObj.transform);
                     floor.transform.localPosition = Vector3.zero;
                 }
+
                 var tileConnector = newObj.GetComponent<TileConnector>();
-                if (tileConnector.tileType == TileType.Open && Random.value <= objectElementChance)
+
+                //HERE
+                if (tileConnector.tileType == TileType.Open)
                 {
-                    GameObject randomObjPrefab = objectElementPrefabs[Random.Range(0, objectElementPrefabs.Count)];
-                    GameObject floor = Instantiate(randomObjPrefab, newObj.transform);
-                    floor.transform.localPosition = Vector3.zero;
+                    foreach (var location in tileConnector.objectLocationPoints)
+                    {
+                        if (Random.value <= objectElementChance)
+                        {
+                            GameObject randomObjPrefab =
+                                objectElementPrefabs[Random.Range(0, objectElementPrefabs.Count)];
+                            GameObject obj = Instantiate(randomObjPrefab, location.position, Quaternion.identity,
+                                newObj.transform);
+                            //obj.transform.localPosition = Vector3.zero;
+                            obj.transform.rotation = Quaternion.identity;
+                        }
+                    }
                 }
-                
+
                 tileCount++;
                 occupied.Add(gridPos);
 
@@ -119,9 +128,9 @@ namespace Procgen
             }
 
             Debug.Log($"Dungeon generation complete. Tiles placed: {tileCount}");
-            
+
             FillEmptySpacesWithFullTiles();
-            
+
             Debug.Log($"Added closing tiles.");
         }
 
@@ -141,7 +150,7 @@ namespace Procgen
                 _ => Vector2Int.zero
             };
         }
-        
+
         void FillEmptySpacesWithFullTiles()
         {
             HashSet<Vector2Int> positionsToFill = new();
@@ -165,7 +174,7 @@ namespace Procgen
                 Instantiate(fullTilePrefab, worldPos, Quaternion.identity);
             }
         }
-        
+
         GameObject GetRandomWeightedTile()
         {
             float totalWeight = 0f;

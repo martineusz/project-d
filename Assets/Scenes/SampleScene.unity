@@ -5800,7 +5800,7 @@ MonoBehaviour:
   - {fileID: 467889609008158841, guid: 011ba05b30235b8479e349281ae98085, type: 3}
   - {fileID: 8720983135389082565, guid: e6fdd4bf034ce994abf5736f0827a817, type: 3}
   - {fileID: 5644048392524204543, guid: c40d0460b3c77e84a80771dfea05bb1b, type: 3}
-  objectElementChance: 0.5
+  objectElementChance: 0.8
   maxTiles: 100
   deadEndChance: 0
   tileSize: 10

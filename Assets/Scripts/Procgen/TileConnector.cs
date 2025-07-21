@@ -7,9 +7,11 @@ namespace Procgen
     public class TileConnector : MonoBehaviour
     {
         [Header("Tile Entry/Exit Setup")]
-        public Direction baseEntryDirection = Direction.South; // Default assumed entry
+        public Direction baseEntryDirection = Direction.South;
         public List<Direction> exitDirections = new();
         public List<Transform> exitPoints = new();
+        [Header("Tile Entry/Object Location Setup")]
+        public List<Transform> objectLocationPoints = new();
         
         [Header("Tile Metadata")]
         public float weight = 1.0f;

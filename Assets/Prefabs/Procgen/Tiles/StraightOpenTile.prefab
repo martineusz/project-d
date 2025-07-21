@@ -188,6 +188,37 @@ MonoBehaviour:
     - rid: 8762262594600828997
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!1 &5026690394606955339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7121815707698614766}
+  m_Layer: 0
+  m_Name: ObjLocation1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7121815707698614766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5026690394606955339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2474940837674276698}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5134396331852721509
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +527,7 @@ Transform:
   - {fileID: 5740024143770736564}
   - {fileID: 1454339053493080086}
   - {fileID: 5289269939720705264}
+  - {fileID: 7121815707698614766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5245279265498343934
@@ -514,6 +546,8 @@ MonoBehaviour:
   exitDirections: 00000000
   exitPoints:
   - {fileID: 5289269939720705264}
+  objectLocationPoints:
+  - {fileID: 7121815707698614766}
   weight: 3
   tileType: 0
 --- !u!1 &7738089887410354929
