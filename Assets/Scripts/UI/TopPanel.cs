@@ -21,7 +21,7 @@ namespace UI
                 healthText.text = $"HP: {playerCombat.hp}";
 
             if (shop)
-                cashText.text = $"Cash: {shop.playerCash}";
+                cashText.text = $"Cash: {shop.player.playerCash}";
 
             if (inventory)
                 torchText.text = $"{inventory.torchesCount} / {inventory.torchesLimit} Torches";

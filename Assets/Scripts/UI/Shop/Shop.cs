@@ -1,24 +1,25 @@
 ﻿using System.Collections.Generic;
 using Items;
+using Player;
 using UnityEngine;
 using UI.Inventory;
+using UnityEngine.Serialization;
 
 namespace UI.Shop
 {
     public class Shop : MonoBehaviour
     {
-        public int playerCash = 1000;
         public List<ItemData> itemsForSale = new List<ItemData>();
-
+        public PlayerEnvironmentInteraction player;
 
         public void SellItem(ItemData item)
         {
-            playerCash += item.price;
+            player.playerCash += item.price;
         }
         
         public bool BuyItem(ItemData item)
         {
-            if (item == null || playerCash < item.price)
+            if (item == null || player.playerCash < item.price)
             {
                 return false;
             }
@@ -26,14 +27,14 @@ namespace UI.Shop
             if (item.instantUse)
             {
                 item.Use();
-                playerCash -= item.price;
+                player.playerCash -= item.price;
                 itemsForSale.Remove(item);
                 return true;
             }
             
             if (Inventory.Inventory.instance.Add(item))
             {
-                playerCash -= item.price;
+                player.playerCash -= item.price;
                 itemsForSale.Remove(item);
                 return true;
             }

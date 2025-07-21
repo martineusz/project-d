@@ -10,6 +10,8 @@ namespace Player
     {
         private List<INteractive> _interactives = new List<INteractive>();
         private INteractive _closestInteractive;
+        
+        public int playerCash = 1000;
 
         private void OnTriggerEnter2D(Collider2D other)
         {

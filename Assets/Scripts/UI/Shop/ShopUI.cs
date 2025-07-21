@@ -91,13 +91,6 @@ namespace UI.Shop
         {
             if (_currentItem != null && shop != null)
             {
-                // Implement your buy logic here, e.g.:
-                // if (shop.playerCash >= _currentItem.price)
-                // {
-                //     shop.playerCash -= _currentItem.price;
-                //     Inventory.Instance.Add(_currentItem);
-                //     itemDetailsPanel.SetActive(false);
-                // }
                 bool isBought = shop.BuyItem(_currentItem);
                 if (isBought)
                 {
