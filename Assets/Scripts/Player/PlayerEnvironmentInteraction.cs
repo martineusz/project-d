@@ -75,7 +75,6 @@ namespace Player
             {
                 if (_closestInteractive != null)
                 {
-                    Debug.LogWarning("Disabling highlight");
                     _closestInteractive.DisableHighlight();
                     _closestInteractive = null;
                 }
@@ -85,11 +84,9 @@ namespace Player
             {
                 if (_closestInteractive != null)
                 {
-                    Debug.LogWarning("Disabling highlight");
                     _closestInteractive.DisableHighlight();
                 }
                 _closestInteractive = currentClosestInteractive;
-                Debug.LogWarning("Highigihgh gigih");
                 _closestInteractive.Highlight();
             }
         }

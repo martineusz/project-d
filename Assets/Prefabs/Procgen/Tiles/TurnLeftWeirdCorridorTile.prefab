@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2417967869882509520}
   - component: {fileID: 8653499393306723771}
   - component: {fileID: 3307167358325369828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ MonoBehaviour:
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.2
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 1141202874638045281}
   - component: {fileID: 4394537015752526168}
   - component: {fileID: 7815790313342400628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ MonoBehaviour:
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.05
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 6093537939489074854}
   - component: {fileID: 3423571935121130216}
   - component: {fileID: 2107730710605826029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ MonoBehaviour:
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.05
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 9177959925813012146}
   - component: {fileID: 6860915298345147348}
   - component: {fileID: 4544396779952407340}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +740,7 @@ MonoBehaviour:
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.05
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
@@ -761,7 +761,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3026658857824219659}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 1230750679596900443}
   - component: {fileID: 3134668820351266761}
   - component: {fileID: 4096817999366432379}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -967,7 +967,7 @@ MonoBehaviour:
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.05
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 2567782318555364080}
   - component: {fileID: 6218271752820880720}
   - component: {fileID: 5150330668112526036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1155,7 @@ MonoBehaviour:
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.05
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
@@ -1218,6 +1218,7 @@ MonoBehaviour:
   exitDirections: 03000000
   exitPoints:
   - {fileID: 7836654952569742405}
+  objectLocationPoints: []
   weight: 3
   tileType: 1
 --- !u!1 &7437967409985289462
@@ -1232,7 +1233,7 @@ GameObject:
   - component: {fileID: 5297184162390923364}
   - component: {fileID: 6989312942911098641}
   - component: {fileID: 4924249297676898722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1397,7 @@ MonoBehaviour:
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.05
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
@@ -1507,7 +1508,7 @@ GameObject:
   - component: {fileID: 1525587720816223989}
   - component: {fileID: 8154628245684218476}
   - component: {fileID: 8918756561525822017}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1671,7 +1672,7 @@ MonoBehaviour:
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.05
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
@@ -1765,6 +1766,10 @@ PrefabInstance:
     - target: {fileID: 1507789797232639768, guid: 3d55e6efc68ba034f8a50efd00b17e5e, type: 3}
       propertyPath: m_Name
       value: WallLayout
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507789797232639768, guid: 3d55e6efc68ba034f8a50efd00b17e5e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

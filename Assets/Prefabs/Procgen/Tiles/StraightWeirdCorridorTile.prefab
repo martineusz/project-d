@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2417967869882509520}
   - component: {fileID: 3564240318950630024}
   - component: {fileID: 701354549132587909}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 7345944061339045175}
   - component: {fileID: 2666646293263104272}
   - component: {fileID: 4244754243333915858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 9065744114838393630}
   - component: {fileID: 8735988485614342426}
   - component: {fileID: 452673152968752753}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3026658857824219659}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 1230750679596900443}
   - component: {fileID: 3048205005902959916}
   - component: {fileID: 3258191714382900144}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 3589588763167504078}
   - component: {fileID: 1870902563303485213}
   - component: {fileID: 5068945174554476811}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,6 +1030,7 @@ MonoBehaviour:
   exitDirections: 00000000
   exitPoints:
   - {fileID: 1254545235071559302}
+  objectLocationPoints: []
   weight: 4
   tileType: 1
 --- !u!1 &7543607940918961620
@@ -1131,7 +1132,7 @@ GameObject:
   - component: {fileID: 1881910392438723650}
   - component: {fileID: 465082305934898051}
   - component: {fileID: 2320451859442401516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1319,7 +1320,7 @@ GameObject:
   - component: {fileID: 4337695717398080616}
   - component: {fileID: 6859079054704465987}
   - component: {fileID: 8403247120505219958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1538,7 +1539,7 @@ GameObject:
   - component: {fileID: 8147320645675954598}
   - component: {fileID: 5092479071647003632}
   - component: {fileID: 3819614085276448702}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1765,6 +1766,10 @@ PrefabInstance:
     - target: {fileID: 1507789797232639768, guid: 3d55e6efc68ba034f8a50efd00b17e5e, type: 3}
       propertyPath: m_Name
       value: WallLayout
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507789797232639768, guid: 3d55e6efc68ba034f8a50efd00b17e5e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

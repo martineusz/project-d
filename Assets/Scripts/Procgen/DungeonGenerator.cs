@@ -126,12 +126,13 @@ namespace Procgen
                     spawnQueue.Enqueue((nextGridPos, DirectionUtils.GetOpposite(rotatedExit)));
                 }
             }
-
             Debug.Log($"Dungeon generation complete. Tiles placed: {tileCount}");
 
             FillEmptySpacesWithFullTiles();
-
             Debug.Log($"Added closing tiles.");
+            
+            AstarPath.active.Scan();
+            Debug.Log($"Updated A* pathfinding grid.");
         }
 
         Direction RotateDirection(Direction dir, int steps)
