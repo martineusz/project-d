@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8202773694592468538}
   - component: {fileID: 1679255580477758372}
-  - component: {fileID: 216082605235986230}
   - component: {fileID: 2096371465475136697}
+  - component: {fileID: 2107639272292156280}
   m_Layer: 0
   m_Name: WorkableMineLogic
   m_TagString: Workplace
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293a696d49e0485eb35ac0c318f099cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceDataFactory: {fileID: 216082605235986230}
+  abstractResourceFactory: {fileID: 2107639272292156280}
   workerLimit: 2
   stashLimit: 5
   cropsLimit: 3
@@ -54,23 +54,6 @@ MonoBehaviour:
   workers: []
   workerQueue: []
   resourceAmount: 5
---- !u!114 &216082605235986230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3052040840261449132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63d4247ef8bf47be933cc929f3e44833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultResourceName: mini diamencik
-  defaultIcon: {fileID: 1546353380395810245, guid: 42c90d667702bc04493713ec674bbcd2, type: 3}
-  defaltDescription: mauluski diamencki
-  defaultRarity: 2
-  defaultPrice: 29
 --- !u!70 &2096371465475136697
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -108,6 +91,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.004979115, y: -0.009721226}
   m_Size: {x: 1.4083066, y: 1.2605325}
   m_Direction: 0
+--- !u!114 &2107639272292156280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052040840261449132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7aec73c1e05448cbe187071fe870e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourcePool:
+  - {fileID: 11400000, guid: 799f8d059c1cea646a3dde4fb3828edd, type: 2}
 --- !u!1 &5644048392524204543
 GameObject:
   m_ObjectHideFlags: 0

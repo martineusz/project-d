@@ -72,7 +72,7 @@ namespace UI.Shop
             }
         }
 
-        private void CloseShop()
+        public void CloseShop()
         {
             shopUIPanel.SetActive(false);
             UIManager.Instance.SetUIOpen(false);
@@ -97,7 +97,7 @@ namespace UI.Shop
         {
             if (_currentItem != null && shop != null)
             {
-                bool isBought = shop.BuyItem(_currentItem, usedShopPlace);
+                bool isBought = shop.BuyItem(_currentItem, usedShopPlace, this);
                 if (isBought)
                 {
                     _currentItem = null;

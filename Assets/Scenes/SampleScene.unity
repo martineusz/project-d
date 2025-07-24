@@ -4834,7 +4834,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsForSale:
   - {fileID: 11400000, guid: b92d7122d136cc84c9341d3bb215b561, type: 2}
-  - {fileID: 11400000, guid: b92d7122d136cc84c9341d3bb215b561, type: 2}
+  - {fileID: 11400000, guid: 664c9cddc37981241bb63247eeb135d6, type: 2}
+  - {fileID: 11400000, guid: c3ee66a955db5cd4ba2b1804320d4911, type: 2}
   player: {fileID: 1137388333}
 --- !u!1 &1082559613
 GameObject:

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5881eaaedc14198bfdc5b1ea6110776, type: 3}
+  m_Name: Landmine
+  m_EditorClassIdentifier: 
+  itemName: Landmine
+  icon: {fileID: -6796818179285881832, guid: 553e9ecdbe55f9a41a4c449e541e0bfb, type: 3}
+  description: Potrzebujemy hakera
+  rarity: 1
+  price: 450
+  instantUse: 1
+  destroyShopPlaceOnUse: 1
+  spawnPosition: {x: 0.571, y: 1.016, z: 0}
+  prefabToSpawn: {fileID: 6578259134977359310, guid: 957caf159f124f347be701fefedcc276, type: 3}
+  spawnRotation: {x: 0, y: 0, z: 0, w: 1}
