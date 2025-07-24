@@ -1,4 +1,5 @@
 ﻿using Items;
+using Items.Factories;
 using UI.Inventory;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Environment.Miscellaneous
         private Color _originalColor;
         private bool _isHighlighted;
         
-        public ResourceDataFactory resourceDataFactory;
+        public AbstractResourceFactory abstractResourceFactory;
 
         private Crop _crop;
 
@@ -66,7 +67,7 @@ namespace Environment.Miscellaneous
 
         private void ResetCrop()
         {
-            ResourceData newResData = resourceDataFactory.GenerateNewResource();
+            ResourceData newResData = abstractResourceFactory.GenerateNewResource();
             _crop = new Crop(newResData);
         }
         

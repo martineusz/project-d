@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4327959821738298834}
   - component: {fileID: 6094110498130755242}
   - component: {fileID: 8910313539343231247}
-  - component: {fileID: -3568709279929846995}
   - component: {fileID: 4162858899413763194}
   m_Layer: 0
   m_Name: WildPlant
@@ -103,26 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6094110498130755242}
-  resourceDataFactory: {fileID: -3568709279929846995}
+  abstractResourceFactory: {fileID: 0}
   growthEfficiency: 1
   isHarvestable: 1
---- !u!114 &-3568709279929846995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6445140390584581062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63d4247ef8bf47be933cc929f3e44833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultResourceName: unnamed
-  defaultIcon: {fileID: 0}
-  defaltDescription: No description provided.
-  defaultRarity: 0
-  defaultPrice: 0
 --- !u!70 &4162858899413763194
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Environment.Miscellaneous;
 using Items;
+using Items.Factories;
 using Units.Boids;
 using Units.Boids.Allies;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Environment.Workplaces
 {
     public class WorkablePlot : MonoBehaviour, IWorkplace
     {
-        public ResourceDataFactory resourceDataFactory;
+        public AbstractResourceFactory abstractResourceFactory;
         
         public int workerLimit = 3;
         public int stashLimit = 3;
@@ -72,7 +73,7 @@ namespace Environment.Workplaces
 
         protected virtual bool AddNewCrop()
         {
-            ResourceData newResData = resourceDataFactory.GenerateNewResource();
+            ResourceData newResData = abstractResourceFactory.GenerateNewResource();
             Crop newCrop = new Crop(newResData);
             Crops.Add(newCrop);
             return true;

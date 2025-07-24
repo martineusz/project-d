@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9014294344553168137}
+  - component: {fileID: 2144272034065744139}
   m_Layer: 0
   m_Name: Plants (I)
   m_TagString: Untagged
@@ -36,6 +37,20 @@ Transform:
   - {fileID: 8950412991783832998}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2144272034065744139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181390225006121889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7aec73c1e05448cbe187071fe870e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourcePool:
+  - {fileID: 11400000, guid: c7736b5c32886714aa59150f001b949d, type: 2}
 --- !u!1001 &1332611391868847399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88,6 +103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WildPlant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8910313539343231247, guid: 297b53dd65a4cfe43ad19c2a568ed0a0, type: 3}
+      propertyPath: abstractResourceFactory
+      value: 
+      objectReference: {fileID: 2144272034065744139}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -150,6 +169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WildPlant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8910313539343231247, guid: 297b53dd65a4cfe43ad19c2a568ed0a0, type: 3}
+      propertyPath: abstractResourceFactory
+      value: 
+      objectReference: {fileID: 2144272034065744139}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -212,6 +235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WildPlant (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8910313539343231247, guid: 297b53dd65a4cfe43ad19c2a568ed0a0, type: 3}
+      propertyPath: abstractResourceFactory
+      value: 
+      objectReference: {fileID: 2144272034065744139}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -274,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WildPlant
       objectReference: {fileID: 0}
+    - target: {fileID: 8910313539343231247, guid: 297b53dd65a4cfe43ad19c2a568ed0a0, type: 3}
+      propertyPath: abstractResourceFactory
+      value: 
+      objectReference: {fileID: 2144272034065744139}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -336,6 +367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WildPlant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8910313539343231247, guid: 297b53dd65a4cfe43ad19c2a568ed0a0, type: 3}
+      propertyPath: abstractResourceFactory
+      value: 
+      objectReference: {fileID: 2144272034065744139}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
