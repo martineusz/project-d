@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBoidPrefab: {fileID: 6411102760633059870, guid: 396769cb68f574e41919a4b8bf600813, type: 3}
   spawnInterval: 8
-  proximityRadius: 50
+  proximityRadius: 4.5
   spawnRadius: 1
   maxEnemies: 20
