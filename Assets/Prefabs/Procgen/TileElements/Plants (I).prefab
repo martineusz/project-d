@@ -51,6 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePool:
   - {fileID: 11400000, guid: c7736b5c32886714aa59150f001b949d, type: 2}
+  - {fileID: 11400000, guid: 2cdace5e87406844ea1bd77e41441aeb, type: 2}
+  - {fileID: 11400000, guid: 1682ca5697ecc59499739a72a120b63f, type: 2}
+  - {fileID: 11400000, guid: 18310f683e0440548b47731dfb8f4aa1, type: 2}
 --- !u!1001 &1332611391868847399
 PrefabInstance:
   m_ObjectHideFlags: 0
