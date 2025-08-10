@@ -103,7 +103,3 @@ InitTestScene*.unity*
 
 # Visual Studio config (optional — ignore if not using it)
 .vsconfig
-
-# Ignore the A* Pathfinding Project folder completely
-/Assets/AstarPathfindingProject/
-/Assets/AstarPathfindingProject.meta
